@@ -1,0 +1,36 @@
+ion-footer {
+  &:before {
+    display: none;
+  }
+
+  min-height: 4vh;
+  background-color: var(--ion-background-color, #dedede);
+  box-shadow: 0 -2px 3px 0px #ccc;
+  --border-style: none;
+
+  ion-grid {
+    min-height: 4vh;
+    height: 100%;
+    background: #ff7200;
+    --border-style: none;
+    padding-bottom: 0;
+  }
+  ion-row {
+    ion-col {
+      align-self: center;
+      padding: 0;
+      text-align:center;
+
+      a {
+        font-size: 11px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+
+        ion-icon {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}

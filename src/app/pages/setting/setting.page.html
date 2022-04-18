@@ -1,0 +1,44 @@
+<ion-content>
+  <ion-toolbar class="ion-no-border">
+    <ion-icon slot="end" name="close" class="pr-2" (click)="closeMenu()"></ion-icon>
+  </ion-toolbar>
+
+  <ion-grid>
+    <ion-row class="pt-2 pb-2" routerLink="/home">
+      <ion-col size="1">
+        <ion-icon name="home"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">TRANG CHỦ</ion-col>
+    </ion-row>
+    <ion-row class="pt-2 pb-2" routerLink="/search">
+      <ion-col size="1">
+        <ion-icon name="document"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">HƯỚNG DẪN THAM GIA CHƯƠNG TRÌNH</ion-col>
+    </ion-row>
+    <ion-row class="pt-2 pb-2" routerLink="/search">
+      <ion-col size="1">
+        <ion-icon name="document"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">HƯỚNG DẪN TRIỂN KHAI CHƯƠNG TRÌNH</ion-col>
+    </ion-row>
+    <ion-row class="pt-2 pb-2" routerLink="/suggestion">
+      <ion-col size="1">
+        <ion-icon name="chatbubbles"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">GÓP Ý - ĐÁNH GIÁ</ion-col>
+    </ion-row>
+    <ion-row class="pt-2 pb-2" routerLink="/directory">
+      <ion-col size="1">
+        <ion-icon name="people"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">DANH BẠ ĐIỆN THOẠI</ion-col>
+    </ion-row>
+    <ion-row *ngIf="!isAuth" class="pt-2 pb-2" routerLink="/login">
+      <ion-col size="1">
+        <ion-icon name="people"></ion-icon>
+      </ion-col>
+      <ion-col size="11" class="pl-1">ĐĂNG NHẬP</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

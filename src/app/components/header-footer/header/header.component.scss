@@ -1,0 +1,19 @@
+ion-header {
+  --background: #FFF1E5;
+  background: #FFF1E5;
+
+  ion-toolbar {
+    --background: #FFF1E5;
+    background: #FFF1E5;
+
+    ion-title {
+      color: #FF7200;
+      --color: #FF7200;
+    }
+  }
+
+  ion-back-button {
+    color: #FF7200;
+    --color: #FF7200;
+  }
+}
