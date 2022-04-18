@@ -1,4 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
+import {Platform} from '@ionic/angular';
+
+import {Constants} from '../../common/constants';
 
 @Component({
   selector: 'app-home',
@@ -6,25 +9,35 @@ import {Component, ElementRef, OnInit} from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  toolbarText: string;
+  unsubscribeBackEvent: any;
 
-  constructor(private element: ElementRef) {
+  constructor(
+    private element: ElementRef,
+    private platform: Platform,
+  ) {
   }
 
   ngOnInit() {
+    this.toolbarText = null;
+  }
+
+  ionViewDidEnter() {
+    this.platform.ready().then(readySource => {
+      this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(999999, () => {
+        navigator['app'].exitApp();
+      });
+    });
+  }
+
+  ionViewDidLeave() {
+    this.unsubscribeBackEvent.unsubscribe();
   }
 
   scrollContent(event) {
+    this.toolbarText = null;
     const cardList = this.element.nativeElement.querySelectorAll('.card-item');
-    for (let i = (cardList.length - 1); i--; i < 0) {
-      if (cardList[i].offsetTop <= event.detail.scrollTop) {
-        console.log('scroll' + event.detail.scrollTop);
-        console.log('element' + cardList[i].offsetTop);
-        cardList[i].style.backgroundColor = 'red';
-        break;
-      } else {
-        cardList[i].style.backgroundColor = 'white';
-      }
-    }
+    this.toolbarText = Constants.scrollContentGetBlogTitle(event.detail.scrollTop, cardList) || this.toolbarText;
   }
 
 }

@@ -23,6 +23,6 @@ export class AppComponent {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT).then(r => {
       this.splashScreen.hide();
       return this.router.navigateByUrl(Constants.routerLinks.home);
-    }).catch(() => this.router.navigateByUrl(Constants.routerLinks.home));
+    }).catch(() => this.router.navigateByUrl(Constants.routerLinks.home, {skipLocationChange: true}));
   }
 }

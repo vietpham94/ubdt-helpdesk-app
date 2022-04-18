@@ -1,10 +1,43 @@
 <app-header></app-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="scrollContent($event)" id="onScrollContent">
+  <div class="sticky-card-title" *ngIf="toolbarText">
+    {{toolbarText}}
+    <hr>
+  </div>
+
   <ion-card class="card-item">
-    <ion-card-header class="card-header">
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+    <ion-card-header>
+      <ion-card-title class="card-title">Card Title1</ion-card-title>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card-item">
+    <ion-card-header>
+      <ion-card-title class="card-title">Card Title2</ion-card-title>
+      <hr>
     </ion-card-header>
 
     <ion-card-content>
@@ -14,9 +47,9 @@
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-card-header class="card-header">
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+    <ion-card-header>
+      <ion-card-title class="card-title">Card Title3</ion-card-title>
+      <hr>
     </ion-card-header>
 
     <ion-card-content>
@@ -26,9 +59,9 @@
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-card-header class="card-header">
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+    <ion-card-header>
+      <ion-card-title class="card-title">Card Title4</ion-card-title>
+      <hr>
     </ion-card-header>
 
     <ion-card-content>
@@ -38,9 +71,9 @@
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-card-header class="card-header">
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+    <ion-card-header>
+      <ion-card-title class="card-title">Card Title5</ion-card-title>
+      <hr>
     </ion-card-header>
 
     <ion-card-content>
@@ -48,19 +81,6 @@
       and climb a mountain or spend a week in the woods. Wash your spirit clean.
     </ion-card-content>
   </ion-card>
-
-  <ion-card class="card-item">
-    <ion-card-header class="card-header">
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
-  </ion-card>
-
 </ion-content>
 
 <app-footer></app-footer>

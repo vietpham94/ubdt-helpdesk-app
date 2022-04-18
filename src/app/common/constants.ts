@@ -6,7 +6,7 @@ export class Constants {
 
   static routerLinks = {
     login: 'login',
-    home: 'home',
+    home: '',
     register: 'register',
     resetPassword: 'reset-password',
     search: 'search',
@@ -99,5 +99,15 @@ export class Constants {
       }
     }
     return linkFormat;
+  }
+
+  static scrollContentGetBlogTitle(currentScrollTop: number, cardList): string {
+    for (let i = (cardList.length - 1); i--; i < 0) {
+      const bottom = cardList[i].offsetTop + cardList[i].offsetHeight - 65;
+      if (cardList[i].offsetTop <= currentScrollTop && currentScrollTop < bottom) {
+        return cardList[i].querySelector('.card-title').innerHTML;
+      }
+    }
+    return;
   }
 }
