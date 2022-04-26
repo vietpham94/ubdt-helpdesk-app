@@ -1,0 +1,12 @@
+export interface District {
+  id?: string;
+  title?: {
+    rendered?: string;
+  };
+  acf?: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    province_id?: string;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    district_code?: string;
+  };
+}

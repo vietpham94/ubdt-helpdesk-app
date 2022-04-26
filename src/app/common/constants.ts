@@ -63,7 +63,11 @@ export class Constants {
   static apiRestEndPoints = {
     login: '/api-bearer-auth/v1/login',
     refreshToken: '/api-bearer-auth/v1/tokens/refresh',
-    validateToken: '/jwt-auth/v1/token/validate'
+    validateToken: '/jwt-auth/v1/token/validate',
+    subject: '/wp/v2/subject',
+    province: '/wp/v2/province',
+    district: '/wp/v2/district',
+    wards: '/wp/v2/wards',
   };
 
   static messages = {
