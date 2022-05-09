@@ -1,11 +1,15 @@
-import { District } from './../../interfaces/district';
 import { Province } from './../../interfaces/province';
+import { District } from './../../interfaces/district';
+import { Ward } from './../../interfaces/ward';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 import { Subject } from './../../interfaces/subject';
 import { SubjectService } from './../../services/subject/subject.service';
 import { Constants } from '../../common/constants';
+import { ProjectAction } from 'src/app/interfaces/project-action';
 
 @Component({
   selector: 'app-home',
@@ -16,13 +20,19 @@ export class HomePage implements OnInit {
   toolbarText: string;
   unsubscribeBackEvent: any;
   subjectList: Array<Subject>;
-  districts: Array<District>;
   provinces: Array<Province>;
+  districts: Array<District>;
+  wards: Array<Ward>;
+  projectActions: Array<ProjectAction>;
   selectedProvince: string;
+  selectedDistrict: string;
+  selectedWard: string;
+  selectedProjectAction: string;
 
   constructor(
     private element: ElementRef,
     private platform: Platform,
+    // private ionicSelectable: IonicSelectableComponent,
     private subjectService: SubjectService
   ) {}
 
@@ -31,6 +41,7 @@ export class HomePage implements OnInit {
     this.subjectList = new Array<Subject>();
     this.provinces = new Array<Province>();
     this.districts = new Array<District>();
+    this.wards = new Array<Ward>();
   }
 
   ionViewDidEnter() {
@@ -47,6 +58,7 @@ export class HomePage implements OnInit {
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.provinces = await this.subjectService.getProvince().toPromise();
+    this.projectActions = await this.subjectService.getProjectAction().toPromise();
   }
 
   onSelectProvince() {
@@ -61,6 +73,27 @@ export class HomePage implements OnInit {
       .subscribe((districts: Array<District>) => {
         this.districts = districts;
       });
+  }
+
+  onSelectDistrict() {
+    if (!this.selectedDistrict) {
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const dataQueryWard = { district: this.selectedDistrict };
+    this.subjectService
+      .getWardsByDistrict(dataQueryWard)
+      .subscribe((wards: Array<Ward>) => {
+        this.wards = wards;
+      });
+  }
+
+  projectActionChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('projectActionChange value:', event.value);
   }
 
   ionViewDidLeave() {

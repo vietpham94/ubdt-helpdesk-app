@@ -35,10 +35,15 @@ constructor(
   }
 
   public getWardsByDistrict(data) {
-    return this.apiService.get(Constants.apiRestEndPoints.wards, {
+    return this.apiService.get(Constants.apiRestEndPoints.ward, {
       headers: this.authService.getAuthHeader,
       params: data
     });
   }
 
+  public getProjectAction() {
+    return this.apiService.get(Constants.apiRestEndPoints.projectAction, {
+      headers: this.authService.getAuthHeader
+    });
+  }
 }

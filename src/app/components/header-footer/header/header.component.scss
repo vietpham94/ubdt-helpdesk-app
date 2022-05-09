@@ -1,6 +1,7 @@
 ion-header {
   --background: #FFF1E5;
   background: #FFF1E5;
+  padding-top: 10px;
 
   ion-toolbar {
     --background: #FFF1E5;
@@ -9,11 +10,15 @@ ion-header {
     ion-title {
       color: #FF7200;
       --color: #FF7200;
+      text-align: left;
+      padding-left: 37px;
+      padding-right: 15px;
     }
   }
 
   ion-back-button {
     color: #FF7200;
     --color: #FF7200;
+    padding-inline: 8px;
   }
 }

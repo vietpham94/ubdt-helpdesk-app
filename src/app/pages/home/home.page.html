@@ -8,41 +8,58 @@
 
   <ion-card class="card-item">
     <ion-card-header>
-      <ion-card-title class="card-title">Card Title1</ion-card-title>
+      <ion-card-title class="card-title">HƯỚNG DẪN THEO HOẠT ĐỘNG</ion-card-title>
       <hr>
     </ion-card-header>
 
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      Keep close to Nature's heart... and break clear away, once in awhile,
       <ion-list>
         <ion-radio-group>
           <ion-list-header>
             <ion-label>
-              Đối tượng
+              Quý vị là ai?
             </ion-label>
           </ion-list-header>
 
           <ion-item *ngFor="let item of subjectList">
-            <ion-label>{{item.title.rendered}}</ion-label>
             <ion-radio [value]="item.id"></ion-radio>
+            <ion-label>{{item.title.rendered}}</ion-label>
           </ion-item>
 
         </ion-radio-group>
       </ion-list>
 
-      <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()">
+      <ion-label>
+        Quý vị quan tâm đến chương trình / dự án ở khu vực nào?
+      </ion-label>
+      <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()" placeholder="+ Chọn tỉnh/thành">
         <ion-select-option *ngFor="let province of provinces" [value]="province.id">
           {{province.title.rendered}}
         </ion-select-option>
       </ion-select>
 
-      <ion-select>
+      <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận/huyện">
         <ion-select-option *ngFor="let district of districts" [value]="district.id">
           {{district.title.rendered}}
         </ion-select-option>
       </ion-select>
+
+      <ion-select [(ngModel)]="selectedWard" placeholder="+ Chọn phường/xã">
+        <ion-select-option *ngFor="let ward of wards" [value]="ward.id">
+          {{ward.title.rendered}}
+        </ion-select-option>
+      </ion-select>
+
+      <ion-item>
+        <ion-label>Quý vị quan tâm đến hoạt động nào?</ion-label>
+        <ionic-selectable [(ngModel)]="selectedProjectAction"
+          [items]="projectActions"
+          itemValueField="id"
+          itemTextField="rendered"
+          [canSearch]="true"
+          (onChange)="projectActionChange($event)">
+        </ionic-selectable>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 

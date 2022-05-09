@@ -67,7 +67,8 @@ export class Constants {
     subject: '/wp/v2/subject',
     province: '/wp/v2/province',
     district: '/wp/v2/district',
-    wards: '/wp/v2/wards',
+    ward: '/wp/v2/ward',
+    projectAction: '/wp/v2/project_action',
   };
 
   static messages = {
