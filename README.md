@@ -59,3 +59,5 @@
 
    > ionic cordova build windows
 
+Cài thêm Ionic Selectable:
+   > npm install ionic-selectable@4.8.0 --save
