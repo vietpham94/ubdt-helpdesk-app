@@ -1,7 +1,179 @@
 <app-header></app-header>
 
 <ion-content>
-
+  <ion-list>
+    <h2>TRA CỨU DANH BẠ</h2>
+    <ion-item>
+      <ion-label position="stacked">Từ khóa tìm kiếm</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nơi thực hiện</ion-label>
+      <ion-select placeholder="+ Chọn tỉnh thành">
+        <ion-select-option>Hà Nội</ion-select-option>
+        <ion-select-option>Hà Nam</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="+ Chọn quận huyện">
+        <ion-select-option>Ba Đình</ion-select-option>
+        <ion-select-option>Đống Đa</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="+ Chọn phường xã">
+        <ion-select-option>Phú Diễn</ion-select-option>
+        <ion-select-option>Phương Canh</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <p class="sugges">Tôi cần thông tin liên hệ của?</p>
+    <ion-radio-group>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <span>Tổ chức, doanh nghiệp tham gia thực hiện Chương trình mục tiêu Quốc gia.</span>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <span>Cơ quan được giao nhiệm vụ tổ chức thực hiện Chương trình mục tiêu Quốc gia.</span>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <span>Cơ quan thường trực Chương trình mục tiêu Quốc gia các cấp.</span>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <span>Cả 3 nhóm trên.</span>
+      </ion-item>
+    </ion-radio-group>
+    <ion-item>
+      <ion-label position="stacked">Thuộc dự án</ion-label>
+      <ion-select placeholder="+ Chọn dự án">
+        <ion-select-option>Dự án 01</ion-select-option>
+        <ion-select-option>Dự án 02</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nội dung của hoạt động là</ion-label>
+      <ion-select placeholder="+ Chọn hoạt động">
+        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
+        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" expand="block" class="submit">TRA CỨU THÔNG TIN LIÊN HỆ</ion-button>
+  </ion-list>
+  <div class="result_search">
+    <ion-list>
+      <h2>Kết quả tìm kiếm<span>25 thông tin</span></h2>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-img src="./assets/image/logo_phulong.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <p class="directory_title">Xây dựng phú long</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Địa chỉ</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp, Tp. Hồ Chí Minh</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Điện thoại</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 0541245666</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Đường dây nóng</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 1900xxxx</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Email</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: kinhdoanhphulong@gmail.com</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Website</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: xaydungphulong.com.vn</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-img src="./assets/image/logo_phulong.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <p class="directory_title">Xây dựng phú long</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Địa chỉ</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp, Tp. Hồ Chí Minh</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Điện thoại</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 0541245666</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Đường dây nóng</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: 1900xxxx</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Email</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: kinhdoanhphulong@gmail.com</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <p>Website</p>
+            </ion-col>
+            <ion-col size="8">
+              <span>: xaydungphulong.com.vn</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 <app-footer></app-footer>
