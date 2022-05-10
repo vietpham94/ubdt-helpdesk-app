@@ -15,6 +15,7 @@ export class Constants {
     helpdeskDetail: 'helpdesk-detail',
     settings: 'settings',
     directory: 'directory',
+    projectDetail: 'project-detail',
   };
 
   static pagesTitle = {
@@ -27,6 +28,7 @@ export class Constants {
     suggestion: 'Góp ý - Đánh giá',
     helpdeskDetail: 'Chi tiết hướng dẫn',
     directory: 'Danh bạ điện thoại',
+    projectDetail: 'Thông tin dự án',
   };
 
   static pageInfo = [
@@ -57,6 +59,10 @@ export class Constants {
     {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
+    },
+    {
+      pageLink: '/project-detail',
+      title: Constants.pagesTitle.projectDetail
     },
   ];
 

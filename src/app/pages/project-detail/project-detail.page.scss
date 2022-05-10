@@ -1,0 +1,21 @@
+.project-search, .project-detail, .project-helpdesk, .project-directory {
+  width: calc(100% - 20px);
+  margin: auto;
+  border: 1px solid #d6d6d6;
+  border-radius: 3px;
+  padding: 20px 10px;
+  margin-bottom: 20px;
+  background: #ffffff;
+}
+ion-content {
+  > h2 {
+    font-size: 18px;
+    width: calc(100% - 20px);
+    margin: 10px auto 20px;
+  }
+  ion-label {
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}
