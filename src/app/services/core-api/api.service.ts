@@ -1,25 +1,24 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
-import {CommonService} from '../common/common.service';
+import { CommonService } from '../common/common.service';
 
-import {Constants} from '../../common/constants';
-import {HttpOptions} from '../../interfaces/http-options';
-import {LoginResponse} from '../../interfaces/login-response';
+import { Constants } from '../../common/constants';
+import { HttpOptions } from '../../interfaces/http-options';
+import { LoginResponse } from '../../interfaces/login-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-
   constructor(
     private httpClient: HttpClient,
     private commonService: CommonService
-  ) {
-  }
+  ) {}
 
   /**
    * CALL API BY GET METHOD
@@ -27,11 +26,17 @@ export class ApiService {
    * @param url
    * @param operation
    */
-  get(url: string, httpOptions?: HttpOptions, operation?: string): Observable<any> {
-    return this.httpClient.get<any>(url, httpOptions).pipe(
-      tap(_ => console.log(operation)),
-      catchError(this.handleError<any>(operation))
-    );
+  get(
+    url: string,
+    httpOptions?: HttpOptions,
+    operation?: string
+  ): Observable<any> {
+    return this.httpClient
+      .get<any>(environment.jsonapi + url, httpOptions)
+      .pipe(
+        tap((_) => console.log(operation)),
+        catchError(this.handleError<any>(operation))
+      );
   }
 
   /**
@@ -42,10 +47,15 @@ export class ApiService {
    * @param httpOptions
    * @param operation
    */
-  post(url: string, data: any, httpOptions?: HttpOptions, operation?: string): Observable<any> {
-    return this.httpClient.post<any>(url, data, httpOptions).pipe(
-      catchError(this.handleError<any>(operation))
-    );
+  post(
+    url: string,
+    data: any,
+    httpOptions?: HttpOptions,
+    operation?: string
+  ): Observable<any> {
+    return this.httpClient
+      .post<any>(environment.jsonapi + url, data, httpOptions)
+      .pipe(catchError(this.handleError<any>(operation)));
   }
 
   /**
@@ -56,11 +66,18 @@ export class ApiService {
    * @param httpOptions
    * @param operation
    */
-  put(url: string, data: any, httpOptions?: HttpOptions, operation?: string): Observable<any> {
-    return this.httpClient.put(url, data, httpOptions).pipe(
-      tap(_ => console.log(operation)),
-      catchError(this.handleError<any>(operation))
-    );
+  put(
+    url: string,
+    data: any,
+    httpOptions?: HttpOptions,
+    operation?: string
+  ): Observable<any> {
+    return this.httpClient
+      .put(environment.jsonapi + url, data, httpOptions)
+      .pipe(
+        tap((_) => console.log(operation)),
+        catchError(this.handleError<any>(operation))
+      );
   }
 
   /**
@@ -70,11 +87,17 @@ export class ApiService {
    * @param httpOptions
    * @param operation
    */
-  delete(url: string, httpOptions?: HttpOptions, operation?: string): Observable<any> {
-    return this.httpClient.delete<any>(url, httpOptions).pipe(
-      tap(_ => console.log(operation)),
-      catchError(this.handleError<any>(operation))
-    );
+  delete(
+    url: string,
+    httpOptions?: HttpOptions,
+    operation?: string
+  ): Observable<any> {
+    return this.httpClient
+      .delete<any>(environment.jsonapi + url, httpOptions)
+      .pipe(
+        tap((_) => console.log(operation)),
+        catchError(this.handleError<any>(operation))
+      );
   }
 
   /**
@@ -93,13 +116,15 @@ export class ApiService {
         errorMsg = Constants.messages.errorForbidden;
       }
 
-      this.commonService.presentAlert(Constants.messages.errorTitle, errorMsg).then(() => {
-        if (!localStorage.getItem(Constants.authKey)) {
-          return this.cleanData();
-        } else {
-          return this.refreshToken();
-        }
-      });
+      this.commonService
+        .presentAlert(Constants.messages.errorTitle, errorMsg)
+        .then(() => {
+          if (!localStorage.getItem(Constants.authKey)) {
+            return this.cleanData();
+          } else {
+            return this.refreshToken();
+          }
+        });
       return of(result as T);
     };
   }
@@ -111,19 +136,26 @@ export class ApiService {
    */
   private refreshToken() {
     try {
-      const authData: LoginResponse = JSON.parse(localStorage.getItem(Constants.authKey));
+      const authData: LoginResponse = JSON.parse(
+        localStorage.getItem(Constants.authKey)
+      );
       if (!authData.refresh_token) {
         return this.cleanData();
       }
 
       const options = {
         headers: new HttpHeaders({
-          'Accept': '*/*',
-          'Content-Type': 'application/json'
-        })
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+        }),
       };
 
-      this.post(Constants.apiRestEndPoints.refreshToken, {token: authData.refresh_token}, options, 'Refresh token').subscribe((data) => {
+      this.post(
+        Constants.apiRestEndPoints.refreshToken,
+        { token: authData.refresh_token },
+        options,
+        'Refresh token'
+      ).subscribe((data) => {
         authData.access_token = data.access_token;
         localStorage.removeItem(Constants.authKey);
         localStorage.setItem(Constants.authKey, JSON.stringify(authData));
