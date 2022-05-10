@@ -1,11 +1,12 @@
 <app-header></app-header>
 
-<ion-content [scrollEvents]="true" (ionScroll)="scrollContent($event)" id="onScrollContent">
+<!-- <ion-content [scrollEvents]="true" (ionScroll)="scrollContent($event)" id="onScrollContent">
   <div class="sticky-card-title" *ngIf="toolbarText">
     {{toolbarText}}
     <hr>
-  </div>
+  </div> -->
 
+<ion-content>
   <ion-card class="card-item">
     <ion-card-header>
       <ion-card-title class="card-title">HƯỚNG DẪN THEO HOẠT ĐỘNG</ion-card-title>
@@ -13,23 +14,19 @@
     </ion-card-header>
 
     <ion-card-content>
+      <ion-label class="item-label">
+        Quý vị là ai?
+      </ion-label>
       <ion-list>
         <ion-radio-group>
-          <ion-list-header>
-            <ion-label>
-              Quý vị là ai?
-            </ion-label>
-          </ion-list-header>
-
-          <ion-item *ngFor="let item of subjectList">
-            <ion-radio [value]="item.id"></ion-radio>
-            <ion-label>{{item.title.rendered}}</ion-label>
+          <ion-item *ngFor="let item of subjectList" mode="md">
+            <p>{{item.title.rendered}}</p>
+            <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
           </ion-item>
-
         </ion-radio-group>
       </ion-list>
 
-      <ion-label>
+      <ion-label class="item-label">
         Quý vị quan tâm đến chương trình / dự án ở khu vực nào?
       </ion-label>
       <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()" placeholder="+ Chọn tỉnh/thành">
@@ -40,76 +37,132 @@
 
       <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận/huyện">
         <ion-select-option *ngFor="let district of districts" [value]="district.id">
-          {{district.title.rendered}}
+          {{district.post_title}}
         </ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="selectedWard" placeholder="+ Chọn phường/xã">
         <ion-select-option *ngFor="let ward of wards" [value]="ward.id">
-          {{ward.title.rendered}}
+          {{ward.post_title}}
         </ion-select-option>
       </ion-select>
 
+      <ion-label class="item-label">Quý vị quan tâm đến hoạt động nào?</ion-label>
       <ion-item>
-        <ion-label>Quý vị quan tâm đến hoạt động nào?</ion-label>
         <ionic-selectable [(ngModel)]="selectedProjectAction"
           [items]="projectActions"
           itemValueField="id"
-          itemTextField="rendered"
+          itemTextField="post_title"
           [canSearch]="true"
           (onChange)="projectActionChange($event)">
         </ionic-selectable>
       </ion-item>
+
+      <ion-label class="item-label">
+        Vấn đề Quý vị quan tâm là?
+      </ion-label>
+      <ion-list>
+        <ion-radio-group>
+          <ion-item *ngFor="let item of helpDeskCategories" mode="md">
+            <p>{{item.name}}</p>
+            <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-button [routerLink]="'/home'" expand="block" shape="round">
+        TÌM KIẾM
+      </ion-button>
+
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
     <ion-card-header>
-      <ion-card-title class="card-title">Card Title2</ion-card-title>
+      <ion-card-title class="card-title">Hướng dẫn theo dự án</ion-card-title>
       <hr>
     </ion-card-header>
 
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <ion-list class="project-list">
+        <ion-item button (click)="onChooseProject(1)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_01.png" /></p>
+          <p class="project-item-title">Dự án 1</p>
+          <p class="project-item-description">Giải quyết tình trạng thiếu đất ở, nhà ở, đất sản xuất, nước sinh hoạt.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(2)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_02.png" /></p>
+          <p class="project-item-title">Dự án 2</p>
+          <p class="project-item-description">Quy hoạch, sắp xếp, bố trí, ổnđịnh dân cư ở những nơi cần thiết.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(3)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_03.png" /></p>
+          <p class="project-item-title">Dự án 3</p>
+          <p class="project-item-description">Phát triển sản xuất nông, lâm nghiệp bền vững, phát huy tiềm năng, thế mạnh của các vùng miền để sản xuất hàng hóa theo chuỗi giá trị.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(4)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_04.png" /></p>
+          <p class="project-item-title">Dự án 4</p>
+          <p class="project-item-description">Đầu tư cơ sở hạ tầng thiết yếu, phục vụ sản xuất, đời sống trong vùng đồng bào dân tộc thiểu số và miền núi và các đơn vị sự nghiệp công lập của lĩnh vực dân tộc.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(5)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_05.png" /></p>
+          <p class="project-item-title">Dự án 5</p>
+          <p class="project-item-description">Phát triển giáo dục đào tạo nâng cao chất lượng nguồn nhân lực.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(6)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_06.png" /></p>
+          <p class="project-item-title">Dự án 6</p>
+          <p class="project-item-description">Bảo tồn, phát huy giá trị văn hóa truyền thống tốt đẹp của các dân tộc thiểu số gắn với phát triển du lịch.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(7)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_07.png" /></p>
+          <p class="project-item-title">Dự án 7</p>
+          <p class="project-item-description">Chăm sóc sức khỏe Nhân dân, nâng cao thể trạng, tầm vóc người dân tộc thiểu số; phòng chống suy dinh dưỡng trẻ em.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(8)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_08.png" /></p>
+          <p class="project-item-title">Dự án 8</p>
+          <p class="project-item-description">Thực hiện bình đẳng giới và giải quyết những vấn đề cấp thiết đối với phụ nữ và trẻ em.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(9)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_09.png" /></p>
+          <p class="project-item-title">Dự án 9</p>
+          <p class="project-item-description">Đầu tư phát triển nhóm dân tộc thiểu số rất ít người và nhóm dân tộc còn nhiều khó khăn.</p>
+        </ion-item>
+        <ion-item button (click)="onChooseProject(10)" detail="false">
+          <p class="project-item-image"><img src="/assets/project_icons/project_10.png" /></p>
+          <p class="project-item-title">Dự án 10</p>
+          <p class="project-item-description">Truyền thông, tuyên truyền, vận động trong vùng đồng bào dân tộc thiểu số và miền núi. Kiểm tra, giám sát đánh giá việc tổ chức thực hiện Chương trình.</p>
+        </ion-item>
+      </ion-list>
+
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
     <ion-card-header>
-      <ion-card-title class="card-title">Card Title3</ion-card-title>
+      <ion-card-title class="card-title">Quản lý tổng thể Chương trình</ion-card-title>
       <hr>
     </ion-card-header>
 
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <ion-list>
+        <ion-item *ngFor="let item of helpdesks">
+          <ion-router-link href="#">{{item.post_title}}</ion-router-link>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-card-header>
-      <ion-card-title class="card-title">Card Title4</ion-card-title>
-      <hr>
-    </ion-card-header>
-
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
+      <ion-router-link class="image-link" href="#"><img src="/assets/feedback.jpg" /></ion-router-link>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-card-header>
-      <ion-card-title class="card-title">Card Title5</ion-card-title>
-      <hr>
-    </ion-card-header>
-
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
+      <ion-router-link class="image-link" href="#"><img src="/assets/contact.jpg" /></ion-router-link>
   </ion-card>
+
 </ion-content>
 
 <app-footer></app-footer>

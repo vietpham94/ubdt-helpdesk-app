@@ -1,5 +1,6 @@
 export interface Province {
   id?: string;
+  post_title?: string;
   title?: {
     rendered?: string;
   };

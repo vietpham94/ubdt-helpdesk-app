@@ -1,15 +1,20 @@
-import { Province } from './../../interfaces/province';
-import { District } from './../../interfaces/district';
-import { Ward } from './../../interfaces/ward';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+
+import { Constants } from '../../common/constants';
 
 import { IonicSelectableComponent } from 'ionic-selectable';
 
 import { Subject } from './../../interfaces/subject';
 import { SubjectService } from './../../services/subject/subject.service';
-import { Constants } from '../../common/constants';
+import { HelpDeskService } from './../../services/help-desk/help-desk.service';
+
+import { Province } from './../../interfaces/province';
+import { District } from './../../interfaces/district';
+import { Ward } from './../../interfaces/ward';
 import { ProjectAction } from 'src/app/interfaces/project-action';
+import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
+import { HelpDesk } from 'src/app/interfaces/help-desk';
 
 @Component({
   selector: 'app-home',
@@ -24,16 +29,20 @@ export class HomePage implements OnInit {
   districts: Array<District>;
   wards: Array<Ward>;
   projectActions: Array<ProjectAction>;
+  helpDeskCategories: Array<HelpDeskCategory>;
+  helpdesks: Array<HelpDesk>;
   selectedProvince: string;
   selectedDistrict: string;
   selectedWard: string;
   selectedProjectAction: string;
+  selectedHelpDeskCategory: string;
 
   constructor(
     private element: ElementRef,
     private platform: Platform,
     // private ionicSelectable: IonicSelectableComponent,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private helpdeskService: HelpDeskService,
   ) {}
 
   ngOnInit() {
@@ -42,6 +51,9 @@ export class HomePage implements OnInit {
     this.provinces = new Array<Province>();
     this.districts = new Array<District>();
     this.wards = new Array<Ward>();
+    this.projectActions = new Array<ProjectAction>();
+    this.helpDeskCategories = new Array<HelpDeskCategory>();
+    this.helpdesks = new Array<HelpDesk>();
   }
 
   ionViewDidEnter() {
@@ -59,6 +71,8 @@ export class HomePage implements OnInit {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.provinces = await this.subjectService.getProvince().toPromise();
     this.projectActions = await this.subjectService.getProjectAction().toPromise();
+    this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
+    this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();
   }
 
   onSelectProvince() {
@@ -95,6 +109,8 @@ export class HomePage implements OnInit {
   }) {
     console.log('projectActionChange value:', event.value);
   }
+
+  onChooseProject(item){}
 
   ionViewDidLeave() {
     this.unsubscribeBackEvent.unsubscribe();

@@ -1,6 +1,6 @@
 export interface ProjectAction {
   id?: string;
-  slug?: string;
+  post_title?: string;
   title?: {
     rendered?: string;
   };
@@ -11,3 +11,4 @@ export interface ProjectAction {
     };
   };
 }
+

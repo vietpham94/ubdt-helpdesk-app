@@ -65,10 +65,12 @@ export class Constants {
     refreshToken: '/api-bearer-auth/v1/tokens/refresh',
     validateToken: '/jwt-auth/v1/token/validate',
     subject: '/wp/v2/subject',
-    province: '/wp/v2/province',
-    district: '/wp/v2/district',
-    ward: '/wp/v2/ward',
-    projectAction: '/wp/v2/project_action',
+    province: '/wp/v2/provinces',
+    district: '/ash/v1/provinces/districts',
+    ward: '/ash/v1/provinces/districts/wards',
+    projectAction: '/ash/v1/project_actions',
+    helpdeskCategory: '/wp/v2/helpdesk_category',
+    helpdesk: '/ash/v1/helpdesk-contents',
   };
 
   static messages = {
