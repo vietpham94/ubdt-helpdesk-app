@@ -117,4 +117,71 @@ export class Constants {
     }
     return;
   }
+
+  static toastOptions = {
+    error: {
+      header: 'Lỗi',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-error',
+      position: 'bottom',
+      icon: 'warning-outline',
+      color: 'danger',
+      keyboardClose: true
+    },
+    success: {
+      header: 'Thành công',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-success',
+      position: 'bottom',
+      icon: 'checkmark-circle-outline',
+      color: 'success',
+      keyboardClose: true
+    },
+    info: {
+      header: 'Thông tin',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-info',
+      position: 'bottom',
+      icon: 'information-circle-outline',
+      color: 'medium',
+      keyboardClose: true
+    },
+    warning: {
+      header: 'Cảnh báo',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-warning',
+      position: 'bottom',
+      icon: 'alert-circle-outline',
+      color: 'warning',
+      keyboardClose: true
+    }
+  };
 }
