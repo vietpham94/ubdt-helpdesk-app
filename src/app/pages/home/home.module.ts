@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { IonicSelectableModule } from 'ionic-selectable';
+
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
@@ -14,6 +16,7 @@ import {HeaderFooterModule} from '../../components/header-footer/header-footer.m
         CommonModule,
         FormsModule,
         IonicModule,
+        IonicSelectableModule,
         HomePageRoutingModule,
         HeaderFooterModule
     ],
