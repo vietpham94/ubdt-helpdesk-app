@@ -1,0 +1,12 @@
+ion-button {
+  --border-radius: 25px;
+}
+
+ion-button.success {
+  --background: #28ba62;
+}
+
+ion-button.default {
+  --background: #28ba62;
+}
+
