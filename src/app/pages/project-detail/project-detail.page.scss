@@ -16,7 +16,7 @@ ion-content {
   }
   ion-label {
     display: block;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16px;
   }
   h3 {
@@ -70,6 +70,22 @@ ion-content {
         left: 10px;
         background-image: url("../../../assets/icon/icon_circle.png");
       }
+    }
+    .funds {
+      text-align: center;
+      ion-label {
+        text-align: left;
+      }
+      img {
+        margin: 20px auto;
+      }
+    }
+    .submit {
+      --border-radius: 30px;
+      color: #ffffff;
+      --background: linear-gradient(#ec8934, #b34804);
+      margin: 15px 0 0;
+      text-transform: uppercase;
     }
   }
 }
