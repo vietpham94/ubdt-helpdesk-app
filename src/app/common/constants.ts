@@ -23,7 +23,7 @@ export class Constants {
     resetPassword: 'Đặt lại mật khẩu',
     home: 'Trang chủ',
     search: 'Tìm kiếm',
-    searchResult: 'Kêt quả tìm kiếm',
+    searchResult: 'Kết quả tìm kiếm',
     suggestion: 'Góp ý - Đánh giá',
     helpdeskDetail: 'Chi tiết hướng dẫn',
     directory: 'Danh bạ điện thoại',
