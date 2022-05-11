@@ -1,7 +1,77 @@
 <app-header></app-header>
 
 <ion-content>
+  <ion-list>
+    <h2>GÓP Ý - ĐÁNH GIÁ - PHẢN ÁNH</h2>
+    <ion-label class="tilte">1. Thông tin cá nhân</ion-label>
+    <ion-item>
+      <ion-label position="stacked">Từ khóa tìm kiếm</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Địa chỉ</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="+ Chọn tỉnh thành">
+        <ion-select-option>Hà Nội</ion-select-option>
+        <ion-select-option>Hà Nam</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="+ Chọn quận huyện">
+        <ion-select-option>Ba Đình</ion-select-option>
+        <ion-select-option>Đống Đa</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="+ Chọn phường xã">
+        <ion-select-option>Phú Diễn</ion-select-option>
+        <ion-select-option>Phương Canh</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label class="tilte">2. Nội dung Góp ý - Đánh giá - Phản ánh</ion-label>
+    <p class="sugges">Góp ý, đánh giá, phản ánh với vai trò</p>
+    <ion-radio-group>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <p>Cán bộ Cơ quan thường trực Chương trình Chương trình mục tiêu quốc gia.</p>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <p>Cán bộ công chức, viên chức, người được giao nhiệm vụ tổ chức thực hiện Chương trình mục tiêu Quốc gia.</p>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <p>Tổ chức, doanh nghiệp, người dân tham gia thực hiện Chương trình mục tiêu Quốc gia.</p>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <p>Cá nhân, tổ chức thụ hưởng.</p>
+      </ion-item>
+      <ion-item>
+        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
+        <p>Cá nhân, tổ chức khác.</p>
+      </ion-item>
+    </ion-radio-group>
 
+    <ion-item>
+      <ion-label position="stacked">Nơi làm việc</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Về việc</ion-label>
+      <ion-select placeholder="+ Chọn hoạt động">
+        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
+        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
+      <ion-textarea placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
+    </ion-item>
+    <ion-button type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
+  </ion-list>
 </ion-content>
 
 <app-footer></app-footer>

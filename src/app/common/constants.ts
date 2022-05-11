@@ -15,6 +15,7 @@ export class Constants {
     helpdeskDetail: 'helpdesk-detail',
     settings: 'settings',
     directory: 'directory',
+    projectDetail: 'project-detail',
   };
 
   static pagesTitle = {
@@ -23,10 +24,11 @@ export class Constants {
     resetPassword: 'Đặt lại mật khẩu',
     home: 'Trang chủ',
     search: 'Tìm kiếm',
-    searchResult: 'Kêt quả tìm kiếm',
+    searchResult: 'Kết quả tìm kiếm',
     suggestion: 'Góp ý - Đánh giá',
     helpdeskDetail: 'Chi tiết hướng dẫn',
     directory: 'Danh bạ điện thoại',
+    projectDetail: 'Thông tin dự án',
   };
 
   static pageInfo = [
@@ -57,6 +59,10 @@ export class Constants {
     {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
+    },
+    {
+      pageLink: '/project-detail',
+      title: Constants.pagesTitle.projectDetail
     },
   ];
 
@@ -118,4 +124,71 @@ export class Constants {
     }
     return;
   }
+
+  static toastOptions = {
+    error: {
+      header: 'Lỗi',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-error',
+      position: 'bottom',
+      icon: 'warning-outline',
+      color: 'danger',
+      keyboardClose: true
+    },
+    success: {
+      header: 'Thành công',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-success',
+      position: 'bottom',
+      icon: 'checkmark-circle-outline',
+      color: 'success',
+      keyboardClose: true
+    },
+    info: {
+      header: 'Thông tin',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-info',
+      position: 'bottom',
+      icon: 'information-circle-outline',
+      color: 'medium',
+      keyboardClose: true
+    },
+    warning: {
+      header: 'Cảnh báo',
+      message: '',
+      duration: 5000,
+      buttons: [{
+        icon: 'close-circle-outline',
+        side: 'end',
+        role: 'cancel'
+      }],
+      model: 'ios',
+      cssClass: 'toast-item toast-warning',
+      position: 'bottom',
+      icon: 'alert-circle-outline',
+      color: 'warning',
+      keyboardClose: true
+    }
+  };
 }

@@ -1,12 +1,12 @@
 ion-list {
   border: 1px solid #d6d6d6;
   border-radius: 3px;
-  padding: 20px 10px;
+  padding: 20px;
   width: calc(100% - 20px);
-  margin:0 auto 20px;
+  margin:0 auto;
   span {
     font-style: italic;
-    font-size: 18px;
+    font-size: 14px;
     border-bottom: 2px solid #8C0A00;
     display: block;
     padding-bottom: 5px;
@@ -15,6 +15,7 @@ ion-list {
     position: relative;
     padding-left: 20px;
     --padding-start:0;
+    --inner-border-width:0;
     &::before {
       position: absolute;
       display: block;
@@ -24,6 +25,12 @@ ion-list {
       width: 14px;
       height: 14px;
       background-image: url("../../../assets/icon/icon_arrow_down_up.png");
+    }
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ec8934;
+      margin-bottom: 0;
     }
   }
 }

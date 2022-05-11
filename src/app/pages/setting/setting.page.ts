@@ -12,10 +12,11 @@ export class SettingPage implements OnInit {
   constructor(
     private authService: AuthService
   ) {
-    this.isAuth = false;
+    this.isAuth = true;
   }
 
   ngOnInit() {
+    this.isAuth = this.authService.isAuthenticated();
   }
 
   ionViewDidEnter() {
