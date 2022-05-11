@@ -57,6 +57,10 @@ export class Constants {
       title: Constants.pagesTitle.helpdeskDetail
     },
     {
+      pageLink: '/helpdesk-detail',
+      title: Constants.pagesTitle.helpdeskDetail
+    },
+    {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
     },
