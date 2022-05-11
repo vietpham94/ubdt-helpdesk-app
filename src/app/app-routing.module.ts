@@ -49,11 +49,11 @@ const routes: Routes = [
   {
     path: 'directory',
     loadChildren: () => import('./pages/directory/directory.module').then( m => m.DirectoryPageModule)
-  },  {
+  },
+  {
     path: 'project-detail',
     loadChildren: () => import('./pages/project-detail/project-detail.module').then( m => m.ProjectDetailPageModule)
-  }
-
+  },
 ];
 
 @NgModule({
