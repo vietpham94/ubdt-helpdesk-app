@@ -85,7 +85,7 @@
 
     <ion-card-content>
       <ion-list class="project-list">
-        <ion-item  *ngFor="let item of projects" (click)="onChooseProject(item.id)" detail="false">
+        <ion-item  *ngFor="let item of projects"  [routerLink]="'/helpdesk-detail/' + item.id">
           <div style="background:{{item.acf.color}}">
             <p class="project-item-image"><img src="{{item.acf.logo_image}}" /></p>
             <p class="project-item-title">{{item.acf.project_munber}}</p>
