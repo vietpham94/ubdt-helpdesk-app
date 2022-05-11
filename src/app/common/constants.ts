@@ -68,6 +68,7 @@ export class Constants {
     province: '/wp/v2/provinces',
     district: '/ash/v1/provinces/districts',
     ward: '/ash/v1/provinces/districts/wards',
+    project: '/wp/v2/projects',
     projectAction: '/ash/v1/project_actions',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',

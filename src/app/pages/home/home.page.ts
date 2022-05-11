@@ -5,13 +5,15 @@ import { Constants } from '../../common/constants';
 
 import { IonicSelectableComponent } from 'ionic-selectable';
 
-import { Subject } from './../../interfaces/subject';
 import { SubjectService } from './../../services/subject/subject.service';
+import { ProjectService } from './../../services/project/project.service';
 import { HelpDeskService } from './../../services/help-desk/help-desk.service';
 
+import { Subject } from './../../interfaces/subject';
 import { Province } from './../../interfaces/province';
 import { District } from './../../interfaces/district';
 import { Ward } from './../../interfaces/ward';
+import { Project } from 'src/app/interfaces/project';
 import { ProjectAction } from 'src/app/interfaces/project-action';
 import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
 import { HelpDesk } from 'src/app/interfaces/help-desk';
@@ -28,6 +30,7 @@ export class HomePage implements OnInit {
   provinces: Array<Province>;
   districts: Array<District>;
   wards: Array<Ward>;
+  projects: Array<Project>;
   projectActions: Array<ProjectAction>;
   helpDeskCategories: Array<HelpDeskCategory>;
   helpdesks: Array<HelpDesk>;
@@ -40,8 +43,8 @@ export class HomePage implements OnInit {
   constructor(
     private element: ElementRef,
     private platform: Platform,
-    // private ionicSelectable: IonicSelectableComponent,
     private subjectService: SubjectService,
+    private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
   ) {}
 
@@ -51,6 +54,7 @@ export class HomePage implements OnInit {
     this.provinces = new Array<Province>();
     this.districts = new Array<District>();
     this.wards = new Array<Ward>();
+    this.projects = new Array<Project>();
     this.projectActions = new Array<ProjectAction>();
     this.helpDeskCategories = new Array<HelpDeskCategory>();
     this.helpdesks = new Array<HelpDesk>();
@@ -70,6 +74,7 @@ export class HomePage implements OnInit {
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.provinces = await this.subjectService.getProvince().toPromise();
+    this.projects = await this.projectService.getListProject().toPromise();
     this.projectActions = await this.subjectService.getProjectAction().toPromise();
     this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
     this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();

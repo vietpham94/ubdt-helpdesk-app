@@ -70,7 +70,7 @@
         </ion-radio-group>
       </ion-list>
 
-      <ion-button [routerLink]="'/home'" expand="block" shape="round">
+      <ion-button [routerLink]="'/search-result'" expand="block" shape="round">
         TÌM KIẾM
       </ion-button>
 
@@ -85,7 +85,14 @@
 
     <ion-card-content>
       <ion-list class="project-list">
-        <ion-item button (click)="onChooseProject(1)" detail="false">
+        <ion-item  *ngFor="let item of projects" (click)="onChooseProject(item.id)" detail="false">
+          <div style="background:{{item.acf.color}}">
+            <p class="project-item-image"><img src="{{item.acf.logo_image}}" /></p>
+            <p class="project-item-title">{{item.acf.project_munber}}</p>
+            <p class="project-item-description">{{item.title.rendered}}</p>
+          </div>
+        </ion-item>
+        <!-- <ion-item button (click)="onChooseProject(1)" detail="false">
           <p class="project-item-image"><img src="/assets/project_icons/project_01.png" /></p>
           <p class="project-item-title">Dự án 1</p>
           <p class="project-item-description">Giải quyết tình trạng thiếu đất ở, nhà ở, đất sản xuất, nước sinh hoạt.</p>
@@ -134,7 +141,7 @@
           <p class="project-item-image"><img src="/assets/project_icons/project_10.png" /></p>
           <p class="project-item-title">Dự án 10</p>
           <p class="project-item-description">Truyền thông, tuyên truyền, vận động trong vùng đồng bào dân tộc thiểu số và miền núi. Kiểm tra, giám sát đánh giá việc tổ chức thực hiện Chương trình.</p>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
 
     </ion-card-content>
@@ -149,18 +156,18 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let item of helpdesks">
-          <ion-router-link href="#">{{item.post_title}}</ion-router-link>
+          <ion-router-link  [routerLink]="'/helpdesk-detail/' + item.id">{{item.post_title}}</ion-router-link>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
-      <ion-router-link class="image-link" href="#"><img src="/assets/feedback.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
   </ion-card>
 
   <ion-card class="card-item">
-      <ion-router-link class="image-link" href="#"><img src="/assets/contact.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg" /></ion-router-link>
   </ion-card>
 
 </ion-content>
