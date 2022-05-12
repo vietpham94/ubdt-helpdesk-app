@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
@@ -50,6 +51,7 @@ export class HomePage implements OnInit {
     private subjectService: SubjectService,
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -72,6 +74,7 @@ export class HomePage implements OnInit {
         });
     });
 
+    this.projectService.passedProject = null;
     return this.initData();
   }
 
@@ -112,10 +115,12 @@ export class HomePage implements OnInit {
       });
   }
 
-  projectActionChange(event: {
-    component: IonicSelectableComponent,
-    value: any
-  }) {
+  onselectProject(project: Project) {
+    this.projectService.passedProject = project;
+    this.router.navigateByUrl(Constants.routerLinks.projectDetail);
+  }
+
+  projectActionChange(event: {component: IonicSelectableComponent; value: any}) {
     console.log('projectActionChange value:', event.value);
   }
 

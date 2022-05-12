@@ -5,11 +5,7 @@ import { ProjectDetailPage } from './project-detail.page';
 
 const routes: Routes = [
   {
-    path: ':id',
-    component: ProjectDetailPage
-  },
-  {
-    path: ':id',
+    path: '',
     component: ProjectDetailPage
   }
 ];

@@ -20,6 +20,6 @@ export interface Project {
     project_subject_type: { ID: number, post_title: string, },
     color: string,
     logo_image: string,
-    project_munber: string,
+    project_number: string,
   }
 }

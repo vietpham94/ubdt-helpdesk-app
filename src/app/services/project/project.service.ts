@@ -10,7 +10,7 @@ import {AuthService} from '../auth/auth.service';
 })
 export class ProjectService {
 
-  private _passedProject: Project
+  private _passedProject: Project;
 
   constructor(
     private apiService: ApiService,

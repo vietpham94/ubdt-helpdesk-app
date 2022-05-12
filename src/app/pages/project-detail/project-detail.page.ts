@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-
 import { Project } from 'src/app/interfaces/project';
 import { ProjectService } from './../../services/project/project.service';
 
@@ -12,16 +11,18 @@ import { ProjectService } from './../../services/project/project.service';
   styleUrls: ['./project-detail.page.scss'],
 })
 export class ProjectDetailPage implements OnInit {
-
   title: string;
+  project: Project;
 
-  constructor() { }
+  constructor(private projectService: ProjectService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
-    this.title = 'Dự án 1';
-  }
+    if (!this.projectService.passedProject) {
+      history.back();
+    }
 
+    this.project = this.projectService.passedProject;
+  }
 }
