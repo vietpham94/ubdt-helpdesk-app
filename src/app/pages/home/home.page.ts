@@ -15,6 +15,7 @@ import { Ward } from './../../interfaces/ward';
 import { ProjectAction } from 'src/app/interfaces/project-action';
 import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
 import { HelpDesk } from 'src/app/interfaces/help-desk';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,7 @@ export class HomePage implements OnInit {
     // private ionicSelectable: IonicSelectableComponent,
     private subjectService: SubjectService,
     private helpdeskService: HelpDeskService,
+    private administrativeService: AdministrativeService,
   ) {}
 
   ngOnInit() {
@@ -69,7 +71,7 @@ export class HomePage implements OnInit {
 
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.provinces = await this.subjectService.getProvince().toPromise();
+    this.provinces = await this.administrativeService.getProvince().toPromise();
     this.projectActions = await this.subjectService.getProjectAction().toPromise();
     this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
     this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();
@@ -82,7 +84,7 @@ export class HomePage implements OnInit {
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const dataQueryDistrict = { province_id: this.selectedProvince };
-    this.subjectService
+    this.administrativeService
       .getDistrictByProvince(dataQueryDistrict)
       .subscribe((districts: Array<District>) => {
         this.districts = districts;
@@ -96,7 +98,7 @@ export class HomePage implements OnInit {
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const dataQueryWard = { district: this.selectedDistrict };
-    this.subjectService
+    this.administrativeService
       .getWardsByDistrict(dataQueryWard)
       .subscribe((wards: Array<Ward>) => {
         this.wards = wards;

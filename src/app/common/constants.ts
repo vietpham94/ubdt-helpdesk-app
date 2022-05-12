@@ -57,6 +57,10 @@ export class Constants {
       title: Constants.pagesTitle.helpdeskDetail
     },
     {
+      pageLink: '/helpdesk-detail',
+      title: Constants.pagesTitle.helpdeskDetail
+    },
+    {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
     },
@@ -77,6 +81,7 @@ export class Constants {
     projectAction: '/ash/v1/project_actions',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
+    suggestion: '/wp/v2/suggestion',
   };
 
   static messages = {
