@@ -36,9 +36,9 @@
       </ion-select>
 
       <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận/huyện">
-        <ion-select-option *ngFor="let district of districts" [value]="district.id">
-          {{district.post_title}}
-        </ion-select-option>
+<!--        <ion-select-option *ngFor="let district of districts" [value]="district.id">-->
+<!--          {{district.post_title}}-->
+<!--        </ion-select-option>-->
       </ion-select>
 
       <ion-select [(ngModel)]="selectedWard" placeholder="+ Chọn phường/xã">
@@ -54,7 +54,7 @@
           itemValueField="id"
           itemTextField="post_title"
           [canSearch]="true"
-          (onChange)="projectActionChange($event)">
+          (onChange)="projectActionChange($event)" placeholder="+ Chọn hoạt động">
         </ionic-selectable>
       </ion-item>
 

@@ -1,5 +1,5 @@
 export interface District {
-  id?: string;
+  ID?: string;
   post_title?: string;
   title?: {
     rendered?: string;
