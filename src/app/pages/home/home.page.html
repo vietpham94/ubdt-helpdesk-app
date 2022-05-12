@@ -18,7 +18,7 @@
         Quý vị là ai?
       </ion-label>
       <ion-list>
-        <ion-radio-group>
+        <ion-radio-group [(ngModel)]="selectedSubject">
           <ion-item *ngFor="let item of subjectList" mode="md">
             <p>{{item.title.rendered}}</p>
             <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
@@ -29,6 +29,7 @@
       <ion-label class="item-label">
         Quý vị quan tâm đến chương trình / dự án ở khu vực nào?
       </ion-label>
+
       <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()" placeholder="+ Chọn tỉnh/thành">
         <ion-select-option *ngFor="let province of provinces" [value]="province.id">
           {{province.title.rendered}}
@@ -62,7 +63,11 @@
         Vấn đề Quý vị quan tâm là?
       </ion-label>
       <ion-list>
-        <ion-radio-group>
+        <ion-radio-group [(ngModel)]="selectedHelpDeskCategory">
+          <ion-item mode="md">
+            <p>Tất cả</p>
+            <ion-radio slot="start" [value]="" mode="md"></ion-radio>
+          </ion-item>
           <ion-item *ngFor="let item of helpDeskCategories" mode="md">
             <p>{{item.name}}</p>
             <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
@@ -70,8 +75,9 @@
         </ion-radio-group>
       </ion-list>
 
-      <ion-button [routerLink]="'/search-result'" expand="block" shape="round">
-        TÌM KIẾM
+      <!-- <ion-button (onChange)="projectActionChange($event)" [routerLink]="'/search-result'" expand="block" shape="round"> -->
+      <ion-button (onClick)="doSearchByAction()" expand="block" shape="round">
+          TÌM KIẾM
       </ion-button>
 
     </ion-card-content>
@@ -85,7 +91,7 @@
 
     <ion-card-content>
       <ion-list class="project-list">
-        <ion-item  *ngFor="let item of projects"  [routerLink]="'/helpdesk-detail/' + item.id">
+        <ion-item  *ngFor="let item of projects"  [routerLink]="['/project-detail/', item.id]">
           <div style="background:{{item.acf.color}}">
             <p class="project-item-image"><img src="{{item.acf.logo_image}}" /></p>
             <p class="project-item-title">{{item.acf.project_munber}}</p>

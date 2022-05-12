@@ -32,4 +32,11 @@ export class ProjectService {
       params: {parent:0, 'filter[orderby]':'project_munber', order:'asc'}
     });
   }
+
+  public getProjectDetail(project_id: number) {
+    return this.apiService.get(Constants.apiRestEndPoints.project, {
+      headers: this.authService.getAuthHeader,
+      params: {id:project_id}
+    });
+  }
 }

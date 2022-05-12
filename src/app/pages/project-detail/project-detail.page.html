@@ -1,6 +1,10 @@
 <app-header></app-header>
 
 <ion-content>
+  <ion-list class="dang_ky" *ngIf="project.id">
+    <h2 class="project_number">{{project.acf.project_number}}</h2>
+    <h3 class="project_title">“{{project.title.rendered}}”</h3>
+  </ion-list>
   <h2>“Phát triển sản xuất nông, lâm nghiệp bền vững, phát huy tiềm năng, thế mạnh của các vùng miền để sản xuất hàng hóa theo chuỗi giá trị”</h2>
   <ion-list class="project-search">
     <h3>Tiểu dự án, hoạt động</h3>

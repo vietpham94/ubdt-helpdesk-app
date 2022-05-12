@@ -5,6 +5,7 @@ import { Constants } from '../../common/constants';
 
 import { IonicSelectableComponent } from 'ionic-selectable';
 
+import {CommonService} from '../../services/common/common.service';
 import { SubjectService } from './../../services/subject/subject.service';
 import { ProjectService } from './../../services/project/project.service';
 import { HelpDeskService } from './../../services/help-desk/help-desk.service';
@@ -34,6 +35,8 @@ export class HomePage implements OnInit {
   projectActions: Array<ProjectAction>;
   helpDeskCategories: Array<HelpDeskCategory>;
   helpdesks: Array<HelpDesk>;
+
+  selectedSubject: string;
   selectedProvince: string;
   selectedDistrict: string;
   selectedWard: string;
@@ -43,6 +46,7 @@ export class HomePage implements OnInit {
   constructor(
     private element: ElementRef,
     private platform: Platform,
+    private commonService: CommonService,
     private subjectService: SubjectService,
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
@@ -115,7 +119,10 @@ export class HomePage implements OnInit {
     console.log('projectActionChange value:', event.value);
   }
 
-  onChooseProject(item){}
+  doSearchByAction(){
+    this.commonService.searchConditions.subject_type = this.selectedSubject;
+    this.commonService.searchConditions.action = this.selectedProjectAction;
+  }
 
   ionViewDidLeave() {
     this.unsubscribeBackEvent.unsubscribe();
