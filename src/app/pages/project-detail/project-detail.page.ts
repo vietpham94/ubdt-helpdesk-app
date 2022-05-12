@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailPage implements OnInit {
 
+  title: string;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  ionViewDidEnter() {
+    this.title = 'Dự án 1';
+  }
+
+
 
 }
