@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { AuthService } from './../auth/auth.service';
-import { Constants } from './../../common/constants';
-import { ApiService } from './../core-api/api.service';
+import {Project} from '../../interfaces/project';
+import {ApiService} from '../core-api/api.service';
+import {Constants} from '../../common/constants';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
+
+  private _passedProject: Project
 
   constructor(
     private apiService: ApiService,
@@ -33,10 +36,17 @@ export class ProjectService {
     });
   }
 
-  public getProjectDetail(project_id: number) {
-    return this.apiService.get(Constants.apiRestEndPoints.project, {
-      headers: this.authService.getAuthHeader,
-      params: {id:project_id}
+  public projectDetail(projectId: string) {
+    return this.apiService.get(Constants.apiRestEndPoints.projectDetail + '/' + projectId, {
+      headers: this.authService.getNoAuthHeader(),
     });
+  }
+
+  public get passedProject(): Project {
+    return this._passedProject;
+  }
+
+  public set passedProject(value: Project) {
+    this._passedProject = value;
   }
 }

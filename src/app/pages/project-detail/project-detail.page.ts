@@ -12,44 +12,16 @@ import { ProjectService } from './../../services/project/project.service';
   styleUrls: ['./project-detail.page.scss'],
 })
 export class ProjectDetailPage implements OnInit {
-  unsubscribeBackEvent: any;
-  project: Project;
 
-  constructor(
-    private element: ElementRef,
-    private platform: Platform,
-    private projectService: ProjectService,
-    private activatedRoute: ActivatedRoute,
-    private route: Router,
-  ) { }
+  title: string;
+
+  constructor() { }
 
   ngOnInit() {
-    this.project = null;
   }
 
   ionViewDidEnter() {
-    this.platform.ready().then((readySource) => {
-      this.unsubscribeBackEvent =
-        this.platform.backButton.subscribeWithPriority(999999, () => {
-          navigator['app'].exitApp();
-        });
-    });
-
-    return this.initData();
-  }
-
-  async initData() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const project_id = id ? parseInt(id, 10) : 0;
-
-    if (project_id > 0) {
-      this.project = await this.projectService.getProjectDetail(project_id).toPromise();
-    }
-  }
-
-  ionViewDidLeave() {
-    this.unsubscribeBackEvent.unsubscribe();
+    this.title = 'Dự án 1';
   }
 
 }
