@@ -19,7 +19,7 @@
     </ion-item>
     <ion-item>
       <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
-        <ion-select-option *ngFor="let district of districts" [value]="district.id">{{district.post_title}}</ion-select-option>
+        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -30,25 +30,9 @@
     <ion-label class="tilte">2. Nội dung Góp ý - Đánh giá - Phản ánh</ion-label>
     <p class="sugges">Góp ý, đánh giá, phản ánh với vai trò</p>
     <ion-radio-group>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cán bộ Cơ quan thường trực Chương trình Chương trình mục tiêu quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cán bộ công chức, viên chức, người được giao nhiệm vụ tổ chức thực hiện Chương trình mục tiêu Quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Tổ chức, doanh nghiệp, người dân tham gia thực hiện Chương trình mục tiêu Quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cá nhân, tổ chức thụ hưởng.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cá nhân, tổ chức khác.</p>
+      <ion-item *ngFor="let item of subjectList">
+        <ion-radio mode="md" color="primary" slot="start" [value]="item.id"></ion-radio>
+        <p>{{item.title.rendered}}</p>
       </ion-item>
     </ion-radio-group>
 
@@ -58,10 +42,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Về việc</ion-label>
-      <ion-select placeholder="+ Chọn hoạt động">
-        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
-        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
-      </ion-select>
+        <ionic-selectable [(ngModel)]="selectedProjectAction"
+                          [items]="projectActions"
+                          itemValueField="id"
+                          itemTextField="post_title"
+                          [canSearch]="true"
+                          (onChange)="projectActionChange($event)">
+        </ionic-selectable>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
@@ -70,5 +57,4 @@
     <ion-button (click)="onSubmitSuggestion()" type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
   </ion-list>
 </ion-content>
-
 <app-footer></app-footer>

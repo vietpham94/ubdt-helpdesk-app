@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {SuggestionService} from '../../services/suggestion/suggestion.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {CommonService} from '../../services/common/common.service';
@@ -12,6 +12,7 @@ import {ProjectAction} from '../../interfaces/project-action';
 import {AdministrativeService} from '../../services/administrative/administrative.service';
 import {SuggestionParam} from '../../interfaces/suggestion-param';
 import {Pagination} from '../../interfaces/pagination';
+import {IonicSelectableComponent} from 'ionic-selectable';
 
 @Component({
   selector: 'app-suggestion',
@@ -76,9 +77,6 @@ export class SuggestionPage implements OnInit {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
   }
 
-
-
-
   onSelectProvince() {
     if (!this.selectedProvince) {
       return;
@@ -99,13 +97,21 @@ export class SuggestionPage implements OnInit {
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryWard = {district: this.selectedDistrict};
+    const dataQueryWard = {district_id: this.selectedDistrict};
     this.administrativeService
       .getWardsByDistrict(dataQueryWard)
       .subscribe((wards: Array<Ward>) => {
         this.wards = wards;
       });
   }
+
+  projectActionChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('projectActionChange value:', event.value);
+  }
+
   onSubmitSuggestion() {
     this.suggestionService.submitSuggestion(this.suggestionParam).subscribe((res) => {
       const toastOption = Constants.toastOptions.success;
@@ -113,5 +119,4 @@ export class SuggestionPage implements OnInit {
       this.commonService.showToast(toastOption);
     });
   }
-
 }
