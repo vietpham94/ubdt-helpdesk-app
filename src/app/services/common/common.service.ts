@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 
 import {AlertButton, AlertController, AlertInput, ModalController, ToastController} from '@ionic/angular';
+import { SearchConditions } from 'src/app/interfaces/search-conditions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
+
+  searchConditions: SearchConditions;
 
   constructor(
     private alertController: AlertController,

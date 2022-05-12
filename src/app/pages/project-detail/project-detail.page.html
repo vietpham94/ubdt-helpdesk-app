@@ -1,7 +1,7 @@
 <app-header [title]="title"></app-header>
 
 <ion-content>
-  <h2>“Phát triển sản xuất nông, lâm nghiệp bền vững, phát huy tiềm năng, thế mạnh của các vùng miền để sản xuất hàng hóa theo chuỗi giá trị”</h2>
+  <h2 *ngIf="project">{{project.title.rendered}}</h2>
   <ion-list class="project-search">
     <h3>Tiểu dự án, hoạt động</h3>
     <ion-item>
