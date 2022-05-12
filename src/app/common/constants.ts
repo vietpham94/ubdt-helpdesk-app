@@ -61,7 +61,7 @@ export class Constants {
       title: Constants.pagesTitle.directory
     },
     {
-      pageLink: '/project-detail',
+      pageLink: '/project-detail/:id',
       title: Constants.pagesTitle.projectDetail
     },
   ];
@@ -75,6 +75,7 @@ export class Constants {
     district: '/ash/v1/provinces/districts',
     ward: '/ash/v1/provinces/districts/wards',
     projectAction: '/ash/v1/project_actions',
+    projectDetail: '/wp/v2/projects',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
   };
