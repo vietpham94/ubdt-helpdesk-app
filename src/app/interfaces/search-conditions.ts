@@ -5,6 +5,7 @@ export interface SearchConditions {
   subject_type?: string;
   province?: string;
   district?: string;
-  wards?: string;
+  ward?: string;
   helpdesk_category?: string;
+  page?: string;
 }
