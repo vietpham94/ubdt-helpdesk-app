@@ -14,6 +14,6 @@ export class SuggestionService {
     private authService: AuthService) {
   }
   public submitSuggestion(suggestion: SuggestionParam){
-    return this.apiService.post(Constants.apiRestEndPoints.suggestion, suggestion, {headers: this.authService.getAuthHeader()}, 'submitSuggestion');
+    return this.apiService.post(Constants.apiRestEndPoints.suggestion, suggestion, {headers: this.authService.getNoAuthHeader()}, 'submitSuggestion');
   }
 }

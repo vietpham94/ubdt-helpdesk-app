@@ -1,4 +1,5 @@
 export interface SuggestionParam {
+  post_title: string;
   acf: {
     name: string;
     address: string;
