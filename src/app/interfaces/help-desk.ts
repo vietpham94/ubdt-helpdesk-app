@@ -1,3 +1,5 @@
+import {HelpDeskCategory} from './help-desk-category';
+
 export interface HelpDesk {
   id?: string;
   post_title?: string;
@@ -41,4 +43,5 @@ export interface HelpDesk {
       post_title?: string;
     }>,
   }
+  terms?: Array<HelpDeskCategory>;
 }

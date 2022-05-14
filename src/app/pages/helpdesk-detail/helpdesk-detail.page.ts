@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {HelpDeskService} from '../../services/help-desk/help-desk.service';
 
 @Component({
   selector: 'app-helpdesk-detail',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpdeskDetailPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private helpdeskService: HelpDeskService
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    if (!this.helpdeskService.passedHelpdesk) {
+      history.back();
+    }
+
+
   }
 
 }

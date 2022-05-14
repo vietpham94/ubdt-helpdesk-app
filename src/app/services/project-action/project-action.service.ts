@@ -22,4 +22,10 @@ export class ProjectActionService {
       params: params
     }, 'getListProjectAction');
   }
+
+  public getDetailProjectAction(id: string) {
+    return this.apiService.get(Constants.apiRestEndPoints.projectActionDetail.replace(':id', id), {
+      headers: this.authService.getNoAuthHeader()
+    }, 'getListProjectAction');
+  }
 }

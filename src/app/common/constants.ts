@@ -57,6 +57,10 @@ export class Constants {
       title: Constants.pagesTitle.helpdeskDetail
     },
     {
+      pageLink: '/helpdesk-detail',
+      title: Constants.pagesTitle.helpdeskDetail
+    },
+    {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
     },
@@ -80,6 +84,7 @@ export class Constants {
     ward: '/ash/v1/provinces/districts/wards',
     project: '/wp/v2/projects',
     projectAction: '/ash/v1/project_actions',
+    projectActionDetail: '/wp/v2/project_action/:id',
     projectDetail: '/wp/v2/projects',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',

@@ -8,15 +8,17 @@ import { ProjectDetailPageRoutingModule } from './project-detail-routing.module'
 
 import { ProjectDetailPage } from './project-detail.page';
 import {HeaderFooterModule} from '../../components/header-footer/header-footer.module';
+import {IonicSelectableModule} from 'ionic-selectable';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProjectDetailPageRoutingModule,
-    HeaderFooterModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProjectDetailPageRoutingModule,
+        HeaderFooterModule,
+        IonicSelectableModule
+    ],
   declarations: [ProjectDetailPage]
 })
 export class ProjectDetailPageModule {}
