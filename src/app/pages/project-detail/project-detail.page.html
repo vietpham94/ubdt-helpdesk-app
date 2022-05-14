@@ -163,14 +163,6 @@
                           [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
         </ionic-selectable>
       </ion-col>
-
-      <ion-col size="12" class="search-directory">
-        <ionic-selectable item-content placeholder="+ Chọn xã phường"
-                          [(items)]="wards" itemTextField="post_title"
-                          [canSearch]="true" (onChange)="onSelectWard($event.value)">
-        </ionic-selectable>
-      </ion-col>
-
     </ion-row>
 
     <ng-container class="enterprise-list">
@@ -241,7 +233,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
-
 <app-footer></app-footer>

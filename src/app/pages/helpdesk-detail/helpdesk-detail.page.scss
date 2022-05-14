@@ -1,0 +1,70 @@
+ion-content {
+  h2 {
+    font-size: 18px;
+    width: calc(100% - 20px);
+    margin: 10px auto 20px;
+  }
+
+  .project-detail {
+    background: #ffffff;
+    width: calc(100% - 20px);
+    margin: auto;
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    padding: 20px 10px 40px;
+    margin-bottom: 20px;
+
+    ion-label {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 16px;
+
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 14px;
+        height: 14px;
+        top: 1px;
+        left: 0px;
+        background-image: url("../../../assets/icon/icon_arrow_down_up.png");
+      }
+    }
+
+    p {
+      position: relative;
+      margin: 5px 0;
+      font-size: 14px;
+      padding-left: 20px;
+      text-align: justify;
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 5px;
+        height: 5px;
+        top: 5px;
+        left: 10px;
+        background-image: url("../../../assets/icon/icon_circle_green.png");
+      }
+    }
+
+    .download-file{
+      a {
+        color: #ec8934;
+      }
+      &::before {
+        font-family: "Font Awesome 5 Free";
+        font-size: 16px;
+        display: block;
+        content: "\f56d";
+        background-image: none;
+        color: #ec8934;
+      }
+    }
+
+
+  }
+}
