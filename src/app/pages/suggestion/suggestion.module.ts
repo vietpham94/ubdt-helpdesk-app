@@ -8,12 +8,14 @@ import { SuggestionPageRoutingModule } from './suggestion-routing.module';
 
 import { SuggestionPage } from './suggestion.page';
 import {HeaderFooterModule} from '../../components/header-footer/header-footer.module';
+import {IonicSelectableModule} from 'ionic-selectable';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
+        IonicSelectableModule,
         SuggestionPageRoutingModule,
         HeaderFooterModule
     ],

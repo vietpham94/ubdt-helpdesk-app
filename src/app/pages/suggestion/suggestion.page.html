@@ -5,73 +5,66 @@
     <h2>GÓP Ý - ĐÁNH GIÁ - PHẢN ÁNH</h2>
     <ion-label class="tilte">1. Thông tin cá nhân</ion-label>
     <ion-item>
-      <ion-label position="stacked">Từ khóa tìm kiếm</ion-label>
-      <ion-input></ion-input>
+      <ion-label position="stacked">Họ và tên</ion-label>
+      <ion-input type="text" [(ngModel)]="suggestionParam.acf.name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Địa chỉ</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="text" [(ngModel)]="suggestionParam.acf.address"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-select placeholder="+ Chọn tỉnh thành">
-        <ion-select-option>Hà Nội</ion-select-option>
-        <ion-select-option>Hà Nam</ion-select-option>
+      <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()" placeholder="+ Chọn tỉnh thành">
+        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.title.rendered}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-select placeholder="+ Chọn quận huyện">
-        <ion-select-option>Ba Đình</ion-select-option>
-        <ion-select-option>Đống Đa</ion-select-option>
+      <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
+        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-select placeholder="+ Chọn phường xã">
-        <ion-select-option>Phú Diễn</ion-select-option>
-        <ion-select-option>Phương Canh</ion-select-option>
+      <ion-select [(ngModel)]="selectedWard" placeholder="+ Chọn phường xã">
+        <ion-select-option *ngFor="let ward of wards" [value]="ward.ID">{{ward.post_title}}</ion-select-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Điện thoại</ion-label>
+      <ion-input type="text" [(ngModel)]="suggestionParam.acf.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="suggestionParam.acf.email"></ion-input>
     </ion-item>
     <ion-label class="tilte">2. Nội dung Góp ý - Đánh giá - Phản ánh</ion-label>
     <p class="sugges">Góp ý, đánh giá, phản ánh với vai trò</p>
-    <ion-radio-group>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cán bộ Cơ quan thường trực Chương trình Chương trình mục tiêu quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cán bộ công chức, viên chức, người được giao nhiệm vụ tổ chức thực hiện Chương trình mục tiêu Quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Tổ chức, doanh nghiệp, người dân tham gia thực hiện Chương trình mục tiêu Quốc gia.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cá nhân, tổ chức thụ hưởng.</p>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <p>Cá nhân, tổ chức khác.</p>
-      </ion-item>
-    </ion-radio-group>
-
+    <ion-item class="radio_position">
+      <ion-radio-group [(ngModel)]="suggestionParam.acf.suggestion_position"  *ngIf="!isLoadingPosition">
+        <ion-item *ngFor="let item of subjectList">
+          <ion-radio mode="md" color="primary" slot="start" [value]="item.title.rendered"></ion-radio>
+          <p>{{item.title.rendered}}</p>
+        </ion-item>
+      </ion-radio-group>
+      <ion-spinner *ngIf="isLoadingPosition"></ion-spinner>
+    </ion-item>
     <ion-item>
       <ion-label position="stacked">Nơi làm việc</ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="suggestionParam.acf.work_place"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Về việc</ion-label>
-      <ion-select placeholder="+ Chọn hoạt động">
-        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
-        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
-      </ion-select>
+        <ionic-selectable [(ngModel)]="suggestionParam.acf.suggestion_action"
+                          [items]="projectActions"
+                          itemValueField="ID"
+                          itemTextField="post_title"
+                          [canSearch]="true"
+                          (ionChange)="projectActionChange($event)">
+        </ionic-selectable>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
-      <ion-textarea placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
+      <ion-textarea [(ngModel)]="suggestionParam.acf.suggestion_content" placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
     </ion-item>
-    <ion-button type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
+    <ion-button (click)="onSubmitSuggestion()" type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
   </ion-list>
 </ion-content>
-
 <app-footer></app-footer>
