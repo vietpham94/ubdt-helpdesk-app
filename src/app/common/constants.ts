@@ -88,7 +88,6 @@ export class Constants {
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
     suggestion: '/ash/v1/suggestion',
-    project:'/wp/v2/projects',
   };
 
   static messages = {
