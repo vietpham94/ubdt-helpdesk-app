@@ -53,7 +53,7 @@ export class DirectoryPage implements OnInit {
       page: 1,
       per_page: 100,
     }
-    this.projectList = await this.projectService.getProjects(directoryParams).toPromise();
+    this.projectList = await this.projectService.getListProject().toPromise();
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.projectAction = await this.subjectService.getListSubject().toPromise();
     this.provines = await this.administrativeService.getProvince(directoryParams).toPromise();

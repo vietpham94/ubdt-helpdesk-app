@@ -65,6 +65,10 @@ export class Constants {
       title: Constants.pagesTitle.directory
     },
     {
+      pageLink: '/project-detail/:id',
+      title: Constants.pagesTitle.projectDetail
+    },
+    {
       pageLink: '/project-detail',
       title: Constants.pagesTitle.projectDetail
     },
@@ -78,7 +82,9 @@ export class Constants {
     province: '/wp/v2/provinces',
     district: '/ash/v1/provinces/districts',
     ward: '/ash/v1/provinces/districts/wards',
+    project: '/wp/v2/projects',
     projectAction: '/ash/v1/project_actions',
+    projectDetail: '/wp/v2/projects',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
     suggestion: '/ash/v1/suggestion',
@@ -91,44 +97,18 @@ export class Constants {
     errorForbidden: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
   };
 
-  static getPageInfoByRouterLink(pageLink: string): PageInfo {
-    if (!pageLink) {
-      return;
-    }
-    const link = Constants.formatLink(pageLink);
-    return Constants.pageInfo.find(u => u.pageLink === link);
-  }
-
-  static formatLink(link: string): string {
-    const arraySlap = link.split('/');
-    let linkFormat = '';
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < arraySlap.length; i++) {
-      if (arraySlap[i].length === 0) {
-        continue;
-      }
-
-      if (Number.isInteger(+arraySlap[i])) {
-        linkFormat += '/:id';
-        continue;
-      }
-
-      if (!linkFormat.includes('/:id')) {
-        linkFormat += '/' + arraySlap[i];
-      }
-    }
-    return linkFormat;
-  }
-
-  static scrollContentGetBlogTitle(currentScrollTop: number, cardList): string {
-    for (let i = (cardList.length - 1); i--; i < 0) {
-      const bottom = cardList[i].offsetTop + cardList[i].offsetHeight - 65;
-      if (cardList[i].offsetTop <= currentScrollTop && currentScrollTop < bottom) {
-        return cardList[i].querySelector('.card-title').innerHTML;
-      }
-    }
-    return;
-  }
+  static pageLink = {
+    login: '/login',
+    register: '/register',
+    resetPassword: 'reset-password',
+    home: '/home',
+    search: '/search',
+    searchResult: '/search-result',
+    suggestion: '/suggestion',
+    helpdeskDetail: '/helpdesk-detail',
+    directory: '/directory',
+    projectDetail: '/project-detail'
+  };
 
   static toastOptions = {
     error: {
@@ -196,4 +176,43 @@ export class Constants {
       keyboardClose: true
     }
   };
+
+  static getPageInfoByRouterLink(pageLink: string): PageInfo {
+    if (!pageLink) {
+      return;
+    }
+    const link = Constants.formatLink(pageLink);
+    return Constants.pageInfo.find(u => u.pageLink === link);
+  }
+
+  static formatLink(link: string): string {
+    const arraySlap = link.split('/');
+    let linkFormat = '';
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < arraySlap.length; i++) {
+      if (arraySlap[i].length === 0) {
+        continue;
+      }
+
+      if (Number.isInteger(+arraySlap[i])) {
+        linkFormat += '/:id';
+        continue;
+      }
+
+      if (!linkFormat.includes('/:id')) {
+        linkFormat += '/' + arraySlap[i];
+      }
+    }
+    return linkFormat;
+  }
+
+  static scrollContentGetBlogTitle(currentScrollTop: number, cardList): string {
+    for (let i = (cardList.length - 1); i--; i < 0) {
+      const bottom = cardList[i].offsetTop + cardList[i].offsetHeight - 65;
+      if (cardList[i].offsetTop <= currentScrollTop && currentScrollTop < bottom) {
+        return cardList[i].querySelector('.card-title').innerHTML;
+      }
+    }
+    return;
+  }
 }

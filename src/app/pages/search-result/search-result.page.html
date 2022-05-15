@@ -40,22 +40,13 @@
       <p>Hướng dẫn thủ tục đánh giá hộ nghèo cần hỗ trợ nhà ở.</p>
     </ion-item>
   </ion-list>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <a routerLink="/suggestion">
-          <img src="assets/image/box-gop-y.png"/>
-        </a>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <a routerLink="/directory">
-          <img src="assets/image/box-danh-ba.png"/>
-        </a>
-       </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card class="card-item">
+    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
+  </ion-card>
+
+  <ion-card class="card-item">
+    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg" /></ion-router-link>
+  </ion-card>
 </ion-content>
 
 <app-footer></app-footer>

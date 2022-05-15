@@ -11,9 +11,9 @@ import {SubjectService} from '../../services/subject/subject.service';
 import {ProjectAction} from '../../interfaces/project-action';
 import {AdministrativeService} from '../../services/administrative/administrative.service';
 import {SuggestionParam} from '../../interfaces/suggestion-param';
-import {Pagination} from '../../interfaces/pagination';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import {Router} from '@angular/router';
+import {Pagination} from '../../interfaces/pagination';
 
 @Component({
   selector: 'app-suggestion',
