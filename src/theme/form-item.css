@@ -35,3 +35,9 @@ ion-select {
   padding-bottom: 10px !important;
 }
 
+ionic-selectable-modal ion-content ion-list ion-item ion-label {
+  text-overflow: unset !important;
+  white-space: unset !important;
+  overflow: unset !important;
+}
+
