@@ -1,7 +1,8 @@
 /* Common styles*/
 body {
-  font-size: 14px;
+  font-size: 15px;
   font-family: Arial, Roboto, sans-serif;
+  --color: #514c4c;
 }
 
 @media screen and (min-width: 360px) {
@@ -17,4 +18,16 @@ body {
 ion-content {
   background: #FFF1E5;
   --background: #FFF1E5;
+}
+
+ion-card {
+  margin: 0 10px 20px;
+  border: 1px solid #b9b7ac;
+  box-shadow: none;
+}
+
+ion-card-header,
+ion-card-content {
+  padding-inline-start: 15px !important;
+  padding-inline-end: 15px !important;
 }
