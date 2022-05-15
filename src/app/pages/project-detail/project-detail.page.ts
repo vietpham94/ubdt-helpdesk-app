@@ -5,6 +5,8 @@ import {SubjectService} from '../../services/subject/subject.service';
 import {ProjectService} from './../../services/project/project.service';
 import {HelpDeskService} from '../../services/help-desk/help-desk.service';
 import {ProjectActionService} from '../../services/project-action/project-action.service';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
+import {EnterpriseService} from '../../services/enterprise/enterprise.service';
 
 import {Constants} from '../../common/constants';
 import {Project} from '../../interfaces/project';
@@ -17,6 +19,9 @@ import {ProjectParams} from '../../interfaces/project-params';
 import {SearchConditions} from '../../interfaces/search-conditions';
 import {HelpDeskCategory} from '../../interfaces/help-desk-category';
 import {ProjectActionParams} from '../../interfaces/project-action-params';
+import {Enterprise} from '../../interfaces/enterprise';
+import {PositionService} from '../../services/position/position.service';
+import {Position} from '../../interfaces/position';
 
 @Component({
   selector: 'app-project-detail',
@@ -42,6 +47,9 @@ export class ProjectDetailPage implements OnInit {
   districts: Array<District>;
   wards: Array<Ward>;
   locationId: number;
+  positionList: Array<Position>;
+  enterpriseList: Array<Enterprise>;
+  enterpriseGroupByPosition: Array<{ position: Position; enterprises: Array<Enterprise> }>;
 
   isLoadingSubProject: boolean;
   isLoadingProjectAction: boolean;
@@ -49,13 +57,17 @@ export class ProjectDetailPage implements OnInit {
   isShowSelectSubProjectAndAction: boolean;
   isLoadingDistrict: boolean;
   isLoadingWard: boolean;
+  isLoadingEnterprise: boolean;
 
   constructor(
     private projectService: ProjectService,
     private projectActionService: ProjectActionService,
     private helpdeskService: HelpDeskService,
     private router: Router,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private administrativeService: AdministrativeService,
+    private enterpriseService: EnterpriseService,
+    private positionService: PositionService,
   ) {
   }
 
@@ -69,6 +81,8 @@ export class ProjectDetailPage implements OnInit {
     this.provinces = new Array<Province>();
     this.districts = new Array<District>();
     this.wards = new Array<Ward>();
+    this.positionList = new Array<Position>();
+    this.enterpriseList = new Array<Enterprise>();
   }
 
   ionViewDidEnter() {
@@ -89,11 +103,16 @@ export class ProjectDetailPage implements OnInit {
     this.getListSubProject();
 
     this.getListHelpdeskCategories();
+
+    this.getListPosition();
+
+    this.getListEnterprise();
   }
 
   onSelectSubProject() {
     this.projectAction = null;
     this.actionList = new Array<ProjectAction>();
+    this.projectActionId = null;
 
     if (!this.subProjectId) {
       return;
@@ -104,6 +123,8 @@ export class ProjectDetailPage implements OnInit {
     this.getListHelpDeskContents();
 
     this.getLisProjectAction();
+
+    this.getListEnterprise();
   }
 
   onSelectProjectAction(projectAction: ProjectAction) {
@@ -116,6 +137,8 @@ export class ProjectDetailPage implements OnInit {
     this.getListHelpDeskContents();
 
     this.getDetailProjectAction();
+
+    this.getListEnterprise();
   }
 
   onClickHelpdesk(helpdesk: HelpDesk) {
@@ -127,16 +150,19 @@ export class ProjectDetailPage implements OnInit {
     this.districts = new Array<District>();
     this.getListDistrict(+province.id);
     this.locationId = +province.id;
+    this.getListEnterprise();
   }
 
   onSelectDistrict(district: District) {
     this.wards = new Array<Ward>();
     this.getListWard(+district.ID);
     this.locationId = +district.ID;
+    this.getListEnterprise();
   }
 
   onSelectWard(ward: Ward) {
     this.locationId = +ward.ID;
+    this.getListEnterprise();
   }
 
   private getListSubProject() {
@@ -268,7 +294,7 @@ export class ProjectDetailPage implements OnInit {
   }
 
   private getListProvince() {
-    this.subjectService.getProvince().subscribe((provinces: Array<Province>) => {
+    this.administrativeService.getProvince({page: 1, per_page: 100}).subscribe((provinces: Array<Province>) => {
       this.provinces = provinces;
       this.provinces.forEach(province => {
         if (province.title) {
@@ -284,7 +310,11 @@ export class ProjectDetailPage implements OnInit {
     }
 
     this.isLoadingDistrict = true;
-    this.subjectService.getDistrictByProvince({province_id: provinceId}).subscribe((districts: Array<District>) => {
+    this.administrativeService.getDistrictByProvince({
+      province_id: provinceId,
+      page: 1,
+      per_page: 100
+    }).subscribe((districts: Array<District>) => {
       this.districts = districts;
       this.isLoadingDistrict = false;
     });
@@ -296,41 +326,83 @@ export class ProjectDetailPage implements OnInit {
     }
 
     this.isLoadingWard = true;
-    this.subjectService.getWardsByDistrict({district_id: districtId}).subscribe((wards: Array<Ward>) => {
+    this.administrativeService.getWardsByDistrict({
+      district_id: districtId,
+      page: 1,
+      per_page: 100
+    }).subscribe((wards: Array<Ward>) => {
       this.wards = wards;
       this.isLoadingWard = false;
     });
   }
 
+  private getListPosition() {
+    this.positionService.getListPosition().subscribe((positionList: Array<Position>) => {
+      this.positionList = positionList;
+    });
+  }
+
   private getListEnterprise() {
-    let params: SearchConditions;
+    let paramsGetListEnterprise: SearchConditions;
 
     if (this.projectActionId) {
-      params = {
-        action: this.projectActionId
-      }
+      paramsGetListEnterprise = {action: this.projectActionId}
     }
 
-    if (!params && this.subProjectId) {
-      params = {
-        project: this.subProjectId
-      };
+    if (!paramsGetListEnterprise && this.subProjectId) {
+      paramsGetListEnterprise = {project: this.subProjectId};
     }
 
-    if (!params && this.project) {
-      params = {
-        project: this.project.id.toString()
-      };
+    if (!paramsGetListEnterprise && this.project) {
+      paramsGetListEnterprise = {project: this.project.id.toString()};
     }
 
-    if (!params) {
+    if (!paramsGetListEnterprise) {
       return;
     }
 
     if (this.locationId) {
-      params.location = this.locationId.toString();
+      paramsGetListEnterprise.location = this.locationId.toString();
     }
 
+    this.isLoadingEnterprise = true;
+    this.enterpriseGroupByPosition = new Array<{ position: Position; enterprises: Array<Enterprise> }>();
+    this.enterpriseService.getListEnterprise(paramsGetListEnterprise).subscribe((enterpriseList: Array<Enterprise>) => {
+      this.enterpriseList = enterpriseList;
+      this.groupEnterpriseByPosition();
+      this.isLoadingEnterprise = false;
+    });
+  }
 
+  private groupEnterpriseByPosition() {
+    if (!this.positionList.length) {
+      return;
+    }
+
+    if (!this.enterpriseList.length) {
+      return;
+    }
+
+    if (this.positionList.length == 0) {
+      return;
+    }
+
+    if (this.enterpriseList.length == 0) {
+      return;
+    }
+
+    this.positionList.forEach(position => {
+      this.enterpriseGroupByPosition.push({
+        position: position,
+        enterprises: new Array<Enterprise>()
+      });
+    });
+
+    this.enterpriseList.forEach(enterprise => {
+      const positionGroup = this.enterpriseGroupByPosition.find(u => +u.position.id == +enterprise.position.ID);
+      if (positionGroup) {
+        positionGroup.enterprises.push(enterprise);
+      }
+    });
   }
 }

@@ -10,3 +10,15 @@ ion-searchbar .searchbar-input-container .searchbar-search-icon {
   top: 7px;
   left: 7px;
 }
+
+.ion-select,
+.ionic-selectable {
+  border: 1px solid #efefef;
+  --border: 1px solid #efefef;
+  border-radius: 2px;
+  --border-radius: 2px;
+}
+
+.ionic-selectable-value {
+  padding-left: 13px;
+}

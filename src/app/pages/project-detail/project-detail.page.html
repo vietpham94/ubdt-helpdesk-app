@@ -180,63 +180,43 @@
       </ion-col>
     </ion-row>
 
-    <ng-container class="enterprise-list">
-      <ion-row>
-        <ion-col>
-          <ion-label>
-            Tham gia thực hiện
-          </ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12"><p>TẬP ĐOÀN XÂY DỰNG VÀ KINH DOANH BẤT ĐỘNG SẢN ÁNH DƯƠNG</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Địa chỉ: </b>193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp,Tp. Hồ Chí Minh</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Điện thoại: </b>0541245666</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Đường dây nóng : </b>1900xxxx</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Email: </b>kinhdoanhphulong@gmail.com</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Website: </b>xaydungphulong.com.vn</p></ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-      </ion-row>
+    <ion-row *ngIf="isLoadingEnterprise">
+      <ion-col size="12" class="ion-text-center">
+        <ion-spinner class="ion-text-center"></ion-spinner>
+      </ion-col>
+    </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-label>
-            Tổ chức thực hiện
-          </ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12"><p>TẬP ĐOÀN XÂY DỰNG VÀ KINH DOANH BẤT ĐỘNG SẢN ÁNH DƯƠNG</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Địa chỉ: </b>193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp,Tp. Hồ Chí Minh</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Điện thoại: </b>0541245666</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Đường dây nóng : </b>1900xxxx</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Email: </b>kinhdoanhphulong@gmail.com</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Website: </b>xaydungphulong.com.vn</p></ion-col>
-            </ion-row>
-          </ion-grid>
+    <ion-row class="enterprise-list">
+      <ng-container *ngFor="let positionGroup of enterpriseGroupByPosition">
+        <ion-col size="12" class="position-group-title" *ngIf="positionGroup.enterprises.length > 0">
+          {{positionGroup.position.title.rendered}}
         </ion-col>
-      </ion-row>
-    </ng-container>
+
+        <ion-col class="enterprise-item" size="12" *ngFor="let enterprise of positionGroup.enterprises">
+          <p>{{enterprise.post_title}}</p>
+          <p>
+            <label>Địa chỉ: </label>
+            {{enterprise.acf.address}}
+          </p>
+          <p>
+            <label>Điện thoại: </label>
+            {{enterprise.acf.enterprise_phone}}
+          </p>
+          <p>
+            <label>Đường dây nóng: </label>
+            {{enterprise.acf.enterprise_hotline}}
+          </p>
+          <p>
+            <label>Email: </label>
+            {{enterprise.acf.enterprise_email}}
+          </p>
+          <p>
+            <label>Website: </label>
+            {{enterprise.acf.address}}
+          </p>
+        </ion-col>
+      </ng-container>
+    </ion-row>
   </ion-grid>
 
   <ion-grid class="redirec-sugges">
