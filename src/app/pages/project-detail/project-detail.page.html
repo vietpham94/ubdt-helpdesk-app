@@ -157,11 +157,26 @@
         </ionic-selectable>
       </ion-col>
 
-      <ion-col size="12" class="search-directory">
+      <ion-col size="12" class="search-directory" *ngIf="districts.length > 0">
         <ionic-selectable item-content placeholder="+ Chọn quận huyện"
                           [(items)]="districts" itemTextField="post_title"
                           [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
         </ionic-selectable>
+      </ion-col>
+
+      <ion-col size="12" class="search-directory ion-text-center" *ngIf="isLoadingDistrict">
+        <ion-spinner class="ion-text-center"></ion-spinner>
+      </ion-col>
+
+      <ion-col size="12" class="search-directory" *ngIf="wards.length > 0">
+        <ionic-selectable item-content placeholder="+ Chọn xã phường"
+                          [(items)]="wards" itemTextField="post_title"
+                          [canSearch]="true" (onChange)="onSelectWard($event.value)">
+        </ionic-selectable>
+      </ion-col>
+
+      <ion-col size="12" class="search-directory ion-text-center" *ngIf="isLoadingWard">
+        <ion-spinner class="ion-text-center"></ion-spinner>
       </ion-col>
     </ion-row>
 

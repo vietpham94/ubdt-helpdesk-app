@@ -1,21 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
+import {SubjectService} from '../../services/subject/subject.service';
 import {ProjectService} from './../../services/project/project.service';
+import {HelpDeskService} from '../../services/help-desk/help-desk.service';
 import {ProjectActionService} from '../../services/project-action/project-action.service';
 
-import {Project} from '../../interfaces/project';
-import {ProjectAction} from '../../interfaces/project-action';
-import {ProjectParams} from '../../interfaces/project-params';
-import {ProjectActionParams} from '../../interfaces/project-action-params';
-import {HelpDesk} from '../../interfaces/help-desk';
-import {HelpDeskCategory} from '../../interfaces/help-desk-category';
-import {HelpDeskService} from '../../services/help-desk/help-desk.service';
-import {SearchConditions} from '../../interfaces/search-conditions';
 import {Constants} from '../../common/constants';
+import {Project} from '../../interfaces/project';
+import {Ward} from '../../interfaces/ward';
 import {Province} from '../../interfaces/province';
 import {District} from '../../interfaces/district';
-import {Ward} from '../../interfaces/ward';
+import {HelpDesk} from '../../interfaces/help-desk';
+import {ProjectAction} from '../../interfaces/project-action';
+import {ProjectParams} from '../../interfaces/project-params';
+import {SearchConditions} from '../../interfaces/search-conditions';
+import {HelpDeskCategory} from '../../interfaces/help-desk-category';
+import {ProjectActionParams} from '../../interfaces/project-action-params';
 
 @Component({
   selector: 'app-project-detail',
@@ -40,17 +41,21 @@ export class ProjectDetailPage implements OnInit {
   provinces: Array<Province>;
   districts: Array<District>;
   wards: Array<Ward>;
+  locationId: number;
 
   isLoadingSubProject: boolean;
   isLoadingProjectAction: boolean;
   isLoadingHelpdeskContent: boolean;
   isShowSelectSubProjectAndAction: boolean;
+  isLoadingDistrict: boolean;
+  isLoadingWard: boolean;
 
   constructor(
     private projectService: ProjectService,
     private projectActionService: ProjectActionService,
     private helpdeskService: HelpDeskService,
     private router: Router,
+    private subjectService: SubjectService
   ) {
   }
 
@@ -61,6 +66,9 @@ export class ProjectDetailPage implements OnInit {
     this.helpdeskCategories = new Array<HelpDeskCategory>();
     this.helpdeskContents = new Array<HelpDesk>();
     this.helpdeskGroupByCategory = new Array<{ category: HelpDeskCategory; helpdesk: Array<HelpDesk> }>();
+    this.provinces = new Array<Province>();
+    this.districts = new Array<District>();
+    this.wards = new Array<Ward>();
   }
 
   ionViewDidEnter() {
@@ -75,6 +83,8 @@ export class ProjectDetailPage implements OnInit {
     this.actionList = new Array<ProjectAction>();
 
     this.project = this.projectService.passedProject;
+
+    this.getListProvince();
 
     this.getListSubProject();
 
@@ -114,15 +124,19 @@ export class ProjectDetailPage implements OnInit {
   }
 
   onSelectProvince(province: Province) {
-    console.log(province.id);
+    this.districts = new Array<District>();
+    this.getListDistrict(+province.id);
+    this.locationId = +province.id;
   }
 
   onSelectDistrict(district: District) {
-    console.log(district.id);
+    this.wards = new Array<Ward>();
+    this.getListWard(+district.ID);
+    this.locationId = +district.ID;
   }
 
   onSelectWard(ward: Ward) {
-    console.log(ward.id);
+    this.locationId = +ward.ID;
   }
 
   private getListSubProject() {
@@ -254,6 +268,69 @@ export class ProjectDetailPage implements OnInit {
   }
 
   private getListProvince() {
+    this.subjectService.getProvince().subscribe((provinces: Array<Province>) => {
+      this.provinces = provinces;
+      this.provinces.forEach(province => {
+        if (province.title) {
+          province.post_title = province.title.rendered;
+        }
+      });
+    });
+  }
+
+  private getListDistrict(provinceId: number) {
+    if (!provinceId) {
+      return;
+    }
+
+    this.isLoadingDistrict = true;
+    this.subjectService.getDistrictByProvince({province_id: provinceId}).subscribe((districts: Array<District>) => {
+      this.districts = districts;
+      this.isLoadingDistrict = false;
+    });
+  }
+
+  private getListWard(districtId: number) {
+    if (!districtId) {
+      return;
+    }
+
+    this.isLoadingWard = true;
+    this.subjectService.getWardsByDistrict({district_id: districtId}).subscribe((wards: Array<Ward>) => {
+      this.wards = wards;
+      this.isLoadingWard = false;
+    });
+  }
+
+  private getListEnterprise() {
+    let params: SearchConditions;
+
+    if (this.projectActionId) {
+      params = {
+        action: this.projectActionId
+      }
+    }
+
+    if (!params && this.subProjectId) {
+      params = {
+        project: this.subProjectId
+      };
+    }
+
+    if (!params && this.project) {
+      params = {
+        project: this.project.id.toString()
+      };
+    }
+
+    if (!params) {
+      return;
+    }
+
+    if (this.locationId) {
+      params.location = this.locationId.toString();
+    }
+
 
   }
 }
