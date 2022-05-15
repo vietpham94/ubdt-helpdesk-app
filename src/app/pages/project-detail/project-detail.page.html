@@ -39,6 +39,7 @@
           <ion-label position="stacked">Chọn hoạt động cần xem</ion-label>
           <ionic-selectable placeholder="+ Chọn hoạt động" class="mt-2"
                             [(items)]="actionList" itemTextField="post_title"
+                            closeButtonText="Đóng" searchPlaceholder="Tiêu đề hoạt động" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
           </ionic-selectable>
         </ion-col>

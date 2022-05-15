@@ -31,3 +31,9 @@ ion-card-content {
   padding-inline-start: 15px !important;
   padding-inline-end: 15px !important;
 }
+
+ion-card-content ion-item {
+  --border-width: 0;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
