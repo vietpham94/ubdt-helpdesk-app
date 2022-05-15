@@ -32,6 +32,7 @@ ion-list {
     color: #ffffff;
     --background: linear-gradient(#ec8934, #b34804);
     margin: 15px 0 0;
+    font-size: 13px;
   }
   ion-item {
     --padding-start: 0;
@@ -40,9 +41,19 @@ ion-list {
     margin-bottom: 10px;
     ion-input,
     ion-select,
-    ion-textarea{
+    ion-textarea
+    {
       border: 1px solid #d6d6d6;
       padding: 10px;
+      --padding-start: 10px;
+      --padding-end: 10px;
+    }
+    ion-textarea {
+      padding: 0;
+    }
+    ionic-selectable {
+      border: 1px solid #d6d6d6;
+      padding: 8px;
       --padding-start: 10px;
       --padding-end: 10px;
     }
@@ -53,4 +64,14 @@ ion-list {
       padding-inline-end: 0;
     }
   }
+  .radio_position {
+    position: relative;
+    ion-spinner {
+      position: absolute;
+      top:20px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
+
 }
