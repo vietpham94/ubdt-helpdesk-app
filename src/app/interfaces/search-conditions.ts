@@ -1,10 +1,15 @@
 export interface SearchConditions {
-  project?: any;
-  action?: any;
-  phase?: any;
-  subject_type?: any;
-  province?: any;
-  district?: any;
-  wards?: any;
-  helpdesk_category?: any;
+  search?: string;
+  project?: string;
+  action?: string;
+  location?: string;
+  position?: string;
+  phase?: string;
+  subject_type?: string;
+  province?: string;
+  district?: string;
+  ward?: string;
+  helpdesk_category?: string;
+  page?: number;
+  numberposts?: number;
 }

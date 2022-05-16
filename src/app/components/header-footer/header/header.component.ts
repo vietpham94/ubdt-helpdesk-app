@@ -23,7 +23,6 @@ export class HeaderComponent {
     try {
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         this.currentPageInfo = Constants.getPageInfoByRouterLink(event.urlAfterRedirects);
-        // eslint-disable-next-line no-cond-assign
         if (this.currentPageInfo.pageLink === Constants.pageLink.projectDetail && this.projectService.passedProject) {
           this.currentPageInfo.title = this.projectService.passedProject.acf.project_number;
         }

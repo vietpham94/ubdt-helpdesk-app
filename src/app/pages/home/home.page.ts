@@ -19,6 +19,7 @@ import { Project } from 'src/app/interfaces/project';
 import { ProjectAction } from 'src/app/interfaces/project-action';
 import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
 import { HelpDesk } from 'src/app/interfaces/help-desk';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
 import { SearchConditions } from './../../interfaces/search-conditions';
 
 @Component({
@@ -55,6 +56,7 @@ export class HomePage implements OnInit {
     private subjectService: SubjectService,
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
+    private administrativeService: AdministrativeService,
     private router: Router
   ) {}
 
@@ -85,7 +87,7 @@ export class HomePage implements OnInit {
 
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.provinces = await this.subjectService.getProvince().toPromise();
+    this.provinces = await this.administrativeService.getProvince().toPromise();
     this.provinces.forEach(item => {
       item.post_title = item.title.rendered;
     });
@@ -101,8 +103,8 @@ export class HomePage implements OnInit {
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryDistrict = { province_id: this.selectedProvince.id };
-    this.subjectService
+    const dataQueryDistrict = { province_id: this.selectedProvince };
+    this.administrativeService
       .getDistrictByProvince(dataQueryDistrict)
       .subscribe((districts: Array<District>) => {
         this.districts = districts;
@@ -115,8 +117,8 @@ export class HomePage implements OnInit {
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryWard = { district_id: this.selectedDistrict };
-    this.subjectService
+    const dataQueryWard = { district: this.selectedDistrict };
+    this.administrativeService
       .getWardsByDistrict(dataQueryWard)
       .subscribe((wards: Array<Ward>) => {
         this.wards = wards;

@@ -13,7 +13,7 @@ export class Constants {
     searchResult: 'search-result',
     suggestion: 'suggestion',
     helpdeskDetail: 'helpdesk-detail',
-    settings: 'settings',
+    setting: 'setting',
     directory: 'directory',
     projectDetail: 'project-detail',
   };
@@ -57,6 +57,10 @@ export class Constants {
       title: Constants.pagesTitle.helpdeskDetail
     },
     {
+      pageLink: '/helpdesk-detail',
+      title: Constants.pagesTitle.helpdeskDetail
+    },
+    {
       pageLink: '/directory',
       title: Constants.pagesTitle.directory
     },
@@ -68,21 +72,29 @@ export class Constants {
       pageLink: '/project-detail',
       title: Constants.pagesTitle.projectDetail
     },
+    {
+      pageLink: '/setting',
+      title: ''
+    },
   ];
 
   static apiRestEndPoints = {
     login: '/api-bearer-auth/v1/login',
     refreshToken: '/api-bearer-auth/v1/tokens/refresh',
     validateToken: '/jwt-auth/v1/token/validate',
-    subject: '/wp/v2/subject',
     province: '/wp/v2/provinces',
     district: '/ash/v1/provinces/districts',
     ward: '/ash/v1/provinces/districts/wards',
     project: '/wp/v2/projects',
-    projectAction: '/ash/v1/project_actions',
     projectDetail: '/wp/v2/projects',
+    projectAction: '/ash/v1/project_actions',
+    projectActionDetail: '/wp/v2/project_action/:id',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
+    subject: '/wp/v2/subject',
+    suggestion: '/ash/v1/suggestion',
+    enterprise: '/ash/v1/enterprise',
+    position: '/wp/v2/position',
   };
 
   static messages = {

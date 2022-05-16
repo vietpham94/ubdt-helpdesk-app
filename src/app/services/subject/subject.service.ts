@@ -23,6 +23,7 @@ constructor(
     });
   }
 
+<<<<<<< HEAD
   public getProvince() {
     return this.apiService.get(Constants.apiRestEndPoints.province, {
       headers: this.authService.getAuthHeader,
@@ -50,6 +51,8 @@ constructor(
     });
   }
 
+=======
+>>>>>>> develop
   public getProjectAction() {
     return this.apiService.get(Constants.apiRestEndPoints.projectAction, {
       headers: this.authService.getAuthHeader

@@ -1,192 +1,253 @@
-<app-header [title]="title"></app-header>
+<app-header></app-header>
 
 <ion-content>
-  <h2 *ngIf="project">{{project.title.rendered}}</h2>
-  <ion-list class="project-search">
-    <h3>Tiểu dự án, hoạt động</h3>
-    <ion-item>
-      <ion-label position="stacked">Chọn tiểu dự án cần tra cứu</ion-label>
-      <ion-select placeholder="+ Chọn tiểu dự án">
-        <ion-select-option>Tiểu dự án 1</ion-select-option>
-        <ion-select-option>Tiểu dự án 2</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Chọn hoạt động cần tra cứu</ion-label>
-      <ion-select placeholder="+ Chọn hoạt động">
-        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
-        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-grid class="project-detail">
-    <h3>Tổng quan</h3>
+  <ion-grid *ngIf="project">
     <ion-row>
       <ion-col size="12">
-        <ion-label>Mục tiêu</ion-label>
-        <p>Phát triển kinh tế rừng, bảo vệ, phát triển rừng bền vững thích ứng biến đổi khí hậu.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Đối tượng</ion-label>
-        <p>Hộ gia đình đồng bào dân tộc thiểu số, hộ gia đình người Kinh nghèo đang sinh sống ổn định tại các xã khu vực II, III làm nghề rừng hoặc được giao bảo vệ rừng.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Nội dung</ion-label>
-        <p>Trợ cấp gạo cho hộ gia đình tham gia bảo vệ phát triển rừng.</p>
-        <p>Hỗ trợ bảo vệ rừng.</p>
-        <p>Bảo vệ phát triển rừng:</p>
-        <ul>
-          <li>+ Hỗ trợ khoán bảo vệ rừng.</li>
-          <li>+ Hỗ trợ khoanh nuôi tái sinh có trồng bổ sung.</li>
-          <li>+ Hỗ trợ một lần cho trồng rừng sản xuất chu kỳ đầu tiên.</li>
-          <li>+ Hỗ trợ trồng rừng phòng hộ.</li>
-        </ul>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Phân công thực hiện</ion-label>
-        <p>Uỷ ban Dân tộc</p>
-        <p>Bộ Nông nghiệp và Phát triển nông thôn</p>
-        <p>UBND cấp tỉnh</p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="funds">
-      <ion-col size="12">
-        <ion-label>Nhu cầu và nguồn vốn</ion-label>
-        <img src="assets/image/nhu_cau_von.jpg"/>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" expand="block" class="submit">Xem chi tiết</ion-button>
+        <h4 class="mt-0 mb-0">{{project.title.rendered}}</h4>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid class="project-helpdesk">
-    <h3>Hướng dẫn thực hiện</h3>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>
-          Hướng dẫn tham gia
-        </ion-label>
-        <p>Hướng dẫn đăng ký tham gia thực hiện hoạt động “Hỗ trợ nhà ở, đất ở”.</p>
-        <p>Hướng dẫn đăng ký tham gia thực hiện hoạt động “Hỗ trợ nước sinh hoạt”.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>
-          Hướng dẫn tổ chức thực hiện
-        </ion-label>
-        <p>Hướng dẫn quy trình đăng ký nhận hỗ trợ nhà ở, đất ở.</p>
-        <p>Các bước quy hoạch, giải phóng mặt bằng khi thực hiện hoạt động “Hỗ trợ đất ở” cho hộ nghèo.</p>
-        <p>Hướng dẫn thủ tục bàn giao nhà ở cho hộ nghèo.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>
-          Hướng dẫn tồng hợp, báo cáo định kỳ gửi lên các cấp
-        </ion-label>
-        <p>Ban giám sát xã thôn</p>
-        <p>Các cơ quan thực hiện.</p>
-        <p>Các cơ quan chủ đầu tư</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-list class="project-directory">
-    <h3>Tìm liên hệ</h3>
-    <span>Quý vị cần thông tin liên hệ ở khu vực nào?</span>
-    <ion-list class="search-directory">
-      <ion-item>
-        <ion-select placeholder="+ Chọn tỉnh thành">
-          <ion-select-option>Hà Nội</ion-select-option>
-          <ion-select-option>Hà Nam</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-select placeholder="+ Chọn quận huyện">
-          <ion-select-option>Ba Đình</ion-select-option>
-          <ion-select-option>Đống Đa</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-select placeholder="+ Chọn phường xã">
-          <ion-select-option>Phú Diễn</ion-select-option>
-          <ion-select-option>Phương Canh</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-    <ion-grid class="enterprise-list">
+
+  <ion-card *ngIf="isShowSelectSubProjectAndAction" class="project-action">
+    <ion-card-header>
+      <ion-card-title class="card-title">Tiểu dự án, hoạt động</ion-card-title>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content>
       <ion-row>
-        <ion-col>
-          <ion-label>
-            Tham gia thực hiện
-          </ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12"><p>TẬP ĐOÀN XÂY DỰNG VÀ KINH DOANH BẤT ĐỘNG SẢN ÁNH DƯƠNG</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Địa chỉ: </b>193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp,Tp. Hồ Chí Minh</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Điện thoại: </b>0541245666</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Đường dây nóng : </b>1900xxxx</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Email: </b>kinhdoanhphulong@gmail.com</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Website: </b>xaydungphulong.com.vn</p></ion-col>
-            </ion-row>
-          </ion-grid>
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingSubProject">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="p-0 mb-3" *ngIf="subProjectList.length > 0">
+          <ion-label position="stacked">Chọn tiểu dự án cần xem</ion-label>
+          <ion-select placeholder="+ Chọn tiểu dự án" [(ngModel)]="subProjectId" (ionChange)="onSelectSubProject()"
+                      interface="popover" class="mt-2">
+            <ion-select-option *ngFor="let option of subProjectList" [value]="option.id">
+              <span [innerHTML]="option.title.rendered"></span>
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingProjectAction">
+          <ion-spinner></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="p-0 mb-3" *ngIf="actionList.length > 0">
+          <ion-label position="stacked">Chọn hoạt động cần xem</ion-label>
+          <ionic-selectable placeholder="+ Chọn hoạt động" class="mt-2"
+                            [(items)]="actionList" itemTextField="post_title"
+                            closeButtonText="Đóng" searchPlaceholder="Tiêu đề hoạt động" closeButtonSlot="end"
+                            [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
+          </ionic-selectable>
         </ion-col>
       </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="project-content">
+    <ion-card-header>
+      <ion-card-title class="card-title">Tổng quan</ion-card-title>
+      <hr>
+    </ion-card-header>
+    <ion-card-content>
       <ion-row>
-        <ion-col>
-          <ion-label>
-            Tổ chức thực hiện
-          </ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12"><p>TẬP ĐOÀN XÂY DỰNG VÀ KINH DOANH BẤT ĐỘNG SẢN ÁNH DƯƠNG</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Địa chỉ: </b>193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp,Tp. Hồ Chí Minh</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Điện thoại: </b>0541245666</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Đường dây nóng : </b>1900xxxx</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Email: </b>kinhdoanhphulong@gmail.com</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12"><p><b>Website: </b>xaydungphulong.com.vn</p></ion-col>
-            </ion-row>
-          </ion-grid>
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingSubProject">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingHelpdeskContent">
+          <ion-spinner class="ion-text-center"></ion-spinner>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </ion-list>
-  <ion-grid class="redirec-sugges">
+
+      <ng-container
+        *ngIf="(project || subProject || projectAction) && !isLoadingSubProject && !isLoadingHelpdeskContent">
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="list-icon">Mục tiêu</ion-label>
+          </ion-col>
+          <ion-col size="12" [innerHTML]="project.acf.project_target"
+                   *ngIf="project && !subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="subProject.acf.project_target"
+                   *ngIf="subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="projectAction.acf.action_target" *ngIf="projectAction"></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="list-icon">Đối tượng</ion-label>
+          </ion-col>
+          <ion-col size="12" [innerHTML]="project.acf.project_subject"
+                   *ngIf="project && !subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="subProject.acf.project_subject"
+                   *ngIf="subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="projectAction.acf.action_subject" *ngIf="projectAction"></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="list-icon">Nội dung</ion-label>
+          </ion-col>
+          <ion-col size="12" [innerHTML]="project.content.rendered"
+                   *ngIf="project && !subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="subProject.content.rendered" *ngIf="subProject && !projectAction"></ion-col>
+          <ion-col size="12" [innerHTML]="projectAction.content.rendered" *ngIf="projectAction"></ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="(project || subProject) && !projectAction">
+          <ion-col size="12">
+            <ion-label class="list-icon">Phân công thực hiện</ion-label>
+          </ion-col>
+          <ion-col size="12" [innerHTML]="project.acf.project_assign" *ngIf="project && !subProject"></ion-col>
+          <ion-col size="12" [innerHTML]="project.acf.project_assign" *ngIf="subProject"></ion-col>
+        </ion-row>
+
+        <ion-row class="funds" *ngIf="(project || subProject) && !projectAction">
+          <ion-col size="12">
+            <ion-label class="list-icon">Nhu cầu và nguồn vốn</ion-label>
+            <ng-container *ngIf="project && !subProject">
+              <img *ngIf="project.acf.project_source_of_capital" [src]="project.acf.project_source_of_capital"/>
+            </ng-container>
+            <ng-container *ngIf="subProject">
+              <img *ngIf="subProject.acf.project_source_of_capital" [src]="subProject.acf.project_source_of_capital"/>
+            </ng-container>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="funds" *ngIf="projectAction">
+          <ion-col size="12">
+            <ion-label class="list-icon">Nhu cầu và nguồn vốn</ion-label>
+            <img *ngIf="projectAction.acf.action_source_of_capital"
+                 [src]="projectAction.acf.action_source_of_capital"/>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="project-helpdesk">
+    <ion-card-header>
+      <ion-card-title class="card-title">Hướng dẫn thực hiện</ion-card-title>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingHelpdeskContent">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+      </ion-row>
+
+      <ng-container *ngIf="helpdeskGroupByCategory.length > 0 && !isLoadingHelpdeskContent">
+        <ion-row *ngFor="let helpdeskGroup of helpdeskGroupByCategory">
+          <ion-col size="12">
+            <ion-label class="list-icon">{{helpdeskGroup.category.name}}</ion-label>
+            <ul class="helpdesk-list mt-1">
+              <li *ngFor="let helpdesk of helpdeskGroup.helpdesk" (click)="onClickHelpdesk(helpdesk)">
+                {{helpdesk.post_title}}
+              </li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="project-directory">
+    <ion-card-header>
+      <ion-card-title class="card-title">Tìm liên hệ</ion-card-title>
+      <hr>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label>Quý vị cần thông tin liên hệ ở khu vực nào?</ion-label>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable item-content placeholder="+ Chọn tỉnh thành"
+                            [(items)]="provinces" itemTextField="post_title"
+                            [canSearch]="true" (onChange)="onSelectProvince($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingDistrict">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2" *ngIf="districts.length > 0">
+          <ionic-selectable item-content placeholder="+ Chọn quận huyện"
+                            [(items)]="districts" itemTextField="post_title"
+                            [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingWard">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2" *ngIf="wards.length > 0">
+          <ionic-selectable item-content placeholder="+ Chọn xã phường"
+                            [(items)]="wards" itemTextField="post_title"
+                            [canSearch]="true" (onChange)="onSelectWard($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="enterprise-list mt-3 pt-2">
+
+        <ion-col size="12" class="ion-text-center" *ngIf="isLoadingEnterprise">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ng-container *ngFor="let positionGroup of enterpriseGroupByPosition">
+          <ion-col size="12" class="position-group-title" *ngIf="positionGroup.enterprises.length > 0">
+            {{positionGroup.position.title.rendered}}
+          </ion-col>
+
+          <ion-col size="12">
+            <ul class="enterprise-list-item mt-1">
+              <li *ngFor="let enterprise of positionGroup.enterprises">
+                <p class="enterprise-title">{{enterprise.post_title}}</p>
+                <p>
+                  <label>Địa chỉ: </label>
+                  {{enterprise.acf.address}}
+                </p>
+                <p>
+                  <label>Điện thoại: </label>
+                  {{enterprise.acf.enterprise_phone}}
+                </p>
+                <p>
+                  <label>Đường dây nóng: </label>
+                  {{enterprise.acf.enterprise_hotline}}
+                </p>
+                <p>
+                  <label>Email: </label>
+                  {{enterprise.acf.enterprise_email}}
+                </p>
+                <p>
+                  <label>Website: </label>
+                  {{enterprise.acf.enterprise_website}}
+                </p>
+              </li>
+            </ul>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid class="suggestion m-0">
     <ion-row>
-      <ion-col>
-        <a routerLink="/suggestion">
-          <img src="assets/image/box-gop-y.png"/>
-        </a>
+      <ion-col size="12">
+        <a routerLink="/suggestion"><img src="assets/image/box-gop-y.png"/></a>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
 <app-footer></app-footer>
