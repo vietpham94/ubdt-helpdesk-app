@@ -91,6 +91,8 @@ export class Constants {
     projectActionDetail: '/wp/v2/project_action/:id',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
+    helpdeskDetail: '/wp/v2/helpdesk/',
+    helpdeskHtmlContent: '/ash/v1/helpdesk-html',
     subject: '/wp/v2/subject',
     suggestion: '/ash/v1/suggestion',
     enterprise: '/ash/v1/enterprise',
