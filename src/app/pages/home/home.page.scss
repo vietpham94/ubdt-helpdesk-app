@@ -25,12 +25,15 @@ div.sticky-card-title {
 ion-content {
   ion-label.item-label {
     font-weight: bold;
+    font-size: initial;
+    color: #333;
   }
   ion-card {
     margin: 0 15px 30px;
     border: 1px solid #b9b7ac;
     ion-card-header {
       padding-bottom: 8px;
+      text-align: center;
       ion-card-title {
         color: #8C0A00;
         text-transform: uppercase;
@@ -44,5 +47,24 @@ ion-content {
         height: 2px;
       }
     }
+    .project-list{
+      ion-item {
+        margin-bottom:15px;
+        text-align: center;
+        color: #ffffff;
+        div {
+          padding:12px;
+        }
+      }
+      .project-item-title {
+        text-transform: uppercase;
+      }
+    }
+    ion-button {
+      width:100%;
+    }
+  }
+  ion-radio {
+    margin: 0px 9px 3px 5px;
   }
 }

@@ -2,11 +2,12 @@
 
 <ion-content>
   <ion-list>
-    <span>Tìm thấy {{helpdesks?helpdesks.length:0}} tài liệu hướng dẫn</span>
+    <ion-label>Tìm thấy {{helpdesks?helpdesks.length:0}} tài liệu hướng dẫn</ion-label>
     <ion-item *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
       {{item.post_title}}
     </ion-item>
   </ion-list>
+
   <ion-card class="card-item">
     <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
   </ion-card>
