@@ -10,3 +10,34 @@ ion-searchbar .searchbar-input-container .searchbar-search-icon {
   top: 7px;
   left: 7px;
 }
+
+ion-select,
+.ionic-selectable {
+  border: 1px solid #d6d6d6;
+  --border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  --border-radius: 5px;
+  color: #514C4C;
+  --color: #514C4C;
+}
+
+.ionic-selectable-has-placeholder .ionic-selectable-value-item {
+  --placeholder-color: #514C4C;
+}
+
+ion-select {
+  --placeholder-opacity: 1;
+}
+
+.ionic-selectable-value {
+  padding-left: 13px;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+ionic-selectable-modal ion-content ion-list ion-item ion-label {
+  text-overflow: unset !important;
+  white-space: unset !important;
+  overflow: unset !important;
+}
+

@@ -1,218 +1,96 @@
-.project-search, .project-detail, .project-helpdesk, .project-directory {
-  p {
-    line-height: 1.4;
-  }
-  ul li {
-    margin: 5px 0;
-  }
-  width: calc(100% - 20px);
-  margin: auto;
-  border: 1px solid #d6d6d6;
-  border-radius: 3px;
-  padding: 20px 10px 40px;
-  margin-bottom: 20px;
-  background: #ffffff;
-}
 ion-content {
-  font-size: 15px;
-  > h2 {
-    font-size: 18px;
-    width: calc(100% - 20px);
-    margin: 10px auto 20px;
-  }
-  ion-label {
-    display: block;
-    font-weight: 600;
-    font-size: 16px;
-  }
-  h3 {
-    display: block;
-    margin-top: 0;
-    text-transform: uppercase;
-    color: #a72d2d;
-    border-bottom: 2px solid #a72d2d;
-    padding-bottom: 5px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  .project-search {
-    ion-item {
-      --padding-start: 0;
-      --inner-border-width:0;
-      --inner-padding-end:0;
-      ion-select {
-        border: 1px solid #d6d6d6;
-        padding-left:10px ;
-      }
-    }
-  }
-  .project-detail {
-    ion-label {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 14px;
-        height: 14px;
-        top: 1px;
-        left: 0px;
-        background-image: url("../../../assets/icon/icon_arrow_down_up.png");
-      }
-    }
-    p{
-      position: relative;
-      margin: 5px 0;
-      padding-left: 20px;
-
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 5px;
-        height: 5px;
-        top: 5px;
-        left: 10px;
-        background-image: url("../../../assets/icon/icon_circle.png");
-      }
-    }
-    .funds {
-      text-align: center;
-      ion-label {
-        text-align: left;
-      }
-      img {
-        margin: 20px auto;
-      }
-    }
-    .submit_button {
-      border-top:1px solid #d6d6d6;
-      padding-top: 5px;
-      ion-col {
-        padding: 0;
-      }
-    }
-    .submit {
-      --border-radius: 30px;
-      color: #ffffff;
-      --background: linear-gradient(#ec8934, #b34804);
-      margin: 15px 0 0;
-      text-transform: uppercase;
-    }
-  }
-  .project-helpdesk {
-    background: #f4f2c8;
-
-    ion-label {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 14px;
-        height: 14px;
-        top: 1px;
-        left: 0px;
-        background-image: url("../../../assets/icon/icon_arrow_down_up.png");
-      }
-    }
-
-    p {
-      position: relative;
-      margin: 5px 0;
-      padding-left: 20px;
-      color: #ec8934;
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 5px;
-        height: 5px;
-        top: 5px;
-        left: 10px;
-        background-image: url("../../../assets/icon/icon_circle_orange.png");
-      }
-    }
-  }
-  .project-directory {
-    .search-directory {
-      border-bottom: 1px solid #d6d6d6;
-      padding-bottom: 15px;
-      margin-bottom: 15px;
-    }
-    span {
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 15px;
-      display: block;
-    }
-    .search-directory {
-      ion-item {
-        --padding-start: 0;
-        --inner-border-width:0;
-        --inner-padding-end:0;
-        ion-select {
-          width: 100%;
-          margin-bottom: 10px;
-          border: 1px solid #d6d6d6;
-          padding-left:10px;
-        }
-      }
-    }
-    .enterprise-list {
-      ion-col {
-        padding: 0;
-      }
-      ion-label{
-        position: relative;
-        padding-left: 20px;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        &::before {
-          position: absolute;
-          display: block;
-          content: '';
-          width: 14px;
-          height: 14px;
-          top: 1px;
-          left: 0px;
-          background-image: url("../../../assets/icon/icon_arrow_down_up.png");
-        }
-      }
-      p {
-        position: relative;
-        margin: 5px 0;
-        padding-left: 20px;
-      }
-      .enterprise_title {
+  ion-card {
+    --ion-card-color: #514c4c;
+    ion-card-header {
+      ion-card-title {
+        color: #8C0A00;
         text-transform: uppercase;
+        font-size: 1.4em;
         font-weight: 500;
-        font-size: 15px;
-        &::before {
-          position: absolute;
-          display: block;
-          content: '';
-          width: 5px;
-          height: 5px;
-          top: 5px;
-          left: 10px;
-          background-image: url("../../../assets/icon/icon_circle_green.png");
+      }
+
+      hr {
+        background: #8C0A00;
+        margin-top: 2px;
+        height: 2px;
+      }
+    }
+
+    ion-card-content {
+      ion-label {
+        font-weight: 500;
+        font-size: 1.1em;
+        color: #0c0c0c;
+      }
+
+      ion-label.list-icon {
+        &:before {
+          content: url('../../../assets/icon/icon-list-decoration.png');
+          padding-right: 5px;
+        }
+      }
+
+      ion-row {
+        ion-col {
+          padding: 0;
+        }
+      }
+
+      .helpdesk-list li {
+        color: #ec8934;
+      }
+
+      .enterprise-list {
+        border-top: 1px solid #dedede;
+
+        .position-group-title {
+          font-weight: 500;
+          font-size: 1.1em;
+          color: #0c0c0c;
+
+          &:before {
+            content: url('../../../assets/icon/icon-list-decoration.png');
+            padding-right: 5px;
+          }
+        }
+
+        .enterprise-list-item {
+          color: #28ba62;
+
+          .enterprise-title {
+            font-size: 1.05em;
+            color: #1d1700;
+            text-transform: uppercase;
+            font-weight: 500;
+          }
+
+          label {
+            font-weight: 500;
+          }
+
+          p {
+            color: #1d1700;
+          }
         }
       }
     }
+
+    &.project-helpdesk {
+      background: #f4f2c8;
+      --background: #f4f2c8;
+    }
+
+    &.project-content {
+
+    }
   }
-  .redirec-sugges {
-    width: calc(100% - 20px);
-    margin: auto;
-    border: 1px solid #d6d6d6;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    padding: 0;
-    background: #ffffff;
+
+  .suggestion {
+    img {
+      border: 1px solid #dedede;
+      border-radius: 3px;
+      width: 100%;
+      height: auto;
+    }
   }
 }

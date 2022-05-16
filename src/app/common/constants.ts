@@ -78,16 +78,19 @@ export class Constants {
     login: '/api-bearer-auth/v1/login',
     refreshToken: '/api-bearer-auth/v1/tokens/refresh',
     validateToken: '/jwt-auth/v1/token/validate',
-    subject: '/wp/v2/subject',
     province: '/wp/v2/provinces',
     district: '/ash/v1/provinces/districts',
     ward: '/ash/v1/provinces/districts/wards',
     project: '/wp/v2/projects',
-    projectAction: '/ash/v1/project_actions',
     projectDetail: '/wp/v2/projects',
+    projectAction: '/ash/v1/project_actions',
+    projectActionDetail: '/wp/v2/project_action/:id',
     helpdeskCategory: '/wp/v2/helpdesk_category',
     helpdesk: '/ash/v1/helpdesk-contents',
+    subject: '/wp/v2/subject',
     suggestion: '/ash/v1/suggestion',
+    enterprise: '/ash/v1/enterprise',
+    position: '/wp/v2/position',
   };
 
   static messages = {

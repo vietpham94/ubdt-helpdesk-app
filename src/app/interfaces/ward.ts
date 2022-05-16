@@ -1,4 +1,5 @@
 export interface Ward {
+  id?: string;
   ID?: string;
   post_title?: string;
   title?: {
