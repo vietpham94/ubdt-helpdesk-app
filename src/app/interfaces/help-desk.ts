@@ -2,8 +2,15 @@ import {HelpDeskCategory} from './help-desk-category';
 
 export interface HelpDesk {
   id?: string;
+  ID?: string;
   post_title?: string;
+  title?: {
+    rendered: string;
+  },
   post_content?: string;
+  content?: {
+    rendered: string;
+  };
   acf?: {
     helpdesk_project?: {
       ID?: number;
@@ -37,6 +44,7 @@ export interface HelpDesk {
       ID?: number;
       url?: string;
       filename?: string;
+      title?: string;
     }>,
     helpdesk_documents: Array<{
       ID?: number;
