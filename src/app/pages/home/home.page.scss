@@ -47,6 +47,9 @@ ion-content {
         height: 2px;
       }
     }
+    ion-row {
+      margin-bottom:15px;
+    }
     .project-list{
       ion-item {
         margin-bottom:15px;
@@ -54,17 +57,35 @@ ion-content {
         color: #ffffff;
         div {
           padding:12px;
+          width:100%;
         }
       }
       .project-item-title {
         text-transform: uppercase;
       }
     }
-    ion-button {
-      width:100%;
+
+    .submit {
+      width: 100%;
+      --border-radius: 30px;
+      color: #ffffff;
+      --background: linear-gradient(#ec8934, #b34804);
+      margin: 15px 0 0;
+      font-size: 13px;
     }
-  }
-  ion-radio {
-    margin: 0px 9px 3px 5px;
+
+    ion-radio {
+      margin: 0px 9px 3px 5px;
+    }
+    ion-router-link {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    ionic-selectable {
+      max-width: 100%;
+      border-radius: 0px;
+    }
   }
 }

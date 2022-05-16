@@ -68,13 +68,13 @@
 
       <ion-row>
         <ion-label class="item-label">Quý vị quan tâm đến hoạt động nào?</ion-label>
-        <ion-item>
+        <ion-col size="12" class="mt-2">
           <ionic-selectable [(ngModel)]="selectedProjectAction" placeholder="+ Chọn hoạt động"
             [items]="projectActions" itemTextField="post_title"
             [canSearch]="true"
             >
           </ionic-selectable>
-        </ion-item>
+        </ion-col>
       </ion-row>
 
       <ion-row>
@@ -96,7 +96,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-button (click)="doSearchByAction()" expand="block" shape="round">
+        <ion-button (click)="doSearchByAction()" type="submit" expand="block" class="submit">
             TÌM KIẾM
         </ion-button>
       </ion-row>
