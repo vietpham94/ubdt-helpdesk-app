@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {ProjectService} from '../../services/project/project.service';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {SubjectService} from '../../services/subject/subject.service';
+
 import {District} from '../../interfaces/district';
 import {Province} from '../../interfaces/province';
 import {Ward} from '../../interfaces/ward';
 import {ProjectAction} from '../../interfaces/project-action';
 import {Subject} from '../../interfaces/subject';
-import {HelpDesk} from '../../interfaces/help-desk';
-import {ProjectService} from '../../services/project/project.service';
-import {AdministrativeService} from '../../services/administrative/administrative.service';
-import {AuthService} from '../../services/auth/auth.service';
-import {SubjectService} from '../../services/subject/subject.service';
-import {DirectoryService} from '../../services/directory/directory.service';
 import {Project} from '../../interfaces/project';
 import {Pagination} from '../../interfaces/pagination';
 
@@ -30,12 +30,14 @@ export class DirectoryPage implements OnInit {
   selectedWard: string;
   selectedProjectAction: string;
   selectedProject: string;
+
   constructor(
     private projectService: ProjectService,
     private administrativeService: AdministrativeService,
     private authService: AuthService,
     private subjectService: SubjectService,
-    ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.projectList = new Array<Project>();
@@ -45,10 +47,12 @@ export class DirectoryPage implements OnInit {
     this.districts = new Array<District>();
     this.wards = new Array<Ward>();
   }
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     return this.initData();
   }
-  async initData(){
+
+  async initData() {
     const directoryParams: Pagination = {
       page: 1,
       per_page: 100,

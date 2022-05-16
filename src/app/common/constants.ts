@@ -13,7 +13,7 @@ export class Constants {
     searchResult: 'search-result',
     suggestion: 'suggestion',
     helpdeskDetail: 'helpdesk-detail',
-    settings: 'settings',
+    setting: 'setting',
     directory: 'directory',
     projectDetail: 'project-detail',
   };
@@ -71,6 +71,10 @@ export class Constants {
     {
       pageLink: '/project-detail',
       title: Constants.pagesTitle.projectDetail
+    },
+    {
+      pageLink: '/setting',
+      title: ''
     },
   ];
 
