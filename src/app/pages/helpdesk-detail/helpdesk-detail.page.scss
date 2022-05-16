@@ -1,70 +1,64 @@
 ion-content {
-  h2 {
-    font-size: 18px;
-    width: calc(100% - 20px);
-    margin: 10px auto 20px;
+  ul li::marker {
+    color: #39b54a !important;
   }
 
   .project-detail {
     background: #ffffff;
     width: calc(100% - 20px);
-    margin: auto;
     border: 1px solid #d6d6d6;
     border-radius: 3px;
-    padding: 20px 10px 40px;
+    padding: 20px 10px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    ion-label {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      font-size: 16px;
+  .elementor-11205 .elementor-element .elementor-widget-wrap {
+    padding: 0 !important;
+  }
 
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 14px;
-        height: 14px;
-        top: 1px;
-        left: 0px;
-        background-image: url("../../../assets/icon/icon_arrow_down_up.png");
-      }
+  .elementor-icon-list-item {
+    &:before {
+      content: url('../../../assets/icon/icon-list-decoration.png');
+      padding-right: 5px;
     }
 
-    p {
-      position: relative;
-      margin: 5px 0;
-      font-size: 14px;
-      padding-left: 20px;
-      text-align: justify;
-      &::before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 5px;
-        height: 5px;
-        top: 5px;
-        left: 10px;
-        background-image: url("../../../assets/icon/icon_circle_green.png");
+    span.elementor-icon-list-icon {
+      display: none;
+    }
+  }
+
+  .elementor-widget-container {
+    ul {
+      margin-top: 0.5em;
+    }
+  }
+
+  ion-label {
+    font-weight: 500;
+    font-size: 20px;
+    color: #514c4c;
+
+    &.list-icon {
+      &:before {
+        content: url('../../../assets/icon/icon-list-decoration.png');
+        padding-right: 10px;
       }
     }
+  }
 
-    .download-file{
-      a {
-        color: #ec8934;
-      }
-      &::before {
-        font-family: "Font Awesome 5 Free";
-        font-size: 16px;
-        display: block;
-        content: "\f56d";
-        background-image: none;
-        color: #ec8934;
+  .download-file {
+    a {
+      color: #ec8934;
+      text-decoration: none;
+      display: flex;
+      width: 100%;
+
+      ion-icon {
+        font-size: 20px;
+        margin-left: auto;
       }
     }
-
-
   }
 }

@@ -1,79 +1,42 @@
 <app-header></app-header>
-<ion-content>
-  <h2>Hỗ trợ trồng rừng sau đầu tư đối với hộ gia đình.</h2>
+
+<ion-content *ngIf="helpdesk">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h4 class="m-0 ion-text-uppercase">{{helpdesk.post_title}}</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-grid class="project-detail">
-    <ion-row>
+    <ion-row *ngIf="helpHtmlContent">
+      <ion-col size="12" [innerHTML]="helpHtmlContent"></ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="helpHtmlContent && helpdesk.acf.file_dinh_kem">
       <ion-col size="12">
-        <ion-label>Đối tượng thực hiện</ion-label>
-        <p>Hộ gia đình đã có giấy chứng nhận quyền sử dụng đất (để trồng rừng sản xuất);</p>
-        <p>Hộ gia đình đã có hợp đồng khoán sử dụng đất lâu dài (gồm đất rừng sản xuất, đất rừng phòng hộ nay chuyển sang quy hoạch là rừng sản xuất) với tổ chức quốc doanh (kể cả các doanh nghiệp quốc doanh nay đã cổ phần hoá);</p>
-        <p>Hộ gia đình có đất nằm trong quy hoạch trồng rừng sản xuất, đang canh tác ổn định từ 3 năm trở lên mà không có tranh chấp nhưng chưa có giấy chứng nhận quyền sử dụng đất, hoặc hợp đồng khoán sử dụng đất lâu dài. Diện tích này phải hoàn thành việc cấp giấy chứng nhận quyền sử dụng đất, hoặc bản đồ khoán đất trồng rừng trong vòng 12 tháng cho chủ rừng.</p>
+        <ion-label class="list-icon">Các mẫu biểu</ion-label>
+      </ion-col>
+
+      <ion-col size="12" class="download-file">
+        <ul class="list-none-style mt-1">
+          <li *ngFor="let fileItem of helpdesk.acf.file_dinh_kem">
+            <a [href]="fileItem.url" target="_blank">
+              {{fileItem.title ? fileItem.title : fileItem.filename}} &nbsp;
+              <ion-icon name="cloud-download-outline"></ion-icon>
+            </a>
+          </li>
+        </ul>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Cơ quan thực hiện</ion-label>
-        <p>Cơ quan có thẩm quyền quyết định: UBND cấp huyện.</p>
-        <p>Cơ quan hoặc người có thẩm quyền được uỷ quyền hoặc phân cấp thực hiện: Không.</p>
-        <p>Cơ quan trực tiếp thực hiện thủ tục hành chính: UBND cấp huyện.</p>
-        <p>Cơ quan phối hợp: BQLDA cấp huyện, UBND cấp xã, thôn.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Trình tự thực hiện</ion-label>
-        <p>Căn cứ kế hoạch hỗ trợ trồng rừng được giao 3 năm và diện tích đất của dự án, BQLDA cấp huyện có văn bản thông báo tới tất cả các xã và tổ chức họp với từng thôn bản để phổ biến kế hoạch trồng rừng, địa điểm trồng rừng, các biện pháp quản lý bảo vệ và đi đến thống nhất.</p>
-        <p>Các hộ gia đình làm đơn, UBND xã tổng hợp nhu cầu trồng rừng trên địa bàn và niêm yết công khai, gửi BQLDA cấp huyện.</p>
-        <p>BQLDA cấp huyện phối hợp cùng với UBND cấp xã, thôn thống nhất trình UBND cấp huyện phê duyệt danh sách các hộ trồng rừng.</p>
-        <p>UBND cấp huyện phê duyệt danh sách các hộ trồng rừng.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Thành phần, số lượng hồ sơ</ion-label>
-        <p>Thành phần hồ sơ: Giấy đề nghị trồng rừng (mẫu ban hành kèm theo Thông tư liên tịch số 03/2012/TTLT-BKHĐT-BNNPTNT-BTC ngày 05/6/2012).</p>
-        <p>Số lượng hồ sơ: 01 bộ.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Thời hạn giải quyết</ion-label>
-        <p>Sau 15 ngày kể từ ngày hết hạn nhận đơn, UBND xã tổng hợp nhu cầu trồng rừng trên địa bàn.</p>
-        <p>Trong vòng 20 ngày làm việc kể từ ngày nhận được đơn, BQLDA cấp huyện căn cứ vào kế hoạch hỗ trợ trồng rừng của Dự án được duyệt, có trách nhiệm cử cán bộ xác minh hiện trường và xác định mức hỗ trợ theo quy định để ký hợp đồng hỗ trợ trồng rừng, kèm theo bản hướng dẫn kỹ thuật trồng và chăm sóc rừng cho hộ gia đình.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Nơi nộp hồ sơ</ion-label>
-        <p>Trực tiếp tại trụ sở UBND cấp huyện.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Lệ phí</ion-label>
-        <p>Không</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Mẫu đơn</ion-label>
-        <p>Giấy đề nghị trồng rừng (mẫu ban hành kèm theo Thông tư liên tịch số 03/2012/TTLT-BKHĐT-BNNPTNT-BTC ngày 05/6/2012).</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label>Căn cứ pháp lý</ion-label>
-        <p>Luật tổ chức HĐND và UBND năm 2003.</p>
-        <p>Quyết định số 147/2007/QĐ-TTg ngày 10/9/2007 của Thủ tướng Chính phủ về một số chinh sách phát triển rừng sản xuất giai đoạn 2007-2015.</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <ion-label class="download-file">
-          <a download>Tải xuống biểu mẫu</a>
-        </ion-label>
+
+    <ion-row *ngIf="isLoadHelpHtmlContent">
+      <ion-col size="12" class="ion-text-center">
+        <ion-spinner class="ion-text-center"></ion-spinner>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
 <app-footer></app-footer>
