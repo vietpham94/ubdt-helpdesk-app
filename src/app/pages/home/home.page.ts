@@ -6,10 +6,12 @@ import { Constants } from '../../common/constants';
 
 import { IonicSelectableComponent } from 'ionic-selectable';
 
-import {CommonService} from '../../services/common/common.service';
+import { CommonService } from '../../services/common/common.service';
 import { SubjectService } from './../../services/subject/subject.service';
+import { ProjectActionService } from './../../services/project-action/project-action.service';
 import { ProjectService } from './../../services/project/project.service';
 import { HelpDeskService } from './../../services/help-desk/help-desk.service';
+import { AdministrativeService } from '../../services/administrative/administrative.service';
 
 import { Subject } from './../../interfaces/subject';
 import { Province } from './../../interfaces/province';
@@ -19,7 +21,6 @@ import { Project } from 'src/app/interfaces/project';
 import { ProjectAction } from 'src/app/interfaces/project-action';
 import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
 import { HelpDesk } from 'src/app/interfaces/help-desk';
-import {AdministrativeService} from '../../services/administrative/administrative.service';
 import { SearchConditions } from './../../interfaces/search-conditions';
 
 @Component({
@@ -41,19 +42,29 @@ export class HomePage implements OnInit {
 
   selectedSubject: string;
   selectedProvince: Province;
-  selectedDistrict: string;
-  selectedWard: string;
+  selectedDistrict: District;
+  selectedWard: Ward;
   selectedProjectAction: ProjectAction;
   selectedHelpDeskCategory: string;
 
   searchByActionConditions: SearchConditions;
   resultHelpDesks: Array<HelpDesk>;
 
+  isLoadingSubProject: boolean;
+  isLoadingProjectAction: boolean;
+  isLoadingHelpdeskContent: boolean;
+  isShowSelectSubProjectAndAction: boolean;
+  isLoadingDistrict: boolean;
+  isLoadingWard: boolean;
+  isLoadingEnterprise: boolean;
+
+
   constructor(
     private element: ElementRef,
     private platform: Platform,
     private commonService: CommonService,
     private subjectService: SubjectService,
+    private projectActionService: ProjectActionService,
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
     private administrativeService: AdministrativeService,
@@ -87,43 +98,59 @@ export class HomePage implements OnInit {
 
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.provinces = await this.administrativeService.getProvince().toPromise();
+    this.provinces = await this.administrativeService.getProvince({page: 1, per_page: 100}).toPromise();
     this.provinces.forEach(item => {
       item.post_title = item.title.rendered;
     });
     this.projects = await this.projectService.getListProject().toPromise();
-    this.projectActions = await this.subjectService.getProjectAction().toPromise();
+    this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
     this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
     this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();
   }
 
-  onselectProvince() {
-    if (!this.selectedProvince) {
+
+  onSelectProvince(province: Province) {
+    this.districts = new Array<District>();
+    this.getListDistrict(+province.id);
+  }
+
+  onSelectDistrict(district: District) {
+    this.wards = new Array<Ward>();
+    this.getListWard(+district.ID);
+  }
+
+  private getListDistrict(provinceId: number) {
+    if (!provinceId) {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryDistrict = { province_id: this.selectedProvince };
-    this.administrativeService
-      .getDistrictByProvince(dataQueryDistrict)
-      .subscribe((districts: Array<District>) => {
-        this.districts = districts;
-      });
+    this.isLoadingDistrict = true;
+    this.administrativeService.getDistrictByProvince({
+      province_id: provinceId,
+      page: 1,
+      per_page: 100
+    }).subscribe((districts: Array<District>) => {
+      this.districts = districts;
+      this.isLoadingDistrict = false;
+    });
   }
 
-  onselectDistrict() {
-    if (!this.selectedDistrict) {
+  private getListWard(districtId: number) {
+    if (!districtId) {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryWard = { district: this.selectedDistrict };
-    this.administrativeService
-      .getWardsByDistrict(dataQueryWard)
-      .subscribe((wards: Array<Ward>) => {
-        this.wards = wards;
-      });
+    this.isLoadingWard = true;
+    this.administrativeService.getWardsByDistrict({
+      district_id: districtId,
+      page: 1,
+      per_page: 100
+    }).subscribe((wards: Array<Ward>) => {
+      this.wards = wards;
+      this.isLoadingWard = false;
+    });
   }
+
 
   onselectProject(project: Project) {
     this.projectService.passedProject = project;
@@ -131,26 +158,20 @@ export class HomePage implements OnInit {
   }
 
   onclickHelpDesk(helpdesk: HelpDesk) {
-    this.helpdeskService.helpdeskDetail = helpdesk;
+    this.helpdeskService.passedHelpdesk = helpdesk;
     this.router.navigateByUrl(Constants.routerLinks.helpdeskDetail);
   }
 
-  // projectActionChange(event: {component: IonicSelectableComponent; value: any}) {
-  //   console.log('projectActionChange value:', event.value);
-  // }
-
-  // provinceChange(event: {component: IonicSelectableComponent; value: any}) {
-  //   console.log('projectActionChange value:', event.value);
-  // }
-
   async doSearchByAction(){
     this.searchByActionConditions = {
-      subject_type: this.selectedSubject,
-      province: this.selectedProvince,
-      district: this.selectedDistrict,
-      wards: this.selectedWard,
-      action: this.selectedProjectAction.ID,
-      helpdesk_category: this.selectedHelpDeskCategory,
+      subject_type: this.selectedSubject?this.selectedSubject.toString():'',
+      province: this.selectedProvince?this.selectedProvince.id.toString():'',
+      district: this.selectedDistrict?this.selectedDistrict.ID.toString():'',
+      ward: this.selectedWard?this.selectedWard.ID.toString():'',
+      action: this.selectedProjectAction?this.selectedProjectAction.ID.toString():'',
+      helpdesk_category: this.selectedHelpDeskCategory?this.selectedHelpDeskCategory:'',
+      page: 1,
+      numberposts: 100
     };
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
@@ -162,11 +183,11 @@ export class HomePage implements OnInit {
     this.unsubscribeBackEvent.unsubscribe();
   }
 
-  scrollContent(event) {
-    this.toolbarText = null;
-    const cardList = this.element.nativeElement.querySelectorAll('.card-item');
-    this.toolbarText =
-      Constants.scrollContentGetBlogTitle(event.detail.scrollTop, cardList) ||
-      this.toolbarText;
-  }
+  // scrollContent(event) {
+  //   this.toolbarText = null;
+  //   const cardList = this.element.nativeElement.querySelectorAll('.card-item');
+  //   this.toolbarText =
+  //     Constants.scrollContentGetBlogTitle(event.detail.scrollTop, cardList) ||
+  //     this.toolbarText;
+  // }
 }
