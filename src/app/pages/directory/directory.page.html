@@ -5,89 +5,80 @@
     <h2>TRA CỨU DANH BẠ</h2>
     <ion-item>
       <ion-label position="stacked">Từ khóa tìm kiếm</ion-label>
-      <ion-input [(ngModel)]=""></ion-input>
+      <ion-input [(ngModel)]="search"></ion-input>
+    </ion-item>
+    <ion-label>Nơi thực hiện</ion-label>
+    <ion-item>
+      <ionic-selectable item-content placeholder="+ Chọn tỉnh thành"
+                        [(items)]="provines" itemTextField="post_title"
+                        [canSearch]="true" (onChange)="onSelectProvince($event.value)">
+      </ionic-selectable>
+    </ion-item>
+    <ion-item *ngIf="isLoadingDistrict">
+      <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Nơi thực hiện</ion-label>
-      <ion-select placeholder="+ Chọn tỉnh thành">
-        <ion-select-option>Hà Nội</ion-select-option>
-        <ion-select-option>Hà Nam</ion-select-option>
-      </ion-select>
+      <ionic-selectable item-content placeholder="+ Chọn quận huyện"
+                        [(items)]="districts" itemTextField="post_title"
+                        [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
+      </ionic-selectable>
+    </ion-item>
+    <ion-item *ngIf="isLoadingWard">
+      <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
     <ion-item>
-      <ion-select placeholder="+ Chọn quận huyện">
-        <ion-select-option>Ba Đình</ion-select-option>
-        <ion-select-option>Đống Đa</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select placeholder="+ Chọn phường xã">
-        <ion-select-option>Phú Diễn</ion-select-option>
-        <ion-select-option>Phương Canh</ion-select-option>
-      </ion-select>
+      <ionic-selectable item-content placeholder="+ Chọn xã phường"
+                        [(items)]="wards" itemTextField="post_title"
+                        [canSearch]="true" (onChange)="onSelectWard($event.value)">
+      </ionic-selectable>
     </ion-item>
     <p class="sugges">Tôi cần thông tin liên hệ của?</p>
-    <ion-radio-group>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <span>Tổ chức, doanh nghiệp tham gia thực hiện Chương trình mục tiêu Quốc gia.</span>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <span>Cơ quan được giao nhiệm vụ tổ chức thực hiện Chương trình mục tiêu Quốc gia.</span>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <span>Cơ quan thường trực Chương trình mục tiêu Quốc gia các cấp.</span>
-      </ion-item>
-      <ion-item>
-        <ion-radio mode="md" color="primary" slot="start"></ion-radio>
-        <span>Cả 3 nhóm trên.</span>
+    <ion-radio-group [(ngModel)]="selectedSubject">
+      <ion-item *ngFor="let item of subjectList">
+        <ion-radio mode="md" color="primary" slot="start" [value]="item.title.rendered"></ion-radio>
+        <span>{{item.title.rendered}}</span>
       </ion-item>
     </ion-radio-group>
+    <ion-label position="stacked">Thuộc dự án</ion-label>
     <ion-item>
-      <ion-label position="stacked">Thuộc dự án</ion-label>
-      <ion-select placeholder="+ Chọn dự án">
-        <ion-select-option>Dự án 01</ion-select-option>
-        <ion-select-option>Dự án 02</ion-select-option>
+      <ion-select [(ngModel)]="selectedProject" (ionChange)="onSelectPorject()" placeholder="+ Chọn dự án">
+        <ion-select-option *ngFor="let project of projectList" [value]="project.id">{{project.title.rendered}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Thuộc tiểu dự án</ion-label>
-      <ion-select placeholder="+ Chọn tiểu dự án">
-        <ion-select-option>Tiểu dự án 01</ion-select-option>
-        <ion-select-option>Tiểu dự án 02</ion-select-option>
+      <ion-select [(ngModel)]="subProjectId" (ionChange)="onSelectSubProject()" placeholder="+ Chọn tiểu dự án">
+        <ion-select-option *ngFor="let subProject of subProjectList" [value]="subProject.id">{{subProject.title.rendered}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-label position="stacked">Nội dung của hoạt động là</ion-label>
     <ion-item>
-      <ion-label position="stacked">Nội dung của hoạt động là</ion-label>
-      <ion-select placeholder="+ Chọn hoạt động">
-        <ion-select-option>Hỗ trợ trồng rừng</ion-select-option>
-        <ion-select-option>Hỗ trợ nhà ở</ion-select-option>
-      </ion-select>
+      <ionic-selectable placeholder="+ Chọn hoạt động"
+                      [(items)]="actionList" itemTextField="post_title"
+                      [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
+      </ionic-selectable>
     </ion-item>
+    <ion-label position="stacked">Vai trò?</ion-label>
     <ion-item>
-      <ion-label position="stacked">Vai trò?</ion-label>
-      <ion-select placeholder="+ Chọn hoạt động">
-        <ion-select-option>Tư vấn hỗ trợ</ion-select-option>
-        <ion-select-option>Tham gia thực hiện</ion-select-option>
+      <ion-select [(ngModel)]="selectedPosition" placeholder="+ Chọn vai trò">
+        <ion-select-option *ngFor="let position of positionList" [value]="position.id">{{position.title.rendered}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button type="submit" expand="block" class="submit">TRA CỨU THÔNG TIN LIÊN HỆ</ion-button>
+    <ion-button type="submit" expand="block" class="submit" (click)="getListEnterprise()">TRA CỨU THÔNG TIN LIÊN HỆ</ion-button>
   </ion-list>
   <div class="result_search">
     <ion-list>
-      <h2>Kết quả tìm kiếm<span>25 thông tin</span></h2>
-      <ion-item>
+      <h2>Kết quả tìm kiếm<span>{{enterpriseList? enterpriseList.length : '0'}} thông tin</span></h2>
+      <ion-item *ngFor="let item of enterpriseList">
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              <ion-img src="./assets/image/logo_phulong.png"></ion-img>
+              <ion-img src="{{item.logo}}"></ion-img>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <p class="directory_title">Xây dựng phú long</p>
+              <p class="directory_title">{{item.post_title}}</p>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -95,7 +86,7 @@
               <p>Địa chỉ</p>
             </ion-col>
             <ion-col size="8">
-              <span>: 193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp, Tp. Hồ Chí Minh</span>
+              <span>{{item.acf.address}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -103,7 +94,7 @@
               <p>Điện thoại</p>
             </ion-col>
             <ion-col size="8">
-              <span>: 0541245666</span>
+              <span>: {{item.acf.enterprise_phone}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -111,7 +102,7 @@
               <p>Đường dây nóng</p>
             </ion-col>
             <ion-col size="8">
-              <span>: 1900xxxx</span>
+              <span>: {{item.acf.enterprise_hotline}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -119,7 +110,7 @@
               <p>Email</p>
             </ion-col>
             <ion-col size="8">
-              <span>: kinhdoanhphulong@gmail.com</span>
+              <span>: {{item.acf.enterprise_email}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -127,61 +118,7 @@
               <p>Website</p>
             </ion-col>
             <ion-col size="8">
-              <span>: xaydungphulong.com.vn</span>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12">
-              <ion-img src="./assets/image/logo_phulong.png"></ion-img>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <p class="directory_title">Xây dựng phú long</p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <p>Địa chỉ</p>
-            </ion-col>
-            <ion-col size="8">
-              <span>: 193/3/8 Lê Đức Thọ, P. 17, Q. Gò Vấp, Tp. Hồ Chí Minh</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <p>Điện thoại</p>
-            </ion-col>
-            <ion-col size="8">
-              <span>: 0541245666</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <p>Đường dây nóng</p>
-            </ion-col>
-            <ion-col size="8">
-              <span>: 1900xxxx</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <p>Email</p>
-            </ion-col>
-            <ion-col size="8">
-              <span>: kinhdoanhphulong@gmail.com</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4">
-              <p>Website</p>
-            </ion-col>
-            <ion-col size="8">
-              <span>: xaydungphulong.com.vn</span>
+              <span>: {{item.acf.enterprise_website}}</span>
             </ion-col>
           </ion-row>
         </ion-grid>
