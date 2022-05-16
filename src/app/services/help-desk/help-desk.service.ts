@@ -12,7 +12,9 @@ import {HelpDesk} from '../../interfaces/help-desk';
 })
 export class HelpDeskService {
 
+  private _helpdeskSearchResult: Array<HelpDesk>;
   private _passedHelpdesk: HelpDesk;
+
 
   constructor(
     private apiService: ApiService,
@@ -52,5 +54,13 @@ export class HelpDeskService {
 
   set passedHelpdesk(value: HelpDesk) {
     this._passedHelpdesk = value;
+  }
+  
+  public get helpdeskSearchResult(): Array<HelpDesk> {
+    return this._helpdeskSearchResult;
+  }
+
+  public set helpdeskSearchResult(value: Array<HelpDesk>) {
+    this._helpdeskSearchResult = value;
   }
 }

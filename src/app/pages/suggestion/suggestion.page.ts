@@ -8,6 +8,7 @@ import {Province} from '../../interfaces/province';
 import {District} from '../../interfaces/district';
 import {Ward} from '../../interfaces/ward';
 import {SubjectService} from '../../services/subject/subject.service';
+import { ProjectActionService } from './../../services/project-action/project-action.service';
 import {ProjectAction} from '../../interfaces/project-action';
 import {AdministrativeService} from '../../services/administrative/administrative.service';
 import {SuggestionParam} from '../../interfaces/suggestion-param';
@@ -38,6 +39,7 @@ export class SuggestionPage implements OnInit {
     private authService: AuthService,
     private commonService: CommonService,
     private subjectService: SubjectService,
+    private projectActionService: ProjectActionService,
     private administrativeService: AdministrativeService,
     private router: Router,
   ) {
@@ -78,7 +80,7 @@ export class SuggestionPage implements OnInit {
     this.provinces = await this.administrativeService.getProvince(provinceParams).toPromise();
     this.districts = await this.administrativeService.getDistrictByProvince(this.selectedProvince).toPromise();
     this.wards = await this.administrativeService.getWardsByDistrict(this.selectedDistrict).toPromise();
-    this.projectActions = await this.subjectService.getProjectAction().toPromise();
+    this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.isLoadingPosition = false;
   }
