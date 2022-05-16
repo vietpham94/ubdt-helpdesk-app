@@ -19,6 +19,7 @@ import { Project } from 'src/app/interfaces/project';
 import { ProjectAction } from 'src/app/interfaces/project-action';
 import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
 import { HelpDesk } from 'src/app/interfaces/help-desk';
+import { SearchConditions } from './../../interfaces/search-conditions';
 
 @Component({
   selector: 'app-home',
@@ -38,11 +39,14 @@ export class HomePage implements OnInit {
   helpdesks: Array<HelpDesk>;
 
   selectedSubject: string;
-  selectedProvince: string;
+  selectedProvince: Province;
   selectedDistrict: string;
   selectedWard: string;
-  selectedProjectAction: string;
+  selectedProjectAction: ProjectAction;
   selectedHelpDeskCategory: string;
+
+  searchByActionConditions: SearchConditions;
+  resultHelpDesks: Array<HelpDesk>;
 
   constructor(
     private element: ElementRef,
@@ -64,6 +68,7 @@ export class HomePage implements OnInit {
     this.projectActions = new Array<ProjectAction>();
     this.helpDeskCategories = new Array<HelpDeskCategory>();
     this.helpdesks = new Array<HelpDesk>();
+    this.resultHelpDesks = new Array<HelpDesk>();
   }
 
   ionViewDidEnter() {
@@ -81,19 +86,22 @@ export class HomePage implements OnInit {
   async initData() {
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.provinces = await this.subjectService.getProvince().toPromise();
+    this.provinces.forEach(item => {
+      item.post_title = item.title.rendered;
+    });
     this.projects = await this.projectService.getListProject().toPromise();
     this.projectActions = await this.subjectService.getProjectAction().toPromise();
     this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
     this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();
   }
 
-  onSelectProvince() {
+  onselectProvince() {
     if (!this.selectedProvince) {
       return;
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryDistrict = { province_id: this.selectedProvince };
+    const dataQueryDistrict = { province_id: this.selectedProvince.id };
     this.subjectService
       .getDistrictByProvince(dataQueryDistrict)
       .subscribe((districts: Array<District>) => {
@@ -101,13 +109,13 @@ export class HomePage implements OnInit {
       });
   }
 
-  onSelectDistrict() {
+  onselectDistrict() {
     if (!this.selectedDistrict) {
       return;
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryWard = { district: this.selectedDistrict };
+    const dataQueryWard = { district_id: this.selectedDistrict };
     this.subjectService
       .getWardsByDistrict(dataQueryWard)
       .subscribe((wards: Array<Ward>) => {
@@ -120,13 +128,32 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl(Constants.routerLinks.projectDetail);
   }
 
-  projectActionChange(event: {component: IonicSelectableComponent; value: any}) {
-    console.log('projectActionChange value:', event.value);
+  onclickHelpDesk(helpdesk: HelpDesk) {
+    this.helpdeskService.helpdeskDetail = helpdesk;
+    this.router.navigateByUrl(Constants.routerLinks.helpdeskDetail);
   }
 
-  doSearchByAction(){
-    this.commonService.searchConditions.subject_type = this.selectedSubject;
-    this.commonService.searchConditions.action = this.selectedProjectAction;
+  // projectActionChange(event: {component: IonicSelectableComponent; value: any}) {
+  //   console.log('projectActionChange value:', event.value);
+  // }
+
+  // provinceChange(event: {component: IonicSelectableComponent; value: any}) {
+  //   console.log('projectActionChange value:', event.value);
+  // }
+
+  async doSearchByAction(){
+    this.searchByActionConditions = {
+      subject_type: this.selectedSubject,
+      province: this.selectedProvince,
+      district: this.selectedDistrict,
+      wards: this.selectedWard,
+      action: this.selectedProjectAction.ID,
+      helpdesk_category: this.selectedHelpDeskCategory,
+    };
+
+    this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
+    this.helpdeskService.helpdeskSearchResult = this.resultHelpDesks;
+    this.router.navigateByUrl(Constants.routerLinks.searchResult);
   }
 
   ionViewDidLeave() {
