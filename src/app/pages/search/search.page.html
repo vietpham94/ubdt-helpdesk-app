@@ -1,7 +1,101 @@
 <app-header></app-header>
 
 <ion-content>
+  <ion-card class="card-item">
+    <ion-card-header>
+      <ion-card-title class="card-title" style="text-align: center;">TÌM KIẾM HƯỚNG DẪN</ion-card-title>
+      <hr>
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-row>
+        <ion-label class="item-label">
+          Quý vị là ai?
+        </ion-label>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="selectedSubject">
+            <ion-item *ngFor="let item of subjectList" mode="md">
+              <p>{{item.title.rendered}}</p>
+              <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item mode="md">
+              <p>Cá nhân, tổ chức khác</p>
+              <ion-radio slot="start" value="" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="item-label">
+          Quý vị quan tâm đến chương trình / dự án ở khu vực nào?
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable [(ngModel)]="selectedProvince" item-content placeholder="+ Chọn tỉnh thành"
+                            [(items)]="provinces" itemTextField="post_title"
+                            [canSearch]="true" (onChange)="onSelectProvince($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingDistrict">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2" *ngIf="districts.length > 0">
+          <ionic-selectable [(ngModel)]="selectedDistrict" item-content placeholder="+ Chọn quận huyện"
+                            [(items)]="districts" itemTextField="post_title"
+                            [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingWard">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2" *ngIf="wards.length > 0">
+          <ionic-selectable [(ngModel)]="selectedWard" item-content placeholder="+ Chọn xã phường"
+                            [(items)]="wards" itemTextField="post_title"
+                            [canSearch]="true">
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="item-label">Quý vị quan tâm đến hoạt động nào?</ion-label>
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable [(ngModel)]="selectedProjectAction" placeholder="+ Chọn hoạt động"
+            [items]="projectActions" itemTextField="post_title"
+            [canSearch]="true"
+            >
+          </ionic-selectable>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="item-label">
+          Vấn đề Quý vị quan tâm là?
+        </ion-label>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="selectedHelpDeskCategory">
+            <ion-item mode="md">
+              <p>Tất cả</p>
+              <ion-radio slot="start" value="" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item *ngFor="let item of helpDeskCategories" mode="md">
+              <p>{{item.name}}</p>
+              <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-row>
+
+      <ion-row>
+        <ion-button (click)="doSearchByAction()" type="submit" expand="block" class="submit">
+            TÌM KIẾM
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <app-footer></app-footer>

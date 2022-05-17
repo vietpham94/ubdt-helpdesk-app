@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { SearchPageRoutingModule } from './search-routing.module';
 
@@ -14,6 +15,7 @@ import {HeaderFooterModule} from '../../components/header-footer/header-footer.m
     CommonModule,
     FormsModule,
     IonicModule,
+    IonicSelectableModule,
     SearchPageRoutingModule,
     HeaderFooterModule
   ],

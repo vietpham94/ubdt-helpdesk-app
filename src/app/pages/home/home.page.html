@@ -25,7 +25,7 @@
               <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
             </ion-item>
             <ion-item mode="md">
-              <p>Khác</p>
+              <p>Cá nhân, tổ chức khác</p>
               <ion-radio slot="start" value="" mode="md"></ion-radio>
             </ion-item>
           </ion-radio-group>
@@ -68,13 +68,13 @@
 
       <ion-row>
         <ion-label class="item-label">Quý vị quan tâm đến hoạt động nào?</ion-label>
-        <ion-item>
+        <ion-col size="12" class="mt-2">
           <ionic-selectable [(ngModel)]="selectedProjectAction" placeholder="+ Chọn hoạt động"
             [items]="projectActions" itemTextField="post_title"
             [canSearch]="true"
             >
           </ionic-selectable>
-        </ion-item>
+        </ion-col>
       </ion-row>
 
       <ion-row>
@@ -96,7 +96,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-button (click)="doSearchByAction()" expand="block" shape="round">
+        <ion-button (click)="doSearchByAction()" type="submit" expand="block" class="submit">
             TÌM KIẾM
         </ion-button>
       </ion-row>
@@ -130,11 +130,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
-          {{item.post_title}}
-        </ion-item>
-      </ion-list>
+      <div class="result-item" *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
+        {{item.post_title}}
+      </div>
     </ion-card-content>
   </ion-card>
 
