@@ -130,11 +130,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
-          {{item.post_title}}
-        </ion-item>
-      </ion-list>
+      <div class="result-item" *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
+        {{item.post_title}}
+      </div>
     </ion-card-content>
   </ion-card>
 
