@@ -8,6 +8,7 @@ import { DirectoryPageRoutingModule } from './directory-routing.module';
 
 import { DirectoryPage } from './directory.page';
 import {HeaderFooterModule} from '../../components/header-footer/header-footer.module';
+import {IonicSelectableModule} from 'ionic-selectable';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {HeaderFooterModule} from '../../components/header-footer/header-footer.m
         FormsModule,
         IonicModule,
         DirectoryPageRoutingModule,
-        HeaderFooterModule
+        HeaderFooterModule,
+        IonicSelectableModule
     ],
   declarations: [DirectoryPage]
 })
