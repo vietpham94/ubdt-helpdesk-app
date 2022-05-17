@@ -5,10 +5,12 @@ ion-searchbar .searchbar-input-container .searchbar-input {
   padding-top: 7px;
   padding-bottom: 7px;
 }
-
+@media screen and (min-width: 415px){
 ion-searchbar .searchbar-input-container .searchbar-search-icon {
   top: 7px;
   left: 7px;
+}
+
 }
 
 ion-select,
