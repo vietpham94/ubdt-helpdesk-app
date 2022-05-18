@@ -14,7 +14,7 @@ ion-content {
       padding-bottom: 5px;
     }
 
-    ion-item {
+    div.result-item {
       color: #ec8934;
       position: relative;
       padding-left: 25px;
@@ -26,7 +26,7 @@ ion-content {
       &::before {
         position: absolute;
         display: block;
-        top:4px;
+        top:2px;
         content:'';
         left: 0;
         width: 16px;

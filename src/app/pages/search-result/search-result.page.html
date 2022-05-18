@@ -3,9 +3,9 @@
 <ion-content>
   <ion-list>
     <ion-label>Tìm thấy {{helpdesks?helpdesks.length:0}} tài liệu hướng dẫn</ion-label>
-    <ion-item *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
+    <div class="result-item" *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
       {{item.post_title}}
-    </ion-item>
+    </div>
   </ion-list>
 
   <ion-card class="card-item">
