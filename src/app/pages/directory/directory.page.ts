@@ -93,6 +93,7 @@ export class DirectoryPage implements OnInit {
     this.projectAction = await this.subjectService.getListSubject().toPromise();
     this.subProjectList = new Array<Project>();
     this.actionList = new Array<ProjectAction>();
+    this.positionList = new Array<Position>();
     this.getListProvince();
     this.getListSubProject();
     this.getListPosition();
@@ -246,6 +247,9 @@ export class DirectoryPage implements OnInit {
     }
     if(this.selectedPosition){
       paramsGetListEnterprise = {position: this.selectedPosition};
+    }
+    if(this.selectedSubject){
+      paramsGetListEnterprise = {subject_type: this.selectedSubject};
     }
     if (!paramsGetListEnterprise) {
       return;

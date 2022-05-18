@@ -1,9 +1,9 @@
 ion-list {
-  width: calc(100% - 20px);
+  width: calc(100% - 30px);
   margin: auto;
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 20px 10px;
+  padding: 20px 15px;
   margin-bottom: 30px;
   h2{
     text-align: center;
@@ -48,12 +48,21 @@ ion-list {
       --padding-start: 10px;
       --padding-end: 10px;
     }
+
     ion-textarea {
       padding: 0;
+      font-size: 15px;
+    }
+
+    ion-input{
+      --padding-top:10px;
+      --padding-bottom:10px;
     }
 
     ion-select {
       width: 100%;
+      font-size: 15px;
+      padding: 11px 10px;
     }
     .item-inner {
       padding-inline-end: 0;

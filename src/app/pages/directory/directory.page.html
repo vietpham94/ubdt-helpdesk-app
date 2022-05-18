@@ -35,7 +35,7 @@
     <p class="sugges">Tôi cần thông tin liên hệ của?</p>
     <ion-radio-group [(ngModel)]="selectedSubject">
       <ion-item *ngFor="let item of subjectList">
-        <ion-radio mode="md" color="primary" slot="start" [value]="item.title.rendered"></ion-radio>
+        <ion-radio mode="md" color="primary" slot="start" [value]="item.id"></ion-radio>
         <span>{{item.title.rendered}}</span>
       </ion-item>
     </ion-radio-group>
