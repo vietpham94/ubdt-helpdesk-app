@@ -45,8 +45,8 @@
         <ion-select-option *ngFor="let project of projectList" [value]="project.id">{{project.title.rendered}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-label position="stacked">Thuộc tiểu dự án</ion-label>
     <ion-item>
-      <ion-label position="stacked">Thuộc tiểu dự án</ion-label>
       <ion-select [(ngModel)]="subProjectId" (ionChange)="onSelectSubProject()" placeholder="+ Chọn tiểu dự án">
         <ion-select-option *ngFor="let subProject of subProjectList" [value]="subProject.id">{{subProject.title.rendered}}</ion-select-option>
       </ion-select>
@@ -82,42 +82,42 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="3">
               <p>Địa chỉ</p>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <span>{{item.acf.address}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="3">
               <p>Điện thoại</p>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <span>: {{item.acf.enterprise_phone}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="3">
               <p>Đường dây nóng</p>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <span>: {{item.acf.enterprise_hotline}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="3">
               <p>Email</p>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <span>: {{item.acf.enterprise_email}}</span>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="3">
               <p>Website</p>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <span>: {{item.acf.enterprise_website}}</span>
             </ion-col>
           </ion-row>

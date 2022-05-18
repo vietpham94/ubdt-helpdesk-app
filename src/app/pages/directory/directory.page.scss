@@ -18,7 +18,7 @@ ion-list {
     margin-top: 20px;
   }
   .sugges {
-    margin: 10px 0;
+    margin: 10px 0 0;
   }
   ion-label, p {
     font-weight: 500;
@@ -55,9 +55,13 @@ ion-list {
     }
     ion-select {
       width: 100%;
+      font-size: 15px;
     }
     .item-inner {
       padding-inline-end: 0;
+    }
+    ionic-selectable {
+      font-size: 15px;
     }
   }
 }
@@ -85,9 +89,10 @@ ion-list {
         margin: auto;
       }
     .directory_title {
-      font-size: 20px;
+      font-size: 18px;
       text-transform: uppercase;
       margin: 15px 0;
+      text-align: center;
     }
     ion-grid {
       padding-inline-start: 0;
