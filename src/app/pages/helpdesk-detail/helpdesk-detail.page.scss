@@ -1,14 +1,17 @@
 ion-content {
+  h4 {
+    margin: 0 5px !important;
+  }
   ul li::marker {
     color: #39b54a !important;
   }
 
   .project-detail {
     background: #ffffff;
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
     border: 1px solid #d6d6d6;
     border-radius: 3px;
-    padding: 20px 10px;
+    padding: 20px 15px;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;

@@ -19,6 +19,7 @@ ion-list {
   }
   .sugges {
     margin: 10px 0 0;
+    font-weight: 500;
   }
   ion-label, p {
     font-weight: 500;
@@ -29,6 +30,7 @@ ion-list {
   }
   p {
     margin: 0;
+    font-weight: normal;
   }
   .submit {
     --border-radius: 30px;
@@ -63,6 +65,7 @@ ion-list {
     ionic-selectable {
       font-size: 15px;
     }
+
   }
 }
 .result_search {
@@ -105,3 +108,4 @@ ion-list {
 
   }
 }
+
