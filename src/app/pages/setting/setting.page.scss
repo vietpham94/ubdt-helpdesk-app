@@ -7,10 +7,12 @@ ion-content {
     --background: transparent;
     border: none;
     --border: none;
+    min-height: 65px;
 
     ion-icon {
       font-size: 2.5em;
       color: #ffffff;
+      padding-top: 25px;
     }
   }
 

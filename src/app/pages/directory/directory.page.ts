@@ -46,14 +46,15 @@ export class DirectoryPage implements OnInit {
   selectedWard: string;
   selectedProjectAction: string;
   selectedProject: string;
-  selectedPosition: string;
+  selectedPosition: Position;
   selectedSubject: string;
-  search: string;
+  search_tittle: string;
 
   locationId: number;
   isLoadingEnterprise: boolean;
   isLoadingDistrict: boolean;
   isLoadingWard: boolean;
+  isLoadingSubject: boolean;
 
 
   enterpriseList: Array<Enterprise>;
@@ -80,60 +81,64 @@ export class DirectoryPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.isLoadingSubject = true;
     return this.initData();
   }
 
   async initData() {
-    const directoryParams: Pagination = {
-      page: 1,
-      per_page: 100,
-    }
     this.projectList = await this.projectService.getListProject().toPromise();
+    this.projectList.forEach(project => {
+      if (project.title) {
+        project.post_title = project.acf.project_number + ': ' + project.title.rendered;
+      }
+    });
     this.subjectList = await this.subjectService.getListSubject().toPromise();
     this.projectAction = await this.subjectService.getListSubject().toPromise();
     this.subProjectList = new Array<Project>();
     this.actionList = new Array<ProjectAction>();
+    this.positionList = new Array<Position>();
     this.getListProvince();
     this.getListSubProject();
     this.getListPosition();
-    this.getListEnterprise();
+    this.isLoadingSubject = false;
+    // this.getListEnterprise();
   }
+
   onSelectProvince(province: Province) {
     this.districts = new Array<District>();
     this.getListDistrict(+province.id);
     this.locationId = +province.id;
-    this.getListEnterprise();
   }
 
   onSelectDistrict(district: District) {
     this.wards = new Array<Ward>();
     this.getListWard(+district.ID);
     this.locationId = +district.ID;
-    this.getListEnterprise();
   }
 
   onSelectWard(ward: Ward) {
     this.locationId = +ward.ID;
-    this.getListEnterprise();
   }
 
-  onSelectPorject(){
-    if(!this.selectedProject){
-      return;
-    }
+  onSelectPorject(project: Project) {
+    this.selectedProject = project.id.toString();
     this.getListSubProject();
     this.getLisProjectAction();
   }
-  onSelectSubProject() {
+
+  onSelectSubProject(subproject: Project) {
     this.projectAction = null;
     this.actionList = new Array<ProjectAction>();
     this.projectActionId = null;
-    if (!this.subProjectId) {
-      return;
-    }
+    /*    if (!this.subProjectId) {
+          return;
+        }*/
+
     this.subProject = this.subProjectList.find(u => u.id == +this.subProjectId);
+    this.subProjectId = subproject.id.toString();
     this.getLisProjectAction();
   }
+
   onSelectProjectAction(projectAction: ProjectAction) {
     if (!projectAction) {
       return;
@@ -154,6 +159,11 @@ export class DirectoryPage implements OnInit {
     };
     this.projectService.getListProject(subProjectParams).subscribe((subProjectList: Array<Project>) => {
       this.subProjectList = subProjectList;
+      this.subProjectList.forEach(subProject => {
+        if (subProject.title) {
+          subProject.post_title = subProject.title.rendered;
+        }
+      });
     });
   }
 
@@ -181,11 +191,17 @@ export class DirectoryPage implements OnInit {
     });
   }
 
-  private getListPosition(){
-    this.positionService.getListPosition().subscribe((positionList: Array<Position>)=> {
+  private getListPosition() {
+    this.positionService.getListPosition().subscribe((positionList: Array<Position>) => {
       this.positionList = positionList;
+      this.positionList.forEach(position => {
+        if (position.title) {
+          position.post_title = position.title.rendered;
+        }
+      });
     });
   }
+
   private getListProvince() {
     this.administrativeService.getProvince({page: 1, per_page: 100}).subscribe((provinces: Array<Province>) => {
       this.provines = provinces;
@@ -228,11 +244,10 @@ export class DirectoryPage implements OnInit {
       this.isLoadingWard = false;
     });
   }
+
   private getListEnterprise() {
     let paramsGetListEnterprise: SearchConditions;
-    if(this.search){
-      paramsGetListEnterprise = {search: this.search};
-    }
+
     if (this.projectActionId) {
       paramsGetListEnterprise = {action: this.projectActionId};
     }
@@ -244,15 +259,29 @@ export class DirectoryPage implements OnInit {
     if (!paramsGetListEnterprise && this.selectedProject) {
       paramsGetListEnterprise = {project: this.selectedProject};
     }
-    if(this.selectedPosition){
-      paramsGetListEnterprise = {position: this.selectedPosition};
-    }
+
     if (!paramsGetListEnterprise) {
-      return;
+      paramsGetListEnterprise = {};
+    }
+
+    if (this.selectedPosition) {
+      paramsGetListEnterprise.position = this.selectedPosition.id.toString();
+    }
+
+    if (this.selectedSubject) {
+      paramsGetListEnterprise.subject_type = this.selectedSubject;
     }
 
     if (this.locationId) {
       paramsGetListEnterprise.location = this.locationId.toString();
+    }
+
+    if (this.search_tittle) {
+      paramsGetListEnterprise.search = this.search_tittle;
+    }
+
+    if (!paramsGetListEnterprise) {
+      return;
     }
 
     this.isLoadingEnterprise = true;

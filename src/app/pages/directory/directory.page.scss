@@ -1,9 +1,9 @@
 ion-list {
-  width: calc(100% - 20px);
+  width: calc(100% - 30px);
   margin: auto;
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 20px 10px;
+  padding: 20px 15px;
   margin-bottom: 30px;
   h2{
     text-align: center;
@@ -18,7 +18,8 @@ ion-list {
     margin-top: 20px;
   }
   .sugges {
-    margin: 10px 0;
+    margin: 10px 0 0;
+    font-weight: 500;
   }
   ion-label, p {
     font-weight: 500;
@@ -29,6 +30,7 @@ ion-list {
   }
   p {
     margin: 0;
+    font-weight: normal;
   }
   .submit {
     --border-radius: 30px;
@@ -55,10 +57,15 @@ ion-list {
     }
     ion-select {
       width: 100%;
+      font-size: 15px;
     }
     .item-inner {
       padding-inline-end: 0;
     }
+    ionic-selectable {
+      font-size: 15px;
+    }
+
   }
 }
 .result_search {
@@ -85,9 +92,10 @@ ion-list {
         margin: auto;
       }
     .directory_title {
-      font-size: 20px;
+      font-size: 18px;
       text-transform: uppercase;
       margin: 15px 0;
+      text-align: center;
     }
     ion-grid {
       padding-inline-start: 0;
@@ -100,3 +108,4 @@ ion-list {
 
   }
 }
+

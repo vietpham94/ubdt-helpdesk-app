@@ -2,6 +2,7 @@ export interface Project {
   id?: number;
   date?: string;
   slug?: string;
+  post_title?: string;
   title?: {
     rendered?: string
   };

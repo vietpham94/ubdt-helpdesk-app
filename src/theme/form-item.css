@@ -14,7 +14,9 @@ ion-searchbar .searchbar-input-container .searchbar-search-icon {
 }
 
 ion-select,
-.ionic-selectable {
+.ionic-selectable,
+ion-input,
+ion-textarea{
   border: 1px solid #d6d6d6;
   --border: 1px solid #d6d6d6;
   border-radius: 5px;
@@ -43,3 +45,12 @@ ionic-selectable-modal ion-content ion-list ion-item ion-label {
   overflow: unset !important;
 }
 
+ion-action-sheet .action-sheet-container .action-sheet-button.select-interface-option{
+  text-align: left;
+  border-bottom: 1px dotted;
+  font-size: 15px;
+  line-height: 1.3;
+}
+ion-action-sheet .action-sheet-container .action-sheet-button.select-interface-option span {
+  display: block;
+}
