@@ -13,19 +13,26 @@
       <ion-input type="text" [(ngModel)]="suggestionParam.acf.address"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-select [(ngModel)]="selectedProvince" (ionChange)="onSelectProvince()" placeholder="+ Chọn tỉnh thành">
-        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.title.rendered}}</ion-select-option>
-      </ion-select>
+      <ionic-selectable [(items)]="provinces" itemTextField="post_title" [canSearch]="true"
+                        [(ngModel)]="selectedProvince" (onChange)="onSelectProvince()" placeholder="+ Chọn tỉnh thành">
+<!--        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.title.rendered}}</ion-select-option>-->
+      </ionic-selectable>
     </ion-item>
-    <ion-item>
-      <ion-select [(ngModel)]="selectedDistrict" (ionChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
-        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>
-      </ion-select>
+    <ion-item *ngIf="districts.length > 0">
+      <ionic-selectable [(items)]="districts"
+                        [(ngModel)]="selectedDistrict"
+                        itemTextField="post_title"
+                        [canSearch]="true" (onChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
+<!--        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>-->
+      </ionic-selectable>
     </ion-item>
-    <ion-item>
-      <ion-select [(ngModel)]="selectedWard" placeholder="+ Chọn phường xã">
-        <ion-select-option *ngFor="let ward of wards" [value]="ward.ID">{{ward.post_title}}</ion-select-option>
-      </ion-select>
+    <ion-item *ngIf="wards.length > 0">
+      <ionic-selectable [(items)]="wards"
+                        [(ngModel)]="selectedWard"
+                        itemTextField="post_title"
+                        [canSearch]="true" placeholder="+ Chọn phường xã">
+<!--        <ion-select-option *ngFor="let ward of wards" [value]="ward.ID">{{ward.post_title}}</ion-select-option>-->
+      </ionic-selectable>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Điện thoại</ion-label>

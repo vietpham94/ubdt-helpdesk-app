@@ -54,6 +54,7 @@ export class DirectoryPage implements OnInit {
   isLoadingEnterprise: boolean;
   isLoadingDistrict: boolean;
   isLoadingWard: boolean;
+  isLoadingSubject: boolean;
 
 
   enterpriseList: Array<Enterprise>;
@@ -80,6 +81,7 @@ export class DirectoryPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.isLoadingSubject = true;
     return this.initData();
   }
 
@@ -98,6 +100,7 @@ export class DirectoryPage implements OnInit {
     this.getListProvince();
     this.getListSubProject();
     this.getListPosition();
+    this.isLoadingSubject = false;
     // this.getListEnterprise();
   }
 

@@ -28,8 +28,8 @@ export class SuggestionPage implements OnInit {
   districts: Array<District>;
   wards: Array<Ward>;
   projectActions: Array<ProjectAction>;
-  selectedProvince: string;
-  selectedDistrict: string;
+  selectedProvince: Province;
+  selectedDistrict: District;
   selectedWard: string;
   selectedProjectAction: string;
   isLoadingPosition: boolean;
@@ -78,7 +78,17 @@ export class SuggestionPage implements OnInit {
     }
 
     this.provinces = await this.administrativeService.getProvince(provinceParams).toPromise();
+    this.provinces.forEach(province=>{
+      if(province.title){
+        province.post_title = province.title.rendered;
+      }
+    })
     this.districts = await this.administrativeService.getDistrictByProvince(this.selectedProvince).toPromise();
+    this.districts.forEach(district=>{
+      if(district.title){
+        district.post_title = district.title.rendered;
+      }
+    })
     this.wards = await this.administrativeService.getWardsByDistrict(this.selectedDistrict).toPromise();
     this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
     this.subjectList = await this.subjectService.getListSubject().toPromise();
@@ -90,8 +100,7 @@ export class SuggestionPage implements OnInit {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryDistrict = {province_id: this.selectedProvince};
+    const dataQueryDistrict = {province_id: this.selectedProvince.id};
     this.administrativeService
       .getDistrictByProvince(dataQueryDistrict)
       .subscribe((districts: Array<District>) => {
@@ -105,7 +114,7 @@ export class SuggestionPage implements OnInit {
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const dataQueryWard = {district_id: this.selectedDistrict};
+    const dataQueryWard = {district_id: this.selectedDistrict.ID};
     this.administrativeService
       .getWardsByDistrict(dataQueryWard)
       .subscribe((wards: Array<Ward>) => {

@@ -17,7 +17,7 @@
     <ion-item *ngIf="isLoadingDistrict">
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="districts.length > 0">
       <ionic-selectable item-content placeholder="+ Chọn quận huyện"
                         [(items)]="districts" itemTextField="post_title"
                         [canSearch]="true" (onChange)="onSelectDistrict($event.value)" [(ngModel)]="selectedDistrict">
@@ -26,19 +26,20 @@
     <ion-item *ngIf="isLoadingWard">
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="wards.length > 0">
       <ionic-selectable item-content placeholder="+ Chọn xã phường"
                         [(items)]="wards" itemTextField="post_title"
                         [canSearch]="true" (onChange)="onSelectWard($event.value)" [(ngModel)]="selectedWard">
       </ionic-selectable>
     </ion-item>
     <p class="sugges">Tôi cần thông tin liên hệ của?</p>
-    <ion-radio-group [(ngModel)]="selectedSubject">
+    <ion-radio-group [(ngModel)]="selectedSubject" *ngIf="!isLoadingSubject">
       <ion-item *ngFor="let item of subjectList">
         <ion-radio mode="md" color="primary" slot="start" [value]="item.id"></ion-radio>
         <span>{{item.title.rendered}}</span>
       </ion-item>
     </ion-radio-group>
+    <ion-spinner *ngIf="isLoadingSubject"></ion-spinner>
     <ion-label position="stacked">Thuộc dự án</ion-label>
     <ion-item>
       <ionic-selectable [(items)]="projectList" item-content placeholder="+ Chọn dự án"
