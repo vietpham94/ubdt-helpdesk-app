@@ -169,7 +169,7 @@
 
         <ion-col size="12" class="mt-2">
           <ionic-selectable item-content placeholder="+ Chọn tỉnh thành"
-                            [(items)]="provinces" itemTextField="post_title"
+                            [(items)]="provinces" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProvince($event.value)">
           </ionic-selectable>
         </ion-col>
@@ -180,7 +180,7 @@
 
         <ion-col size="12" class="mt-2" *ngIf="districts.length > 0">
           <ionic-selectable item-content placeholder="+ Chọn quận huyện"
-                            [(items)]="districts" itemTextField="post_title"
+                            [(items)]="districts" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
           </ionic-selectable>
         </ion-col>
@@ -191,7 +191,7 @@
 
         <ion-col size="12" class="mt-2" *ngIf="wards.length > 0">
           <ionic-selectable item-content placeholder="+ Chọn xã phường"
-                            [(items)]="wards" itemTextField="post_title"
+                            [(items)]="wards" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectWard($event.value)">
           </ionic-selectable>
         </ion-col>
