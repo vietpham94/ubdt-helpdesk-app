@@ -13,7 +13,7 @@
       <ion-input type="text" [(ngModel)]="suggestionParam.acf.address"></ion-input>
     </ion-item>
     <ion-item>
-      <ionic-selectable [(items)]="provinces" itemTextField="post_title" [canSearch]="true"
+      <ionic-selectable [(items)]="provinces" itemTextField="post_title" [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end"
                         [(ngModel)]="selectedProvince" (onChange)="onSelectProvince()" placeholder="+ Chọn tỉnh thành">
 <!--        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.title.rendered}}</ion-select-option>-->
       </ionic-selectable>
@@ -21,7 +21,7 @@
     <ion-item *ngIf="districts.length > 0">
       <ionic-selectable [(items)]="districts"
                         [(ngModel)]="selectedDistrict"
-                        itemTextField="post_title"
+                        itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
 <!--        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>-->
       </ionic-selectable>
@@ -29,7 +29,7 @@
     <ion-item *ngIf="wards.length > 0">
       <ionic-selectable [(items)]="wards"
                         [(ngModel)]="selectedWard"
-                        itemTextField="post_title"
+                        itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" placeholder="+ Chọn phường xã">
 <!--        <ion-select-option *ngFor="let ward of wards" [value]="ward.ID">{{ward.post_title}}</ion-select-option>-->
       </ionic-selectable>
@@ -62,7 +62,7 @@
         <ionic-selectable [(ngModel)]="suggestionParam.acf.suggestion_action"
                           [items]="projectActions"
                           itemValueField="ID"
-                          itemTextField="post_title"
+                          itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                           [canSearch]="true"
                           (ionChange)="projectActionChange($event)">
         </ionic-selectable>

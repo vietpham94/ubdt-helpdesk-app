@@ -67,6 +67,15 @@ ion-list {
     }
 
   }
+  .radio_subject {
+    position: relative;
+    ion-spinner {
+      position: absolute;
+      top:20px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  }
 }
 .result_search {
   ion-list {
@@ -107,5 +116,6 @@ ion-list {
     }
 
   }
+
 }
 

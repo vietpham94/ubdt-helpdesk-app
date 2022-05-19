@@ -76,6 +76,10 @@ export class Constants {
       pageLink: '/setting',
       title: ''
     },
+    {
+      pageLink: '/login',
+      title: Constants.pagesTitle.login
+    },
   ];
 
   static apiRestEndPoints = {

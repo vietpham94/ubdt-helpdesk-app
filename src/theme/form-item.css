@@ -50,6 +50,8 @@ ion-action-sheet .action-sheet-container .action-sheet-button.select-interface-o
   border-bottom: 1px dotted;
   font-size: 15px;
   line-height: 1.3;
+  height: auto;
+  contain: none;
 }
 ion-action-sheet .action-sheet-container .action-sheet-button.select-interface-option span {
   display: block;
