@@ -30,7 +30,7 @@ export class SuggestionPage implements OnInit {
   projectActions: Array<ProjectAction>;
   selectedProvince: Province;
   selectedDistrict: District;
-  selectedWard: string;
+  selectedWard: Ward;
   selectedProjectAction: string;
   isLoadingPosition: boolean;
 
@@ -134,22 +134,13 @@ export class SuggestionPage implements OnInit {
       return;
     }
     if(this.selectedWard){
-      const existWard = this.wards.find(u => u.ID == this.selectedWard);
-      if(existWard){
-        this.suggestionParam.acf.address += ',' + existWard.post_title;
-      }
+      this.suggestionParam.acf.address += ', ' + this.selectedWard.post_title;
     }
     if(this.selectedDistrict){
-      const existDistrict = this.districts.find(d => d.ID == this.selectedDistrict);
-      if (existDistrict) {
-        this.suggestionParam.acf.address += ',' + existDistrict.post_title;
-      }
+      this.suggestionParam.acf.address += ', ' + this.selectedDistrict.post_title;
     }
     if(this.selectedProvince){
-      const  existProvince = this.provinces.find(p => p.id == this.selectedProvince);
-      if(existProvince){
-        this.suggestionParam.acf.address += ',' + existProvince.title.rendered;
-      }
+      this.suggestionParam.acf.address += ', ' + this.selectedProvince.post_title;
     }
     this.suggestionParam.post_title = this.suggestionParam.acf.name;
     this.suggestionService.submitSuggestion(this.suggestionParam).subscribe((res) => {
