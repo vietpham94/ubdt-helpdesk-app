@@ -34,7 +34,7 @@ export class HeaderComponent {
 
   onClickBack() {
     try {
-
+      this.router.navigateByUrl(Constants.routerLinks.home);
     } catch (e) {
       console.error(e.message);
     }
