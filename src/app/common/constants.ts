@@ -29,6 +29,7 @@ export class Constants {
     helpdeskDetail: 'Chi tiết hướng dẫn',
     directory: 'Danh bạ điện thoại',
     projectDetail: 'Thông tin dự án',
+    faq: 'Câu hỏi thường gặp',
   };
 
   static pageInfo = [
@@ -73,6 +74,10 @@ export class Constants {
       title: Constants.pagesTitle.projectDetail
     },
     {
+      pageLink: '/faq',
+      title: Constants.pagesTitle.faq
+    },
+    {
       pageLink: '/setting',
       title: ''
     },
@@ -101,6 +106,7 @@ export class Constants {
     suggestion: '/ash/v1/suggestion',
     enterprise: '/ash/v1/enterprise',
     position: '/wp/v2/position',
+    faq: '/ash/v1/faq',
   };
 
   static messages = {
@@ -116,6 +122,7 @@ export class Constants {
     home: '/home',
     search: '/search',
     searchResult: '/search-result',
+    faq: '/faq',
     suggestion: '/suggestion',
     helpdeskDetail: '/helpdesk-detail',
     directory: '/directory',

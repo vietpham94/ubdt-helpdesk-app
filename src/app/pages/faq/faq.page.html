@@ -1,0 +1,99 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-card class="card-item">
+    <ion-card-header>
+      <ion-card-title class="card-title" style="text-align: center;">TÌM CÂU HỎI THƯỜNG GẶP</ion-card-title>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-label class="item-label">
+          Từ khoá tìm kiếm
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          <ion-input type="text" [(ngModel)]="faqParams.search"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="item-label">
+          Dự án
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable [(ngModel)]="selectedProject" item-content placeholder="+ Chọn dự án"
+                            [(items)]="projects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+                            [canSearch]="true" (onChange)="onSelectProject($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingSubProject">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="subProjects.length > 0">
+        <ion-label class="item-label">
+          Tiểu dự án
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable [(ngModel)]="selectedSubProject" item-content placeholder="+ Chọn tiểu dự án"
+                            [(items)]="subProjects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+                            [canSearch]="true" (onChange)="onSelectSubProject($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingProjectAction">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="projectActions.length > 0">
+        <ion-label class="item-label">
+          Hoạt động
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          <ionic-selectable [(ngModel)]="selectedProjectAction" item-content placeholder="+ Chọn hoạt động"
+                            [(items)]="projectActions" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+                            [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
+          </ionic-selectable>
+        </ion-col>
+
+        <ion-col size="12" class="mt-2 ion-text-center" *ngIf="isLoadingProjectAction">
+          <ion-spinner class="ion-text-center"></ion-spinner>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-button (click)="doSearchFaq()" type="submit" expand="block" class="submit">
+            TÌM KIẾM
+        </ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card-item">
+    <ion-card-header>
+      <ion-card-title class="card-title">Câu hỏi - Trả lời</ion-card-title>
+      <hr>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="result-item" *ngFor="let item of faqs"  (click)="onclickFaq(item)">
+        {{item.post_title}}
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card-item">
+    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
+  </ion-card>
+
+  <ion-card class="card-item">
+    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg" /></ion-router-link>
+  </ion-card>
+
+</ion-content>
+
+<app-footer></app-footer>

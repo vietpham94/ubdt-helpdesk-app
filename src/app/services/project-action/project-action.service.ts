@@ -17,6 +17,10 @@ export class ProjectActionService {
   }
 
   public getListProjectAction(params?: ProjectActionParams) {
+    if(!params){
+      params = { per_page: 200, page: 1 };
+    }
+
     return this.apiService.get(Constants.apiRestEndPoints.projectAction, {
       headers: this.authService.getNoAuthHeader(),
       params: params
