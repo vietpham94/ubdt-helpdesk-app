@@ -16,6 +16,8 @@ export class Constants {
     setting: 'setting',
     directory: 'directory',
     projectDetail: 'project-detail',
+    faq: 'faq',
+    faqDetail: 'faq-detail',
   };
 
   static pagesTitle = {
@@ -30,6 +32,7 @@ export class Constants {
     directory: 'Danh bạ điện thoại',
     projectDetail: 'Thông tin dự án',
     faq: 'Câu hỏi thường gặp',
+    faqDetail: 'Câu hỏi thường gặp',
   };
 
   static pageInfo = [
@@ -78,6 +81,10 @@ export class Constants {
       title: Constants.pagesTitle.faq
     },
     {
+      pageLink: '/faq-detail',
+      title: Constants.pagesTitle.faqDetail
+    },
+    {
       pageLink: '/setting',
       title: ''
     },
@@ -123,6 +130,7 @@ export class Constants {
     search: '/search',
     searchResult: '/search-result',
     faq: '/faq',
+    faqDetail: '/faq-detail',
     suggestion: '/suggestion',
     helpdeskDetail: '/helpdesk-detail',
     directory: '/directory',

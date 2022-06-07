@@ -61,8 +61,8 @@ export class FaqPage implements OnInit {
     this.faqs = new Array<Faq>();
     this.resultFaqs = new Array<Faq>();
     this.faqParams = {
-      project: 0,
-      action: 0,
+      project: '',
+      action: '',
       search: '',
       numberposts: 10,
       page: 1,
@@ -123,9 +123,30 @@ export class FaqPage implements OnInit {
 
   }
 
-  doSearchFaq(){}
+  doSearchFaq(){
+    this.isLoadingFaq = true;
 
-  onclickFaq(item: Faq){}
+    if (this.selectedSubProject){
+      this.faqParams.project = this.selectedSubProject.id.toString();
+    } else if (this.selectedProject){
+      this.faqParams.project = this.selectedProject.id.toString();
+    }
+
+    if (this.selectedProjectAction) {
+      this.faqParams.action = this.selectedProjectAction.ID.toString();
+    }
+
+    this.faqService.getListFaq(this.faqParams).subscribe((faqs: Array<Faq>) => {
+      this.faqs = faqs;
+      this.isLoadingFaq = false;
+    });
+
+  }
+
+  onclickFaq(item: Faq){
+    this.faqService.passedFaq = item;
+    this.router.navigateByUrl(Constants.routerLinks.faqDetail);
+  }
 
   private getListSubProject(projectId: number) {
     if (!projectId) {
@@ -172,7 +193,7 @@ export class FaqPage implements OnInit {
   }
 
 
-  // async doSearchByAction(){
+  // async doSearchFaq(){
   //   this.searchByActionConditions = {
   //     subject_type: this.selectedSubject?this.selectedSubject.toString():'',
   //     province: this.selectedProvince?this.selectedProvince.id.toString():'',

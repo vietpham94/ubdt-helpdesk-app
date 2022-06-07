@@ -81,7 +81,7 @@
 
     <ion-card-content>
       <div class="result-item" *ngFor="let item of faqs"  (click)="onclickFaq(item)">
-        {{item.post_title}}
+        <div id="faq_{{item.ID}}">{{item.post_title}}</div>
       </div>
     </ion-card-content>
   </ion-card>

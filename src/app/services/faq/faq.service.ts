@@ -12,21 +12,30 @@ import {FaqParams} from '../../interfaces/faq-params';
 })
 
 export class FaqService {
+  private _passedFaq: Faq;
 
-constructor(
-  private apiService: ApiService,
-  private authService: AuthService
-) { }
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+  ) { }
 
-public getListFaq(params?: FaqParams) {
-  if(!params){
-    params = { numberposts: 20, page: 1 };
+  public getListFaq(params?: FaqParams) {
+    if(!params){
+      params = { numberposts: 20, page: 1 };
+    }
+
+    return this.apiService.get(Constants.apiRestEndPoints.faq, {
+      headers: this.authService.getNoAuthHeader(),
+      params: params,
+    });
   }
 
-  return this.apiService.get(Constants.apiRestEndPoints.faq, {
-    headers: this.authService.getNoAuthHeader(),
-    params: params,
-  });
-}
+  public get passedFaq(): Faq {
+    return this._passedFaq;
+  }
+
+  public set passedFaq(value: Faq) {
+    this._passedFaq = value;
+  }
 
 }

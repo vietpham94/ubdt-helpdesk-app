@@ -1,6 +1,6 @@
 export interface FaqParams {
-  project?: number;
-  action?: number;
+  project?: string;
+  action?: string;
   search?: string;
   numberposts?: number;
   page?: number;
