@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit} from '@angular/core';
 import {SuggestionService} from '../../services/suggestion/suggestion.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {CommonService} from '../../services/common/common.service';
@@ -33,6 +33,8 @@ export class SuggestionPage implements OnInit {
   selectedWard: Ward;
   selectedProjectAction: string;
   isLoadingPosition: boolean;
+  private captchaPassed: boolean = false;
+  private captchaResponse: string;
 
   constructor(
     private suggestionService: SuggestionService,
@@ -42,6 +44,7 @@ export class SuggestionPage implements OnInit {
     private projectActionService: ProjectActionService,
     private administrativeService: AdministrativeService,
     private router: Router,
+    private zone: NgZone,
   ) {
   }
 
@@ -52,6 +55,7 @@ export class SuggestionPage implements OnInit {
     this.wards = new Array<Ward>();
     this.projectActions = new Array<ProjectAction>();
     this.suggestionParam = {
+      captchaResponse: '',
       post_title: '',
       acf: {
         name: '',
@@ -130,6 +134,7 @@ export class SuggestionPage implements OnInit {
     this.suggestionParam.acf.suggestion_action = event.value.ID;
   }
   onSubmitSuggestion() {
+
     if(!this.validateSuggetion()){
       return;
     }
@@ -142,12 +147,19 @@ export class SuggestionPage implements OnInit {
     if(this.selectedProvince){
       this.suggestionParam.acf.address += ', ' + this.selectedProvince.post_title;
     }
+    this.suggestionParam.captchaResponse = this.captchaResponse;
     this.suggestionParam.post_title = this.suggestionParam.acf.name;
     this.suggestionService.submitSuggestion(this.suggestionParam).subscribe((res) => {
       const toastOption = Constants.toastOptions.success;
       toastOption.message = 'Bạn đã gửi góp ý thành công !';
       this.commonService.showToast(toastOption);
       this.router.navigateByUrl(Constants.routerLinks.home);
+    });
+  }
+  captchaResolved(response: string): void {
+    this.zone.run(() => {
+      this.captchaPassed = true;
+      this.captchaResponse = response;
     });
   }
 

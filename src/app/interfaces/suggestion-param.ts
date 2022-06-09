@@ -1,5 +1,6 @@
 export interface SuggestionParam {
   post_title: string;
+  captchaResponse: string;
   acf: {
     name: string;
     address: string;

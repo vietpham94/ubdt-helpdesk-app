@@ -9,6 +9,7 @@ import { SuggestionPageRoutingModule } from './suggestion-routing.module';
 import { SuggestionPage } from './suggestion.page';
 import {HeaderFooterModule} from '../../components/header-footer/header-footer.module';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {IonicSelectableModule} from 'ionic-selectable';
         IonicModule,
         IonicSelectableModule,
         SuggestionPageRoutingModule,
-        HeaderFooterModule
+        HeaderFooterModule,
+        RecaptchaModule
     ],
   declarations: [SuggestionPage]
 })
