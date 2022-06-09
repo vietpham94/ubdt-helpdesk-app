@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-card class="card-item">
+    <!-- <ion-card-header>
+      <ion-card-title class="card-title" style="text-align: center;" *ngIf="faq">{{faq.post_title}}</ion-card-title>
+      <hr>
+    </ion-card-header> -->
+
+    <ion-card-content *ngIf="faq">
+      <ion-row>
+        <ion-label class="item-label">
+          Câu hỏi: {{faq.post_title}}
+        </ion-label>
+      </ion-row>
+
+      <ion-row>
+        <ion-label class="item-label">
+          Trả lời:
+        </ion-label>
+        <ion-col size="12" class="mt-2">
+          {{faq.post_content}}
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<app-footer></app-footer>
