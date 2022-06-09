@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {SplashScreen} from '@awesome-cordova-plugins/splash-screen/ngx';
 import {ScreenOrientation} from '@awesome-cordova-plugins/screen-orientation/ngx';
 import {AuthGuardService} from './services/auth-guard/auth-guard.service';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {AuthGuardService} from './services/auth-guard/auth-guard.service';
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule],
+
   providers: [
     SplashScreen,
     ScreenOrientation,

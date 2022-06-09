@@ -71,7 +71,9 @@
       <ion-label position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
       <ion-textarea [(ngModel)]="suggestionParam.acf.suggestion_content" placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
     </ion-item>
-    <ion-button (click)="onSubmitSuggestion()" type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
+    <re-captcha (resolved)="captchaResolved($event)"
+                siteKey="6Ld3yVYgAAAAAHWEjFy2BMXIflTboOLgkL-qCtHC"></re-captcha>
+    <ion-button [disabled]="!captchaPassed" (click)="onSubmitSuggestion()" type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
   </ion-list>
 </ion-content>
 <app-footer></app-footer>
