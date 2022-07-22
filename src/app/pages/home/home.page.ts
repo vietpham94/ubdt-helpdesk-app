@@ -1,27 +1,25 @@
-import { Router } from '@angular/router';
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import {Router} from '@angular/router';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {LoadingController, Platform} from '@ionic/angular';
 
-import { Constants } from '../../common/constants';
+import {Constants} from '../../common/constants';
 
-import { IonicSelectableComponent } from 'ionic-selectable';
+import {CommonService} from '../../services/common/common.service';
+import {SubjectService} from './../../services/subject/subject.service';
+import {ProjectActionService} from './../../services/project-action/project-action.service';
+import {ProjectService} from './../../services/project/project.service';
+import {HelpDeskService} from './../../services/help-desk/help-desk.service';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
 
-import { CommonService } from '../../services/common/common.service';
-import { SubjectService } from './../../services/subject/subject.service';
-import { ProjectActionService } from './../../services/project-action/project-action.service';
-import { ProjectService } from './../../services/project/project.service';
-import { HelpDeskService } from './../../services/help-desk/help-desk.service';
-import { AdministrativeService } from '../../services/administrative/administrative.service';
-
-import { Subject } from './../../interfaces/subject';
-import { Province } from './../../interfaces/province';
-import { District } from './../../interfaces/district';
-import { Ward } from './../../interfaces/ward';
-import { Project } from 'src/app/interfaces/project';
-import { ProjectAction } from 'src/app/interfaces/project-action';
-import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
-import { HelpDesk } from 'src/app/interfaces/help-desk';
-import { SearchConditions } from './../../interfaces/search-conditions';
+import {Subject} from './../../interfaces/subject';
+import {Province} from './../../interfaces/province';
+import {District} from './../../interfaces/district';
+import {Ward} from './../../interfaces/ward';
+import {Project} from 'src/app/interfaces/project';
+import {ProjectAction} from 'src/app/interfaces/project-action';
+import {HelpDeskCategory} from 'src/app/interfaces/help-desk-category';
+import {HelpDesk} from 'src/app/interfaces/help-desk';
+import {SearchConditions} from './../../interfaces/search-conditions';
 
 @Component({
   selector: 'app-home',
@@ -68,8 +66,10 @@ export class HomePage implements OnInit {
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
     private administrativeService: AdministrativeService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private loadingController: LoadingController,
+  ) {
+  }
 
   ngOnInit() {
     this.toolbarText = null;
@@ -162,20 +162,23 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl(Constants.routerLinks.helpdeskDetail);
   }
 
-  async doSearchByAction(){
+  async doSearchByAction() {
+    const loading = await this.loadingController.create();
+    await loading.present();
     this.searchByActionConditions = {
-      subject_type: this.selectedSubject?this.selectedSubject.toString():'',
-      province: this.selectedProvince?this.selectedProvince.id.toString():'',
-      district: this.selectedDistrict?this.selectedDistrict.ID.toString():'',
-      ward: this.selectedWard?this.selectedWard.ID.toString():'',
-      action: this.selectedProjectAction?this.selectedProjectAction.ID.toString():'',
-      helpdesk_category: this.selectedHelpDeskCategory?this.selectedHelpDeskCategory:'',
+      subject_type: this.selectedSubject ? this.selectedSubject.toString() : '',
+      province: this.selectedProvince ? this.selectedProvince.id.toString() : '',
+      district: this.selectedDistrict ? this.selectedDistrict.ID.toString() : '',
+      ward: this.selectedWard ? this.selectedWard.ID.toString() : '',
+      action: this.selectedProjectAction ? this.selectedProjectAction.ID.toString() : '',
+      helpdesk_category: this.selectedHelpDeskCategory ? this.selectedHelpDeskCategory : '',
       page: 1,
       numberposts: 100
     };
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
     this.helpdeskService.helpdeskSearchResult = this.resultHelpDesks;
+    await loading.dismiss();
     this.router.navigateByUrl(Constants.routerLinks.searchResult);
   }
 
