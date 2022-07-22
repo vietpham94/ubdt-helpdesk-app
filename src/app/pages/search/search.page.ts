@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import {LoadingController, Platform} from '@ionic/angular';
 
 import { Constants } from '../../common/constants';
 
@@ -66,7 +66,8 @@ export class SearchPage implements OnInit {
     private projectService: ProjectService,
     private helpdeskService: HelpDeskService,
     private administrativeService: AdministrativeService,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController,
   ) {}
 
   ngOnInit() {
@@ -145,7 +146,10 @@ export class SearchPage implements OnInit {
     });
   }
 
-  async doSearchByAction(){
+  async doSearchByAction() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     this.searchByActionConditions = {
       subject_type: this.selectedSubject?this.selectedSubject.toString():'',
       province: this.selectedProvince?this.selectedProvince.id.toString():'',
@@ -159,6 +163,7 @@ export class SearchPage implements OnInit {
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
     this.helpdeskService.helpdeskSearchResult = this.resultHelpDesks;
+    await loading.dismiss();
     this.router.navigateByUrl(Constants.routerLinks.searchResult);
   }
 
