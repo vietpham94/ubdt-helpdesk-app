@@ -105,7 +105,7 @@ export class HomePage implements OnInit {
     this.projects = await this.projectService.getListProject().toPromise();
     this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
     this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
-    this.helpdesks = await this.helpdeskService.getListHelpDesk().toPromise();
+    this.helpdesks = await this.helpdeskService.getListHelpDesk({helpdesk_category: 'van-de-chung'}).toPromise();
   }
 
 
