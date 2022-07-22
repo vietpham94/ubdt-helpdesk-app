@@ -64,4 +64,13 @@ ion-content {
       }
     }
   }
+
+  figure {
+    margin: 0 !important;
+  }
+
+  td, th {
+    border: 1px solid #dedede !important;
+    padding: 5px !important;
+  }
 }
