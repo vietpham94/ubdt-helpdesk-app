@@ -8,7 +8,7 @@ import {Province} from '../../interfaces/province';
 import {District} from '../../interfaces/district';
 import {Ward} from '../../interfaces/ward';
 import {SubjectService} from '../../services/subject/subject.service';
-import { ProjectActionService } from './../../services/project-action/project-action.service';
+import {ProjectActionService} from './../../services/project-action/project-action.service';
 import {ProjectAction} from '../../interfaces/project-action';
 import {AdministrativeService} from '../../services/administrative/administrative.service';
 import {SuggestionParam} from '../../interfaces/suggestion-param';
@@ -71,28 +71,39 @@ export class SuggestionPage implements OnInit {
     return this.initData();
   }
 
-  async initData() {
+  initData() {
     const provinceParams: Pagination = {
       page: 1,
       per_page: 100,
     }
 
-    this.provinces = await this.administrativeService.getProvince(provinceParams).toPromise();
-    this.provinces.forEach(province=>{
-      if(province.title){
-        province.post_title = province.title.rendered;
-      }
+    this.administrativeService.getProvince(provinceParams).subscribe(provinces => {
+      provinces.forEach(province => {
+        if (province.title) {
+          province.post_title = province.title.rendered;
+        }
+      });
+
+      this.provinces = provinces;
+
+      this.administrativeService.getDistrictByProvince(this.selectedProvince).subscribe(districts => {
+        districts.forEach(district => {
+          if (district.title) {
+            district.post_title = district.title.rendered;
+          }
+        });
+        this.districts = districts;
+
+        this.administrativeService.getWardsByDistrict(this.selectedDistrict).subscribe(wards => this.wards = wards);
+      });
     })
-    this.districts = await this.administrativeService.getDistrictByProvince(this.selectedProvince).toPromise();
-    this.districts.forEach(district=>{
-      if(district.title){
-        district.post_title = district.title.rendered;
-      }
-    })
-    this.wards = await this.administrativeService.getWardsByDistrict(this.selectedDistrict).toPromise();
-    this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
-    this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.isLoadingPosition = false;
+
+
+    this.projectActionService.getListProjectAction().subscribe(projectActions => this.projectActions = projectActions);
+    this.subjectService.getListSubject().subscribe(subjectList => {
+      this.subjectList = subjectList;
+      this.isLoadingPosition = false;
+    });
   }
 
   onSelectProvince() {
@@ -129,17 +140,18 @@ export class SuggestionPage implements OnInit {
     console.log('projectActionChange value:', event.value);
     this.suggestionParam.acf.suggestion_action = event.value.ID;
   }
+
   onSubmitSuggestion() {
-    if(!this.validateSuggetion()){
+    if (!this.validateSuggetion()) {
       return;
     }
-    if(this.selectedWard){
+    if (this.selectedWard) {
       this.suggestionParam.acf.address += ', ' + this.selectedWard.post_title;
     }
-    if(this.selectedDistrict){
+    if (this.selectedDistrict) {
       this.suggestionParam.acf.address += ', ' + this.selectedDistrict.post_title;
     }
-    if(this.selectedProvince){
+    if (this.selectedProvince) {
       this.suggestionParam.acf.address += ', ' + this.selectedProvince.post_title;
     }
     this.suggestionParam.post_title = this.suggestionParam.acf.name;
@@ -152,49 +164,49 @@ export class SuggestionPage implements OnInit {
   }
 
   private validateSuggetion(): boolean {
-    if(!this.suggestionParam.acf.name){
+    if (!this.suggestionParam.acf.name) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập họ và tên!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.address){
+    if (!this.suggestionParam.acf.address) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập địa chỉ!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.phone){
+    if (!this.suggestionParam.acf.phone) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập số điện thoại!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.email){
+    if (!this.suggestionParam.acf.email) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập email!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.suggestion_position){
+    if (!this.suggestionParam.acf.suggestion_position) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng chọn vai trò của bạn!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.work_place){
+    if (!this.suggestionParam.acf.work_place) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập thông tin nơi làm việc của bạn!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.suggestion_action){
+    if (!this.suggestionParam.acf.suggestion_action) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng chọn hoạt động bạn muốn góp ý!";
       this.commonService.showToast(toastOption);
       return;
     }
-    if(!this.suggestionParam.acf.suggestion_content){
+    if (!this.suggestionParam.acf.suggestion_content) {
       const toastOption = Constants.toastOptions.warning;
       toastOption.message = "Vui lòng nhập nội dung góp ý!";
       this.commonService.showToast(toastOption);

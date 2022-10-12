@@ -1,27 +1,24 @@
-import { Router } from '@angular/router';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {LoadingController, Platform} from '@ionic/angular';
 
-import { Constants } from '../../common/constants';
+import {Constants} from '../../common/constants';
 
-import { IonicSelectableComponent } from 'ionic-selectable';
+import {CommonService} from '../../services/common/common.service';
+import {SubjectService} from './../../services/subject/subject.service';
+import {ProjectActionService} from './../../services/project-action/project-action.service';
+import {ProjectService} from './../../services/project/project.service';
+import {HelpDeskService} from './../../services/help-desk/help-desk.service';
+import {AdministrativeService} from '../../services/administrative/administrative.service';
 
-import { CommonService } from '../../services/common/common.service';
-import { SubjectService } from './../../services/subject/subject.service';
-import { ProjectActionService } from './../../services/project-action/project-action.service';
-import { ProjectService } from './../../services/project/project.service';
-import { HelpDeskService } from './../../services/help-desk/help-desk.service';
-import { AdministrativeService } from '../../services/administrative/administrative.service';
-
-import { Subject } from './../../interfaces/subject';
-import { Province } from './../../interfaces/province';
-import { District } from './../../interfaces/district';
-import { Ward } from './../../interfaces/ward';
-import { Project } from 'src/app/interfaces/project';
-import { ProjectAction } from 'src/app/interfaces/project-action';
-import { HelpDeskCategory } from 'src/app/interfaces/help-desk-category';
-import { HelpDesk } from 'src/app/interfaces/help-desk';
-import { SearchConditions } from './../../interfaces/search-conditions';
+import {Subject} from './../../interfaces/subject';
+import {Province} from './../../interfaces/province';
+import {District} from './../../interfaces/district';
+import {Ward} from './../../interfaces/ward';
+import {ProjectAction} from 'src/app/interfaces/project-action';
+import {HelpDeskCategory} from 'src/app/interfaces/help-desk-category';
+import {HelpDesk} from 'src/app/interfaces/help-desk';
+import {SearchConditions} from './../../interfaces/search-conditions';
 
 @Component({
   selector: 'app-search',
@@ -48,6 +45,8 @@ export class SearchPage implements OnInit {
   searchByActionConditions: SearchConditions;
   resultHelpDesks: Array<HelpDesk>;
 
+  isLoadingSubject: boolean;
+  isLoadingHelpDeskCategories: boolean;
   isLoadingSubProject: boolean;
   isLoadingProjectAction: boolean;
   isLoadingHelpdeskContent: boolean;
@@ -68,7 +67,8 @@ export class SearchPage implements OnInit {
     private administrativeService: AdministrativeService,
     private router: Router,
     private loadingController: LoadingController,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.toolbarText = null;
@@ -79,6 +79,8 @@ export class SearchPage implements OnInit {
     this.projectActions = new Array<ProjectAction>();
     this.helpDeskCategories = new Array<HelpDeskCategory>();
     this.resultHelpDesks = new Array<HelpDesk>();
+    this.isLoadingSubject = true;
+    this.isLoadingHelpDeskCategories = true;
   }
 
   ionViewDidEnter() {
@@ -93,16 +95,28 @@ export class SearchPage implements OnInit {
     return this.initData();
   }
 
-  async initData() {
-    this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.provinces = await this.administrativeService.getProvince({page: 1, per_page: 100}).toPromise();
-    this.provinces.forEach(item => {
-      item.post_title = item.title.rendered;
+  private initData() {
+    this.subjectService.getListSubject().subscribe(subjectList => {
+      this.subjectList = subjectList;
+      this.isLoadingSubject = false;
     });
-    this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
-    this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
-  }
 
+    this.helpdeskService.getListHelpDeskCategory().subscribe(helpDeskCategories => {
+      this.helpDeskCategories = helpDeskCategories;
+      this.isLoadingHelpDeskCategories = false;
+    });
+
+    this.administrativeService.getProvince({page: 1, per_page: 100}).subscribe(provinces => {
+      provinces.forEach(item => {
+        item.post_title = item.title.rendered;
+      });
+      this.provinces = provinces;
+    });
+
+    this.projectActionService.getListProjectAction().subscribe(projectActions => {
+      this.projectActions = projectActions;
+    });
+  }
 
   onSelectProvince(province: Province) {
     this.districts = new Array<District>();
@@ -151,12 +165,12 @@ export class SearchPage implements OnInit {
     await loading.present();
 
     this.searchByActionConditions = {
-      subject_type: this.selectedSubject?this.selectedSubject.toString():'',
-      province: this.selectedProvince?this.selectedProvince.id.toString():'',
-      district: this.selectedDistrict?this.selectedDistrict.ID.toString():'',
-      ward: this.selectedWard?this.selectedWard.ID.toString():'',
-      action: this.selectedProjectAction?this.selectedProjectAction.ID.toString():'',
-      helpdesk_category: this.selectedHelpDeskCategory?this.selectedHelpDeskCategory:'',
+      subject_type: this.selectedSubject ? this.selectedSubject.toString() : '',
+      province: this.selectedProvince ? this.selectedProvince.id.toString() : '',
+      district: this.selectedDistrict ? this.selectedDistrict.ID.toString() : '',
+      ward: this.selectedWard ? this.selectedWard.ID.toString() : '',
+      action: this.selectedProjectAction ? this.selectedProjectAction.ID.toString() : '',
+      helpdesk_category: this.selectedHelpDeskCategory ? this.selectedHelpDeskCategory : '',
       page: 1,
       numberposts: 100
     };

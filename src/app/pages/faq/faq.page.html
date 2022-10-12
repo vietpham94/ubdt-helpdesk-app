@@ -22,7 +22,7 @@
           Dự án
         </ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedProject" item-content placeholder="+ Chọn dự án"
+          <ionic-selectable [(ngModel)]="selectedProject" item-content placeholder="+ Chọn dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
                             [(items)]="projects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProject($event.value)">
           </ionic-selectable>
@@ -38,7 +38,7 @@
           Tiểu dự án
         </ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedSubProject" item-content placeholder="+ Chọn tiểu dự án"
+          <ionic-selectable [(ngModel)]="selectedSubProject" item-content placeholder="+ Chọn tiểu dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
                             [(items)]="subProjects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectSubProject($event.value)">
           </ionic-selectable>

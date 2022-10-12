@@ -38,3 +38,23 @@ ion-card-content ion-item {
   --inner-padding-end: 0;
   --border-color: transparent;
 }
+
+.searchbar-search-icon.sc-ion-searchbar-md {
+  left: 8px;
+  top: 6px;
+  width: 21px;
+  height: 21px;
+}
+
+.searchbar-input-container.sc-ion-searchbar-md {
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
+
+.searchbar-input-container.sc-ion-searchbar-md input {
+  border-radius: 5px;
+}
+
+.sc-ion-searchbar-md-h {
+  --box-shadow: none;
+}

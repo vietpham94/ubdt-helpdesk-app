@@ -47,7 +47,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="project-content">
+  <ion-card class="project-content" *ngIf="false">
     <ion-card-header>
       <ion-card-title class="card-title">Tổng quan</ion-card-title>
       <hr>
@@ -128,7 +128,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="project-helpdesk">
+  <ion-card class="project-helpdesk" *ngIf="helpdeskContents?.length > 1">
     <ion-card-header>
       <ion-card-title class="card-title">Hướng dẫn thực hiện</ion-card-title>
       <hr>
@@ -141,9 +141,9 @@
         </ion-col>
       </ion-row>
 
-      <ng-container *ngIf="helpdeskGroupByCategory.length > 0 && !isLoadingHelpdeskContent">
+      <ng-container *ngIf="helpdeskGroupByCategory?.length > 0 && !isLoadingHelpdeskContent">
         <ion-row *ngFor="let helpdeskGroup of helpdeskGroupByCategory">
-          <ion-col size="12">
+          <ion-col size="12" *ngIf="helpdeskGroup.helpdesk?.length > 0">
             <ion-label class="list-icon">{{helpdeskGroup.category.name}}</ion-label>
             <ul class="helpdesk-list mt-1">
               <li *ngFor="let helpdesk of helpdeskGroup.helpdesk" (click)="onClickHelpdesk(helpdesk)">

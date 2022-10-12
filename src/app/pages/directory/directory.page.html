@@ -9,7 +9,7 @@
     </ion-item>
     <ion-label>Nơi thực hiện</ion-label>
     <ion-item>
-      <ionic-selectable item-content placeholder="+ Chọn tỉnh thành"
+      <ionic-selectable item-content placeholder="+ Chọn tỉnh thành" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="provines" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectProvince($event.value)" [(ngModel)]="selecteProvince">
       </ionic-selectable>
@@ -18,7 +18,7 @@
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
     <ion-item *ngIf="districts.length > 0">
-      <ionic-selectable item-content placeholder="+ Chọn quận huyện"
+      <ionic-selectable item-content placeholder="+ Chọn quận huyện" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="districts" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectDistrict($event.value)" [(ngModel)]="selectedDistrict">
       </ionic-selectable>
@@ -27,7 +27,7 @@
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
     <ion-item *ngIf="wards.length > 0">
-      <ionic-selectable item-content placeholder="+ Chọn xã phường"
+      <ionic-selectable item-content placeholder="+ Chọn xã phường" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="wards" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectWard($event.value)" [(ngModel)]="selectedWard">
       </ionic-selectable>
@@ -44,7 +44,7 @@
     </ion-item>
     <ion-label position="stacked">Thuộc dự án</ion-label>
     <ion-item>
-      <ionic-selectable [(items)]="projectList" item-content placeholder="+ Chọn dự án"
+      <ionic-selectable [(items)]="projectList" item-content placeholder="+ Chọn dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         itemTextField="post_title"
                         [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end"
                         (onChange)="onSelectPorject($event.value)">
@@ -62,14 +62,14 @@
     </ion-item>
     <ion-label position="stacked">Nội dung của hoạt động là</ion-label>
     <ion-item>
-      <ionic-selectable placeholder="+ Chọn hoạt động"
+      <ionic-selectable placeholder="+ Chọn hoạt động" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="actionList" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
       </ionic-selectable>
     </ion-item>
     <ion-label position="stacked">Vai trò?</ion-label>
     <ion-item>
-      <ionic-selectable [(ngModel)]="selectedPosition"
+      <ionic-selectable [(ngModel)]="selectedPosition" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="positionList"
                         itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" placeholder="+ Chọn vai trò">

@@ -2,10 +2,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-label>Tìm thấy {{helpdesks?helpdesks.length:0}} tài liệu hướng dẫn</ion-label>
-    <div class="result-item" *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
-      {{item.post_title}}
-    </div>
+    <ion-label>Tìm thấy {{helpdesks?helpdesks[helpdesks?.length - 1]?.total_found:0}} tài liệu hướng dẫn</ion-label>
+    <ng-container *ngFor="let item of helpdesks">
+      <div class="result-item" *ngIf="item.ID" (click)="onclickHelpDesk(item)">
+        {{item.post_title}}
+      </div>
+    </ng-container>
   </ion-list>
 
   <ion-card class="card-item">

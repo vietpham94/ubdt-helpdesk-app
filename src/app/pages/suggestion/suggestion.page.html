@@ -3,48 +3,45 @@
 <ion-content>
   <ion-list>
     <h2>GÓP Ý - ĐÁNH GIÁ - PHẢN ÁNH</h2>
-    <ion-label class="tilte">1. Thông tin cá nhân</ion-label>
-    <ion-item>
-      <ion-label position="stacked">Họ và tên</ion-label>
-      <ion-input type="text" [(ngModel)]="suggestionParam.acf.name"></ion-input>
+    <ion-label class="tilte" mode="ios">1. Thông tin cá nhân</ion-label>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Họ và tên</ion-label>
+      <ion-input mode="ios" type="text" [(ngModel)]="suggestionParam.acf.name"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Địa chỉ</ion-label>
-      <ion-input type="text" [(ngModel)]="suggestionParam.acf.address"></ion-input>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Địa chỉ</ion-label>
+      <ion-input mode="ios" type="text" [(ngModel)]="suggestionParam.acf.address"></ion-input>
     </ion-item>
-    <ion-item>
-      <ionic-selectable [(items)]="provinces" itemTextField="post_title" [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end"
+    <ion-item lines="none">
+      <ionic-selectable [(items)]="provinces" itemTextField="post_title" [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(ngModel)]="selectedProvince" (onChange)="onSelectProvince()" placeholder="+ Chọn tỉnh thành">
-<!--        <ion-select-option *ngFor="let province of provinces" [value]="province.id">{{province.title.rendered}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
-    <ion-item *ngIf="districts.length > 0">
-      <ionic-selectable [(items)]="districts"
+    <ion-item *ngIf="districts.length > 0" lines="none">
+      <ionic-selectable [(items)]="districts" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(ngModel)]="selectedDistrict"
                         itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectDistrict()" placeholder="+ Chọn quận huyện">
-<!--        <ion-select-option *ngFor="let district of districts" [value]="district.ID">{{district.post_title}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
-    <ion-item *ngIf="wards.length > 0">
-      <ionic-selectable [(items)]="wards"
+    <ion-item *ngIf="wards.length > 0" lines="none">
+      <ionic-selectable [(items)]="wards" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(ngModel)]="selectedWard"
                         itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" placeholder="+ Chọn phường xã">
-<!--        <ion-select-option *ngFor="let ward of wards" [value]="ward.ID">{{ward.post_title}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Điện thoại</ion-label>
-      <ion-input type="text" [(ngModel)]="suggestionParam.acf.phone"></ion-input>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Điện thoại</ion-label>
+      <ion-input mode="ios" type="text" [(ngModel)]="suggestionParam.acf.phone"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="suggestionParam.acf.email"></ion-input>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Email</ion-label>
+      <ion-input mode="ios" type="email" [(ngModel)]="suggestionParam.acf.email"></ion-input>
     </ion-item>
-    <ion-label class="tilte">2. Nội dung Góp ý - Đánh giá - Phản ánh</ion-label>
+    <ion-label mode="ios" class="tilte">2. Nội dung Góp ý - Đánh giá - Phản ánh</ion-label>
     <p class="sugges">Góp ý, đánh giá, phản ánh với vai trò</p>
-    <ion-item class="radio_position">
+    <ion-item class="radio_position" lines="none">
       <ion-radio-group [(ngModel)]="suggestionParam.acf.suggestion_position"  *ngIf="!isLoadingPosition">
         <ion-item *ngFor="let item of subjectList">
           <ion-radio mode="md" color="primary" slot="start" [value]="item.title.rendered"></ion-radio>
@@ -53,13 +50,13 @@
       </ion-radio-group>
       <ion-spinner *ngIf="isLoadingPosition"></ion-spinner>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Nơi làm việc</ion-label>
-      <ion-input [(ngModel)]="suggestionParam.acf.work_place"></ion-input>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Nơi làm việc</ion-label>
+      <ion-input mode="ios" [(ngModel)]="suggestionParam.acf.work_place"></ion-input>
     </ion-item>
-    <ion-label>Về việc</ion-label>
-    <ion-item>
-        <ionic-selectable [(ngModel)]="suggestionParam.acf.suggestion_action"
+    <ion-label mode="ios">Về việc</ion-label>
+    <ion-item lines="none">
+        <ionic-selectable [(ngModel)]="suggestionParam.acf.suggestion_action" [canClear]="true" clearButtonText="Xóa lựa chọn"
                           [items]="projectActions"
                           itemValueField="ID"
                           itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
@@ -67,9 +64,9 @@
                           (ionChange)="projectActionChange($event)">
         </ionic-selectable>
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
-      <ion-textarea [(ngModel)]="suggestionParam.acf.suggestion_content" placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
+    <ion-item lines="none">
+      <ion-label mode="ios" position="stacked">Nội dung góp ý, đánh giá, phản ánh</ion-label>
+      <ion-textarea mode="ios" [(ngModel)]="suggestionParam.acf.suggestion_content" placeholder="Nhập nội dung góp ý, đánh giá, phản ánh cụ thể" rows="6"></ion-textarea>
     </ion-item>
     <ion-button (click)="onSubmitSuggestion()" type="submit" expand="block" class="submit">GỬI THÔNG TIN GÓP Ý - ĐÁNH GIA - PHẢN ÁNH</ion-button>
   </ion-list>

@@ -52,4 +52,5 @@ export interface HelpDesk {
     }>,
   }
   terms?: Array<HelpDeskCategory>;
+  total_found?: number;
 }

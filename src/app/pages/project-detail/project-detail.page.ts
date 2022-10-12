@@ -267,7 +267,7 @@ export class ProjectDetailPage implements OnInit {
 
     this.helpdeskContents.forEach(helpdesk => {
       const helpdeskTerms = helpdesk.terms;
-      for (let i = 0; i < helpdeskTerms.length; i++) {
+      for (let i = 0; i < helpdeskTerms?.length; i++) {
         const existHelpdeskGroup = this.helpdeskGroupByCategory.find(u => u.category.id == helpdeskTerms[i].term_id);
         if (!existHelpdeskGroup) {
           continue;

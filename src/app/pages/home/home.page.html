@@ -12,13 +12,16 @@
         <ion-label class="item-label">
           Quý vị là ai?
         </ion-label>
+        <ion-col size="12" *ngIf="isLoadingSubject" class="ion-text-center">
+          <ion-spinner></ion-spinner>
+        </ion-col>
         <ion-list>
           <ion-radio-group [(ngModel)]="selectedSubject">
             <ion-item *ngFor="let item of subjectList" mode="md">
               <p>{{item.title.rendered}}</p>
               <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
             </ion-item>
-            <ion-item mode="md">
+            <ion-item mode="md" *ngIf="!isLoadingSubject">
               <p>Cá nhân, tổ chức khác</p>
               <ion-radio slot="start" value="" mode="md"></ion-radio>
             </ion-item>
@@ -31,7 +34,7 @@
           Quý vị quan tâm đến chương trình / dự án ở khu vực nào?
         </ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedProvince" item-content placeholder="+ Chọn tỉnh thành"
+          <ionic-selectable [(ngModel)]="selectedProvince" item-content placeholder="+ Chọn tỉnh thành" [canClear]="true" clearButtonText="Xóa lựa chọn"
                             [(items)]="provinces" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProvince($event.value)">
           </ionic-selectable>
@@ -42,8 +45,8 @@
         </ion-col>
 
         <ion-col size="12" class="mt-2" *ngIf="districts.length > 0">
-          <ionic-selectable [(ngModel)]="selectedDistrict" item-content placeholder="+ Chọn quận huyện"
-                            [(items)]="districts" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+          <ionic-selectable [(ngModel)]="selectedDistrict" item-content placeholder="+ Chọn quận huyện" [canClear]="true" clearButtonText="Xóa lựa chọn"
+                            [(items)]="districts" itemTextField="post_title" closeButtonText="Đóng"  closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectDistrict($event.value)">
           </ionic-selectable>
         </ion-col>
@@ -53,8 +56,8 @@
         </ion-col>
 
         <ion-col size="12" class="mt-2" *ngIf="wards.length > 0">
-          <ionic-selectable [(ngModel)]="selectedWard" item-content placeholder="+ Chọn xã phường"
-                            [(items)]="wards" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+          <ionic-selectable [(ngModel)]="selectedWard" item-content placeholder="+ Chọn xã phường" [canClear]="true" clearButtonText="Xóa lựa chọn"
+                            [(items)]="wards" itemTextField="post_title" closeButtonText="Đóng"  closeButtonSlot="end"
                             [canSearch]="true">
           </ionic-selectable>
         </ion-col>
@@ -63,10 +66,8 @@
       <ion-row>
         <ion-label class="item-label">Quý vị quan tâm đến hoạt động nào?</ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedProjectAction" placeholder="+ Chọn hoạt động"
-            [items]="projectActions" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
-            [canSearch]="true"
-            >
+          <ionic-selectable [(ngModel)]="selectedProjectAction" placeholder="+ Chọn hoạt động" [canClear]="true" clearButtonText="Xóa lựa chọn"
+                            [items]="projectActions" itemTextField="post_title" [canSearch]="true" closeButtonText="Đóng"  closeButtonSlot="end">
           </ionic-selectable>
         </ion-col>
       </ion-row>
@@ -75,13 +76,17 @@
         <ion-label class="item-label">
           Vấn đề Quý vị quan tâm là?
         </ion-label>
+        <ion-col size="12" *ngIf="isLoadingHelpDeskCategories" class="ion-text-center">
+          <ion-spinner></ion-spinner>
+        </ion-col>
         <ion-list>
           <ion-radio-group [(ngModel)]="selectedHelpDeskCategory">
-            <ion-item mode="md">
+            <ion-item *ngIf="!isLoadingHelpDeskCategories">
               <p>Tất cả</p>
               <ion-radio slot="start" value="" mode="md"></ion-radio>
             </ion-item>
-            <ion-item *ngFor="let item of helpDeskCategories" mode="md">
+
+            <ion-item model="ios" *ngFor="let item of helpDeskCategories" mode="md">
               <p>{{item.name}}</p>
               <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
             </ion-item>
@@ -91,7 +96,7 @@
 
       <ion-row>
         <ion-button (click)="doSearchByAction()" type="submit" expand="block" class="submit">
-            TÌM KIẾM
+          TÌM KIẾM
         </ion-button>
       </ion-row>
     </ion-card-content>
@@ -105,9 +110,9 @@
 
     <ion-card-content>
       <ion-list class="project-list">
-        <ion-item  *ngFor="let item of projects" (click)="onselectProject(item)">
+        <ion-item *ngFor="let item of projects" (click)="onselectProject(item)">
           <div style="background: {{item.acf.color}}">
-            <p class="project-item-image"><img src="{{item.acf.logo_image}}" /></p>
+            <p class="project-item-image"><img src="{{item.acf.logo_image}}"/></p>
             <p class="project-item-title">{{item.acf.project_number}}</p>
             <p class="project-item-description">{{item.title.rendered}}</p>
           </div>
@@ -124,18 +129,18 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div class="result-item" *ngFor="let item of helpdesks"  (click)="onclickHelpDesk(item)">
+      <div class="result-item" *ngFor="let item of helpdesks" (click)="onclickHelpDesk(item)">
         {{item.post_title}}
       </div>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg"/></ion-router-link>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg"/></ion-router-link>
   </ion-card>
 
 </ion-content>

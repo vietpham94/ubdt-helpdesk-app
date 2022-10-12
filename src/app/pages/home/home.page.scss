@@ -6,6 +6,7 @@ ion-content {
   }
   ion-radio-group {
     ion-item {
+      width: 100%;
       margin: 0;
       padding: 0;
       text-align: justify;
@@ -95,7 +96,6 @@ ion-content {
     }
     ionic-selectable {
       max-width: 100%;
-      border-radius: 0px;
       .ionic-selectable-inner {
         .ionic-selectable-icon {
           position: relative;

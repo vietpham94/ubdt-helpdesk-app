@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  jsonapi: 'https://helpdesk-undb.idfood.net/wp-json',
+  jsonapi: 'http://112.213.86.233/camnangso/wp-json',
 };
 
 /*

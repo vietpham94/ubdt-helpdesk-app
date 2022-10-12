@@ -48,6 +48,8 @@ export class HomePage implements OnInit {
   searchByActionConditions: SearchConditions;
   resultHelpDesks: Array<HelpDesk>;
 
+  isLoadingSubject: boolean;
+  isLoadingHelpDeskCategories: boolean;
   isLoadingSubProject: boolean;
   isLoadingProjectAction: boolean;
   isLoadingHelpdeskContent: boolean;
@@ -82,6 +84,8 @@ export class HomePage implements OnInit {
     this.helpDeskCategories = new Array<HelpDeskCategory>();
     this.helpdesks = new Array<HelpDesk>();
     this.resultHelpDesks = new Array<HelpDesk>();
+    this.isLoadingSubject = true;
+    this.isLoadingHelpDeskCategories = true;
   }
 
   ionViewDidEnter() {
@@ -96,18 +100,37 @@ export class HomePage implements OnInit {
     return this.initData();
   }
 
-  async initData() {
-    this.subjectList = await this.subjectService.getListSubject().toPromise();
-    this.provinces = await this.administrativeService.getProvince({page: 1, per_page: 100}).toPromise();
-    this.provinces.forEach(item => {
-      item.post_title = item.title.rendered;
+  private initData() {
+    this.subjectService.getListSubject().subscribe(subjectList => {
+      this.subjectList = subjectList;
+      this.isLoadingSubject = false;
     });
-    this.projects = await this.projectService.getListProject().toPromise();
-    this.projectActions = await this.projectActionService.getListProjectAction().toPromise();
-    this.helpDeskCategories = await this.helpdeskService.getListHelpDeskCategory().toPromise();
-    this.helpdesks = await this.helpdeskService.getListHelpDesk({helpdesk_category: 'van-de-chung'}).toPromise();
-  }
 
+    this.helpdeskService.getListHelpDeskCategory().subscribe(helpDeskCategories => {
+      this.helpDeskCategories = helpDeskCategories;
+      this.isLoadingHelpDeskCategories = false;
+    });
+
+    this.administrativeService.getProvince({page: 1, per_page: 100}).subscribe(provinces => {
+      provinces.forEach(item => {
+        item.post_title = item.title.rendered;
+      });
+      this.provinces = provinces;
+    });
+
+    this.projectService.getListProject().subscribe(projects => {
+      this.projects = projects;
+    });
+
+    this.projectActionService.getListProjectAction().subscribe(projectActions => {
+      this.projectActions = projectActions;
+    });
+
+    this.helpdeskService.getListHelpDesk({helpdesk_category: 'van-de-chung'}).subscribe((helpdesks: Array<HelpDesk>) => {
+      helpdesks.splice(helpdesks.length - 1, 1);
+      this.helpdesks = helpdesks;
+    });
+  }
 
   onSelectProvince(province: Province) {
     this.districts = new Array<District>();
@@ -151,7 +174,6 @@ export class HomePage implements OnInit {
     });
   }
 
-
   onselectProject(project: Project) {
     this.projectService.passedProject = project;
     this.router.navigateByUrl(Constants.routerLinks.projectDetail);
@@ -173,7 +195,7 @@ export class HomePage implements OnInit {
       action: this.selectedProjectAction ? this.selectedProjectAction.ID.toString() : '',
       helpdesk_category: this.selectedHelpDeskCategory ? this.selectedHelpDeskCategory : '',
       page: 1,
-      numberposts: 100
+      numberposts: 9999
     };
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
@@ -185,12 +207,4 @@ export class HomePage implements OnInit {
   ionViewDidLeave() {
     this.unsubscribeBackEvent.unsubscribe();
   }
-
-  // scrollContent(event) {
-  //   this.toolbarText = null;
-  //   const cardList = this.element.nativeElement.querySelectorAll('.card-item');
-  //   this.toolbarText =
-  //     Constants.scrollContentGetBlogTitle(event.detail.scrollTop, cardList) ||
-  //     this.toolbarText;
-  // }
 }
