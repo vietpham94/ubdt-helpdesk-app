@@ -33,4 +33,18 @@ ion-footer {
       }
     }
   }
+
+  ion-col {
+    &.home.home-active {
+      border-bottom: 3px solid #ffffff;
+    }
+
+    &.search.search-active {
+      border-bottom: 3px solid #ffffff;
+    }
+
+    &.suggestion.suggestion-active {
+      border-bottom: 3px solid #ffffff;
+    }
+  }
 }
