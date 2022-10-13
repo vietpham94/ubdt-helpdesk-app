@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  jsonapi: 'http://112.213.86.233/camnangso/wp-json',
+  jsonapi: 'https://ctmtqgdttsmn.vn/wp-json',
 };
 
 /*
