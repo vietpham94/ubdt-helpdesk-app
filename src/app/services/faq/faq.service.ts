@@ -21,7 +21,7 @@ export class FaqService {
 
   public getListFaq(params?: FaqParams) {
     if(!params){
-      params = { numberposts: 20, page: 1 };
+      params = { numberposts: -1, page: 1 };
     }
 
     return this.apiService.get(Constants.apiRestEndPoints.faq, {

@@ -38,12 +38,12 @@ export class HomePage implements OnInit {
   helpDeskCategories: Array<HelpDeskCategory>;
   helpdesks: Array<HelpDesk>;
 
-  selectedSubject: string;
+  selectedSubject: Array<number>;
   selectedProvince: Province;
   selectedDistrict: District;
   selectedWard: Ward;
   selectedProjectAction: ProjectAction;
-  selectedHelpDeskCategory: string;
+  selectedHelpDeskCategory: Array<number>;
 
   searchByActionConditions: SearchConditions;
   resultHelpDesks: Array<HelpDesk>;
@@ -96,6 +96,8 @@ export class HomePage implements OnInit {
         });
     });
 
+    this.selectedSubject = new Array<number>();
+    this.selectedHelpDeskCategory = new Array<number>();
     this.projectService.passedProject = null;
     return this.initData();
   }
@@ -188,14 +190,14 @@ export class HomePage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     this.searchByActionConditions = {
-      subject_type: this.selectedSubject ? this.selectedSubject.toString() : '',
+      subject_type: this.selectedSubject?.length ? '[' + this.selectedSubject.toString() + ']' : '',
       province: this.selectedProvince ? this.selectedProvince.id.toString() : '',
       district: this.selectedDistrict ? this.selectedDistrict.ID.toString() : '',
       ward: this.selectedWard ? this.selectedWard.ID.toString() : '',
       action: this.selectedProjectAction ? this.selectedProjectAction.ID.toString() : '',
-      helpdesk_category: this.selectedHelpDeskCategory ? this.selectedHelpDeskCategory : '',
+      helpdesk_category: this.selectedHelpDeskCategory?.length ? '[' + this.selectedHelpDeskCategory.toString() + ']' : '',
       page: 1,
-      numberposts: 9999
+      numberposts: -1
     };
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();

@@ -22,7 +22,8 @@
           Dự án
         </ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedProject" item-content placeholder="+ Chọn dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
+          <ionic-selectable [(ngModel)]="selectedProject" item-content placeholder="+ Chọn dự án" [canClear]="true"
+                            clearButtonText="Xóa lựa chọn"
                             [(items)]="projects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProject($event.value)">
           </ionic-selectable>
@@ -38,8 +39,10 @@
           Tiểu dự án
         </ion-label>
         <ion-col size="12" class="mt-2">
-          <ionic-selectable [(ngModel)]="selectedSubProject" item-content placeholder="+ Chọn tiểu dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
-                            [(items)]="subProjects" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+          <ionic-selectable [(ngModel)]="selectedSubProject" item-content placeholder="+ Chọn tiểu dự án"
+                            [canClear]="true" clearButtonText="Xóa lựa chọn"
+                            [(items)]="subProjects" itemTextField="post_title" closeButtonText="Đóng"
+                            closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectSubProject($event.value)">
           </ionic-selectable>
         </ion-col>
@@ -55,7 +58,8 @@
         </ion-label>
         <ion-col size="12" class="mt-2">
           <ionic-selectable [(ngModel)]="selectedProjectAction" item-content placeholder="+ Chọn hoạt động"
-                            [(items)]="projectActions" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
+                            [(items)]="projectActions" itemTextField="post_title" closeButtonText="Đóng"
+                            closeButtonSlot="end"
                             [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
           </ionic-selectable>
         </ion-col>
@@ -67,7 +71,7 @@
 
       <ion-row>
         <ion-button (click)="doSearchFaq()" type="submit" expand="block" class="submit">
-            TÌM KIẾM
+          TÌM KIẾM
         </ion-button>
       </ion-row>
     </ion-card-content>
@@ -80,18 +84,20 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div class="result-item" *ngFor="let item of faqs"  (click)="onclickFaq(item)">
-        <div id="faq_{{item.ID}}">{{item.post_title}}</div>
-      </div>
+      <ng-container *ngFor="let item of faqs">
+        <div *ngIf="item.ID" class="result-item" (click)="onclickFaq(item)">
+          <div id="faq_{{item.ID}}">{{item.post_title}}</div>
+        </div>
+      </ng-container>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/suggestion'"><img src="/assets/feedback.jpg"/></ion-router-link>
   </ion-card>
 
   <ion-card class="card-item">
-    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg" /></ion-router-link>
+    <ion-router-link class="image-link" [routerLink]="'/directory'"><img src="/assets/contact.jpg"/></ion-router-link>
   </ion-card>
 
 </ion-content>

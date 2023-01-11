@@ -16,16 +16,11 @@
           <ion-spinner></ion-spinner>
         </ion-col>
         <ion-list>
-          <ion-radio-group [(ngModel)]="selectedSubject">
-            <ion-item *ngFor="let item of subjectList" mode="md">
-              <p>{{item.title.rendered}}</p>
-              <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
-            </ion-item>
-            <ion-item mode="md" *ngIf="!isLoadingSubject">
-              <p>Cá nhân, tổ chức khác</p>
-              <ion-radio slot="start" value="" mode="md"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+          <ion-item *ngFor="let item of subjectList" mode="md" class="pb-2">
+            <ion-checkbox slot="start" [value]="item.id" mode="md"
+                          (ionChange)="$event.target.checked ? selectedSubject.push(+item.id) : selectedSubject.splice(selectedSubject.indexOf(+item.id), 1)"></ion-checkbox>
+            <ion-text>{{item.title.rendered}}</ion-text>
+          </ion-item>
         </ion-list>
       </ion-row>
 
@@ -82,16 +77,11 @@
           <ion-spinner></ion-spinner>
         </ion-col>
         <ion-list>
-          <ion-radio-group [(ngModel)]="selectedHelpDeskCategory">
-            <ion-item mode="md" *ngIf="!isLoadingHelpDeskCategories">
-              <p>Tất cả</p>
-              <ion-radio slot="start" value="" mode="md"></ion-radio>
-            </ion-item>
-            <ion-item *ngFor="let item of helpDeskCategories" mode="md">
-              <p>{{item.name}}</p>
-              <ion-radio slot="start" [value]="item.id" mode="md"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+          <ion-item *ngFor="let item of helpDeskCategories" mode="md">
+            <ion-checkbox slot="start" [value]="item.id" mode="md"
+                          (ionChange)="$event.target.checked ? selectedHelpDeskCategory.push(+item.id) : selectedHelpDeskCategory.splice(selectedHelpDeskCategory.indexOf(+item.id), 1)"></ion-checkbox>
+            <ion-text>{{item.name}}</ion-text>
+          </ion-item>
         </ion-list>
       </ion-row>
 

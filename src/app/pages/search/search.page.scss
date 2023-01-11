@@ -4,14 +4,15 @@ ion-content {
     font-size: initial;
     color: #333;
   }
-  ion-radio-group {
-    ion-item{
-      margin: 0;
-      padding: 0;
-      text-align: justify;
-      div.item-inner {
-        border: 0;
-      }
+
+  ion-item {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+    --min-height: 0;
+    ion-checkbox {
+      margin-inline-end: 15px;
     }
   }
 

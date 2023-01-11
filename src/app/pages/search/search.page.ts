@@ -35,12 +35,12 @@ export class SearchPage implements OnInit {
   projectActions: Array<ProjectAction>;
   helpDeskCategories: Array<HelpDeskCategory>;
 
-  selectedSubject: string;
+  selectedSubject: Array<number>;
   selectedProvince: Province;
   selectedDistrict: District;
   selectedWard: Ward;
   selectedProjectAction: ProjectAction;
-  selectedHelpDeskCategory: string;
+  selectedHelpDeskCategory: Array<number>;
 
   searchByActionConditions: SearchConditions;
   resultHelpDesks: Array<HelpDesk>;
@@ -165,14 +165,14 @@ export class SearchPage implements OnInit {
     await loading.present();
 
     this.searchByActionConditions = {
-      subject_type: this.selectedSubject ? this.selectedSubject.toString() : '',
+      subject_type: this.selectedSubject?.length ? '[' + this.selectedSubject.toString() + ']' : '',
       province: this.selectedProvince ? this.selectedProvince.id.toString() : '',
       district: this.selectedDistrict ? this.selectedDistrict.ID.toString() : '',
       ward: this.selectedWard ? this.selectedWard.ID.toString() : '',
       action: this.selectedProjectAction ? this.selectedProjectAction.ID.toString() : '',
-      helpdesk_category: this.selectedHelpDeskCategory ? this.selectedHelpDeskCategory : '',
+      helpdesk_category: this.selectedHelpDeskCategory?.length ? '[' + this.selectedHelpDeskCategory.toString() + ']' : '',
       page: 1,
-      numberposts: 100
+      numberposts: -1
     };
 
     this.resultHelpDesks = await this.helpdeskService.getListHelpDesk(this.searchByActionConditions).toPromise();
