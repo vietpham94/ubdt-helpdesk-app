@@ -3,86 +3,96 @@
 <ion-content>
   <ion-list>
     <h2>TRA CỨU DANH BẠ</h2>
-    <ion-item>
-      <ion-label position="stacked">Từ khóa tìm kiếm</ion-label>
-      <ion-input [(ngModel)]="search_tittle" name="search_tittle"></ion-input>
+    <ion-label>Từ khóa tìm kiếm</ion-label>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="search_tittle" name="search_tittle" mode="ios"></ion-input>
     </ion-item>
+
     <ion-label>Nơi thực hiện</ion-label>
-    <ion-item>
+    <ion-item lines="none">
       <ionic-selectable item-content placeholder="+ Chọn tỉnh thành" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="provines" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectProvince($event.value)" [(ngModel)]="selecteProvince">
       </ionic-selectable>
     </ion-item>
-    <ion-item *ngIf="isLoadingDistrict">
+
+    <ion-item *ngIf="isLoadingDistrict" lines="none">
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
-    <ion-item *ngIf="districts.length > 0">
+
+    <ion-item *ngIf="districts.length > 0" lines="none">
       <ionic-selectable item-content placeholder="+ Chọn quận huyện" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="districts" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectDistrict($event.value)" [(ngModel)]="selectedDistrict">
       </ionic-selectable>
     </ion-item>
-    <ion-item *ngIf="isLoadingWard">
+
+    <ion-item *ngIf="isLoadingWard" lines="none">
       <ion-spinner class="ion-text-center"></ion-spinner>
     </ion-item>
-    <ion-item *ngIf="wards.length > 0">
+
+    <ion-item *ngIf="wards.length > 0" lines="none">
       <ionic-selectable item-content placeholder="+ Chọn xã phường" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="wards" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectWard($event.value)" [(ngModel)]="selectedWard">
       </ionic-selectable>
     </ion-item>
+
     <p class="sugges">Tôi cần thông tin liên hệ của?</p>
-    <ion-item class="radio_subject">
-      <ion-radio-group [(ngModel)]="selectedSubject" *ngIf="!isLoadingSubject">
-        <ion-item *ngFor="let item of subjectList">
+    <ion-item class="radio_subject" lines="none">
+      <ion-radio-group [(ngModel)]="selectedSubject" *ngIf="!isLoadingSubject" mode="ios">
+        <ion-item *ngFor="let item of subjectList" mode="md">
           <ion-radio mode="md" color="primary" slot="start" [value]="item.id"></ion-radio>
           <span>{{item.title.rendered}}</span>
         </ion-item>
       </ion-radio-group>
       <ion-spinner *ngIf="isLoadingSubject"></ion-spinner>
     </ion-item>
+
     <ion-label position="stacked">Thuộc dự án</ion-label>
-    <ion-item>
+    <ion-item lines="none">
       <ionic-selectable [(items)]="projectList" item-content placeholder="+ Chọn dự án" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         itemTextField="post_title"
                         [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end"
                         (onChange)="onSelectPorject($event.value)">
-        <!--        <ion-select-option *ngFor="let project of projectList" [value]="project.id">{{project.title.rendered}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
+
     <ion-label position="stacked">Thuộc tiểu dự án</ion-label>
-    <ion-item>
+    <ion-item lines="none">
       <ionic-selectable [(items)]="subProjectList"
                         itemTextField="post_title"
                         [canSearch]="true" closeButtonText="Đóng" closeButtonSlot="end"
                         (onChange)="onSelectSubProject($event.value)" placeholder="+ Chọn tiểu dự án">
-        <!--        <ion-select-option *ngFor="let subProject of subProjectList" [value]="subProject.id">{{subProject.title.rendered}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
+
     <ion-label position="stacked">Nội dung của hoạt động là</ion-label>
-    <ion-item>
+    <ion-item lines="none">
       <ionic-selectable placeholder="+ Chọn hoạt động" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="actionList" itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" (onChange)="onSelectProjectAction($event.value)">
       </ionic-selectable>
     </ion-item>
+
     <ion-label position="stacked">Vai trò?</ion-label>
-    <ion-item>
+    <ion-item lines="none">
       <ionic-selectable [(ngModel)]="selectedPosition" [canClear]="true" clearButtonText="Xóa lựa chọn"
                         [(items)]="positionList"
                         itemTextField="post_title" closeButtonText="Đóng" closeButtonSlot="end"
                         [canSearch]="true" placeholder="+ Chọn vai trò">
-        <!--        <ion-select-option *ngFor="let position of positionList" [value]="position.id">{{position.title.rendered}}</ion-select-option>-->
       </ionic-selectable>
     </ion-item>
+
     <ion-button type="submit" expand="block" class="submit" (click)="getListEnterprise()">TRA CỨU THÔNG TIN LIÊN HỆ
     </ion-button>
+
   </ion-list>
+
   <div class="result_search">
     <ion-list>
       <h2>Kết quả tìm kiếm<span>{{enterpriseList ? enterpriseList.length : '0'}} thông tin</span></h2>
-      <ion-item *ngFor="let item of enterpriseList">
+      <ion-item *ngFor="let item of enterpriseList" lines="none">
         <ion-grid>
           <ion-row>
             <ion-col size="12">

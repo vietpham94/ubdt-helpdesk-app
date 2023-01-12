@@ -23,7 +23,7 @@
 
         <ion-col size="12" class="p-0 mb-3" *ngIf="subProjectList.length > 0">
           <ion-label position="stacked">Chọn tiểu dự án cần xem</ion-label>
-          <ion-select placeholder="+ Chọn tiểu dự án" [(ngModel)]="subProjectId" (ionChange)="onSelectSubProject()"
+          <ion-select mode="ios" placeholder="+ Chọn tiểu dự án" [(ngModel)]="subProjectId" (ionChange)="onSelectSubProject()"
                       interface="action-sheet" cancelText="Đóng" class="mt-2">
             <ion-select-option *ngFor="let option of subProjectList" [value]="option.id">
               <span [innerHTML]="option.title.rendered"></span>

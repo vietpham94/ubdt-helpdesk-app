@@ -89,7 +89,8 @@ export class DirectoryPage implements OnInit {
     this.projectList = await this.projectService.getListProject().toPromise();
     this.projectList.forEach(project => {
       if (project.title) {
-        project.post_title = project.acf.project_number + ': ' + project.title.rendered;
+        // project.post_title = project.acf.project_number + ': ' + project.title.rendered;
+        project.post_title = project.title.rendered;
       }
     });
     this.subjectList = await this.subjectService.getListSubject().toPromise();

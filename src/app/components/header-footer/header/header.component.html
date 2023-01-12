@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="currentPageInfo?.pageLink != '/home'">
       <ion-back-button text="" (click)="onClickBack()" defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>{{currentPageInfo ? currentPageInfo.title : ''}}</ion-title>
